@@ -1,0 +1,610 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苹果的7300則故事 belong to me & you </title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<!-- 隐藏的SVG存储容器 -->
+<div id="ph-cobig" style="display:none;"></div>
+<div id="ph-jaybig" style="display:none;"></div>
+
+
+<!-- 开机启动画面 -->
+<div id="bootScreen">
+  <div class="boot-logo">好久不見，歡迎回來</div>
+  <div class="bios-text" id="biosText"></div>
+  <div class="boot-bar"><div class="boot-bar-fill"></div></div>
+  <div class="boot-hint">LOADING YOUR LITTLE CORNER...</div>
+</div>
+
+<!-- 进入世界界面（CRT显示器） -->
+<div id="worldGate">
+  <div class="crt-monitor" id="crtMonitor">
+    <div class="crt-screen">
+      <div class="gate-question" id="gateQuestion">
+        &gt; system ready.<br>
+        &gt; 是否选择进入<span class="highlight"> 千禧银粉世界</span>？<span class="gate-cursor"></span>
+      </div>
+      <div class="gate-sub">[ enter to continue · esc to stay ]</div>
+      <div class="gate-buttons">
+        <button class="gate-btn enter" id="gateEnter">进入 ♡</button>
+        <button class="gate-btn leave" id="gateLeave">再想想</button>
+      </div>
+    </div>
+    <div class="crt-brand">CTBU-OS · v2.0</div>
+  </div>
+  <div class="crt-stand"></div>
+  <div class="crt-base"></div>
+</div>
+
+<!-- CRT开机扫描线过渡 -->
+<div class="crt-poweron" id="crtPoweron" style="display:none;">
+  <div class="scan-line"></div>
+  <div class="flash"></div>
+</div>
+
+<!-- 大显示器框架 -->
+<div id="monitorFrame">
+  <div class="monitor-body">
+    <!-- 外壳贴纸装饰 -->
+    <div class="monitor-sticker ms-smiley"><svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="15" fill="#ffd93d" stroke="#e8a800" stroke-width="2"/><circle cx="12" cy="14" r="2.5" fill="#333"/><circle cx="22" cy="14" r="2.5" fill="#333"/><path d="M10 20 Q17 27 24 20" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="monitor-sticker ms-star"><svg viewBox="0 0 22 22"><path d="M11 1 L13.5 8 L21 8.5 L15 13.5 L17 21 L11 16.5 L5 21 L7 13.5 L1 8.5 L8.5 8 Z" fill="#7b68ee" stroke="#5a4abd" stroke-width="1"/></svg></div>
+    <div class="monitor-sticker ms-heart"><svg viewBox="0 0 28 28"><path d="M14 25 C4 17 2 10 7 6 C10 3.5 13 5 14 8 C15 5 18 3.5 21 6 C26 10 24 17 14 25 Z" fill="#ff69b4" stroke="#e04090" stroke-width="1.5"/></svg></div>
+    <div class="monitor-sticker ms-bow"><svg viewBox="0 0 26 20"><path d="M13 10 L2 2 L2 18 Z" fill="#ff8fc4" stroke="#e05090" stroke-width="1"/><path d="M13 10 L24 2 L24 18 Z" fill="#ff8fc4" stroke="#e05090" stroke-width="1"/><circle cx="13" cy="10" r="3" fill="#ff5cad" stroke="#e04090" stroke-width="1"/></svg></div>
+    <div class="monitor-screen">
+
+<!-- CRT效果层 -->
+<div class="crt-overlay"></div>
+<div class="crt-chroma"></div>
+
+<!-- 动态极光壁纸 -->
+<div class="aurora"></div>
+<div class="desktop-bg"></div>
+
+<!-- 自定义光标 -->
+<div class="cursor-star" id="cursorStar">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="cursorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#ffb3d9;stop-opacity:1"/>
+        <stop offset="50%" style="stop-color:#ff6ec7;stop-opacity:1"/>
+        <stop offset="100%" style="stop-color:#ff1493;stop-opacity:1"/>
+      </linearGradient>
+    </defs>
+    <path d="M16,3 L19.5,12 L29,12 L21.5,17.5 L24.5,28 L16,22.5 L7.5,28 L10.5,17.5 L3,12 L12.5,12 Z" fill="url(#cursorGrad)" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M16,6 L18.5,13 L26,13 L20,17.5 L22,25 L16,21 L10,25 L12,17.5 L6,13 L13.5,13 Z" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.5"/>
+  </svg>
+</div>
+
+<svg width="0" height="0" style="position:absolute" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="matte" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe9e0"/><stop offset=".5" stop-color="#d8d0c5"/><stop offset="1" stop-color="#bcb3a7"/></linearGradient>
+    <linearGradient id="warmGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0c2cf"/><stop offset=".5" stop-color="#f6e6e0"/><stop offset="1" stop-color="#e7a9b8"/></linearGradient>
+    <linearGradient id="pinkPlastic" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3d4dd"/><stop offset="1" stop-color="#e0aab8"/></linearGradient>
+    <linearGradient id="silverMetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8e6e2"/><stop offset=".5" stop-color="#cfcac2"/><stop offset="1" stop-color="#b8b3aa"/></linearGradient>
+    <radialGradient id="cdGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f5c8d6"/><stop offset="30%" stop-color="#e8e6e2"/><stop offset="60%" stop-color="#d8d5d0"/><stop offset="100%" stop-color="#c5c1ba"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<div class="window-light"></div>
+<div class="grain"></div>
+<div class="vignette"></div>
+<div class="scan"></div>
+
+<!-- 桌面中心旋转CD -->
+<div class="desktop-cd">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="95" fill="url(#cdGrad)" stroke="#c5c1ba" stroke-width="1"/>
+    <circle cx="100" cy="100" r="95" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(180,170,160,.3)" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="55" fill="none" stroke="rgba(180,170,160,.25)" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="35" fill="none" stroke="rgba(180,170,160,.2)" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="20" fill="#e8c5cf" stroke="#d99fb0" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="6" fill="#fbf8f3" stroke="#c5c1ba" stroke-width="1"/>
+    <text x="100" y="105" text-anchor="middle" font-family="Courier New,monospace" font-size="7" fill="#8a847c" letter-spacing="1">CTBU</text>
+  </svg>
+</div>
+
+<!-- 桌面散落贴纸 -->
+<div class="desk-stickers">
+  <div class="sticker sticker-star" style="top:15%;left:12%;--sr:-15deg;">
+    <svg viewBox="0 0 32 32"><path d="M16,2 L19,12 L29,12 L21,18 L24,28 L16,22 L8,28 L11,18 L3,12 L13,12 Z" fill="#f5c8d6" stroke="#d99fb0" stroke-width="1.2"/></svg>
+  </div>
+  <div class="sticker sticker-heart" style="top:25%;right:15%;--sr:10deg;">
+    <svg viewBox="0 0 28 28"><path d="M14,24 C4,16 5,6 12,8 C14,8.5 14,10 14,10 C14,10 14,8.5 16,8 C23,6 24,16 14,24 Z" fill="#e8c5cf" stroke="#d99fb0" stroke-width="1.2"/></svg>
+  </div>
+  <div class="sticker sticker-note" style="top:60%;left:8%;--sr:-8deg;">today is ♡</div>
+  <div class="sticker sticker-star" style="bottom:20%;right:10%;--sr:20deg;">
+    <svg viewBox="0 0 32 32"><path d="M16,2 L19,12 L29,12 L21,18 L24,28 L16,22 L8,28 L11,18 L3,12 L13,12 Z" fill="#e8e6e2" stroke="#c5c1ba" stroke-width="1.2"/></svg>
+  </div>
+  <div class="sticker sticker-heart" style="top:45%;left:45%;--sr:-5deg;opacity:.5;">
+    <svg viewBox="0 0 28 28"><path d="M14,24 C4,16 5,6 12,8 C14,8.5 14,10 14,10 C14,10 14,8.5 16,8 C23,6 24,16 14,24 Z" fill="none" stroke="#d99fb0" stroke-width="1.5"/></svg>
+  </div>
+  <div class="sticker sticker-note" style="bottom:25%;right:20%;--sr:6deg;opacity:.6;">be gentle ✿</div>
+</div>
+
+<!-- 珍珠链 -->
+<svg class="pearl-chain top-right" viewBox="0 0 130 240" xmlns="http://www.w3.org/2000/svg">
+  <path d="M65,0 Q88,55 65,110 Q42,165 65,220" fill="none" stroke="#d8d5d0" stroke-width="1.5" opacity=".5"/>
+  <circle cx="65" cy="28" r="5.5" fill="#f0dde4" stroke="#d99fb0" stroke-width="1"/>
+  <circle cx="76" cy="60" r="4.5" fill="#e8e6e2" stroke="#c5c1ba" stroke-width="1"/>
+  <circle cx="56" cy="92" r="6.5" fill="#f5c8d6" stroke="#d99fb0" stroke-width="1"/>
+  <circle cx="72" cy="124" r="4.5" fill="#e8e6e2" stroke="#c5c1ba" stroke-width="1"/>
+  <circle cx="60" cy="156" r="5.5" fill="#f0dde4" stroke="#d99fb0" stroke-width="1"/>
+  <circle cx="70" cy="188" r="4.5" fill="#e8e6e2" stroke="#c5c1ba" stroke-width="1"/>
+  <path d="M65,220 L59,234 L65,228 L71,234 Z" fill="#e7a9b8" opacity=".75"/>
+</svg>
+<svg class="pearl-chain bottom-left" viewBox="0 0 110 200" xmlns="http://www.w3.org/2000/svg">
+  <path d="M55,0 Q77,45 55,90 Q33,135 55,180" fill="none" stroke="#d8d5d0" stroke-width="1.5" opacity=".5"/>
+  <circle cx="55" cy="22" r="4.5" fill="#e8e6e2" stroke="#c5c1ba" stroke-width="1"/>
+  <circle cx="64" cy="55" r="5.5" fill="#f0dde4" stroke="#d99fb0" stroke-width="1"/>
+  <circle cx="48" cy="88" r="4.5" fill="#e8e6e2" stroke="#c5c1ba" stroke-width="1"/>
+  <circle cx="62" cy="120" r="5.5" fill="#f5c8d6" stroke="#d99fb0" stroke-width="1"/>
+  <circle cx="53" cy="152" r="4.5" fill="#e8e6e2" stroke="#c5c1ba" stroke-width="1"/>
+  <path d="M55,180 L49,194 L55,188 L61,194 Z" fill="#e7a9b8" opacity=".75"/>
+</svg>
+
+<div class="floaties" id="floaties"></div>
+<div class="butterflies" id="butterflies"></div>
+
+<main id="desktop">
+  <!-- Win98 桌面图标 -->
+  <div class="win98-icons">
+    <div class="w98-icon">
+      <svg class="w98-ico" viewBox="0 0 32 32" shape-rendering="crispEdges"><rect x="2" y="6" width="28" height="20" rx="3" fill="#cc0000"/><rect x="2" y="6" width="28" height="20" rx="3" fill="none" stroke="#800000" stroke-width="1"/><path d="M13 11 L22 16 L13 21 Z" fill="#fff"/></svg>
+      <div class="w98-lbl">youtube</div>
+    </div>
+    <div class="w98-icon">
+      <svg class="w98-ico" viewBox="0 0 32 32" shape-rendering="crispEdges"><rect x="4" y="4" width="24" height="24" rx="2" fill="#000"/><path d="M20 8 L20 18 Q20 22 16 22 Q12 22 12 18 Q12 14 16 14 L16 18 Q14.5 18 14.5 19.5 Q14.5 21 16 21 Q17.5 21 17.5 19.5 L17.5 8 Z" fill="#fff"/><path d="M20 8 L24 11 L24 8 Z" fill="#25f4ee"/><path d="M20 8 L24 11 L20 12 Z" fill="#fe2c55"/></svg>
+      <div class="w98-lbl">抖音</div>
+    </div>
+    <div class="w98-icon">
+      <svg class="w98-ico" viewBox="0 0 32 32" shape-rendering="crispEdges"><rect x="6" y="4" width="20" height="24" fill="#fff" stroke="#808080" stroke-width="1"/><rect x="6" y="4" width="20" height="4" fill="#000080"/><rect x="9" y="11" width="14" height="1.5" fill="#808080"/><rect x="9" y="15" width="14" height="1.5" fill="#808080"/><rect x="9" y="19" width="10" height="1.5" fill="#808080"/><rect x="9" y="23" width="12" height="1.5" fill="#808080"/></svg>
+      <div class="w98-lbl">记事本</div>
+    </div>
+    <div class="w98-icon">
+      <svg class="w98-ico" viewBox="0 0 32 32" shape-rendering="crispEdges"><path d="M9 8 L23 8 L21 26 L11 26 Z" fill="#c0c0c0" stroke="#808080" stroke-width="1"/><rect x="8" y="6" width="16" height="3" fill="#c0c0c0" stroke="#808080" stroke-width="1"/><rect x="13" y="11" width="1.5" height="12" fill="#808080"/><rect x="17.5" y="11" width="1.5" height="12" fill="#808080"/></svg>
+      <div class="w98-lbl">回收站</div>
+    </div>
+  </div>
+  <!-- 环形导航 -->
+  <div class="ring-nav" id="ringNav"></div>
+</main>
+
+<div id="windows">
+  <section class="win" id="win-today" data-win="today">
+    <div class="win-bar"><div class="win-dots"><span class="d-red"></span><span class="d-yel"></span><span class="d-grn"></span></div><div class="win-title glitch-title" data-title="about.me">about.me</div><div class="win-btns"><button class="wb-min" title="缩小">—</button><button class="wb-max" title="放大">▢</button><button class="wb-close" title="关闭">✕</button></div></div>
+    <div class="win-body">
+      <div class="kicker">// hello.world</div>
+      <div class="sec-title">我们与世界，是帧帧瞬间</div>
+      <div class="journal"><div class="j-head">intro.sys</div><div class="screen"><p>&gt; 大一的时候学过一阵子手语</p><p>&gt; 手指动的时候在想一件事</p><p>&gt; 说不出嘴的话要怎么被人接住</p><p>&gt; 后来做项目、学AI、写东西</p><p>&gt; 好像一直在回答这同一个问题</p><span class="lcd-mini">status: learning ♥　fps: 24</span></div></div>
+      <div style="margin:20px 0;text-align:center;">
+  <img loading="lazy" decoding="async" src="assets/img/img02.jpg" style="width:100%;max-width:520px;border-radius:16px;box-shadow:0 16px 48px rgba(90,70,55,.3);display:inline-block;margin:8px 0;" alt="个人照">
+</div>
+      <div style="max-width:600px;margin:18px auto;line-height:2.1;font-size:15px;">
+        <p>我是龙秋玲，重庆工商大学市场营销专业在读，也是一个AIGC实践者、AI工作流建设者。</p>
+        <p>对我来说，做项目、搭工作流、写东西，都是同一件事——用我能想到的方式，跟这个世界对话，也接住那些说不出嘴的话。</p>
+        <p>认识乾坤的路上，犹怜草木青。世界宽阔，总是在路上，慢慢学，慢慢做。</p>
+      </div>
+      <div class="chips"><span class="chip">AIGC实践</span><span class="chip">AI工作流</span><span class="chip">市场营销</span><span class="chip">文字创作</span><span class="chip">项目搭建</span></div>
+    </div>
+  </section>
+
+  <section class="win" id="win-about" data-win="about">
+    <div class="win-bar"><div class="win-dots"><span class="d-red"></span><span class="d-yel"></span><span class="d-grn"></span></div><div class="win-title glitch-title" data-title="resume.txt">resume.txt</div><div class="win-btns"><button class="wb-min" title="缩小">—</button><button class="wb-max" title="放大">▢</button><button class="wb-close" title="关闭">✕</button></div></div>
+    <div class="win-body">
+      <div class="kicker">// resume.txt</div>
+      <div class="sec-title">我走过的路</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="yr">教育</div><div class="tx"><strong>重庆工商大学 · 市场营销</strong>｜2025.9 - 2029.6（大二在读）<br>通过大学英语四级；独立开展AI方向用户使用研究，学术论文已完成初稿框架后推翻重做，目前独立推进中，拟请本校导师指导。</div></div>
+        <div class="tl-item"><div class="yr">实习</div><div class="tx"><strong>北辰青年 · 暑期线上实习</strong>｜2026.7 - 2026.8<br>产出AI时代个人说明书、校园招募洞察报告、50+张校园内容卡片、求职面试AI Skill；担任训练营面试官。<br><span style="display:inline-block;margin-top:6px;padding:3px 12px;background:linear-gradient(135deg,#fff5e6,#ffe8cc);border:1px solid #f0c674;border-radius:20px;font-size:12px;color:#b8860b;">🏆 优秀个人提名 · 28 / 250+ 人</span><br>实习结业后获得腾讯云AI校园大使项目保荐资格，综合评估满课学业、支教任务、个人作品集迭代的精力负荷后选择婉拒，优先深耕AI产品方向个人实践沉淀。<br><button onclick="openBeichenDetail()" style="margin-top:6px;margin-left:8px;padding:3px 12px;background:var(--pink-soft);border:1px solid var(--accent);border-radius:20px;font-size:12px;color:var(--accent-deep);cursor:pointer;font-family:var(--hand);">📁 查看实习详情</button></div></div>
+        <div class="tl-item"><div class="yr">实习</div><div class="tx"><strong>钦南区教育局 · 计财股行政实习</strong>｜1个月<br>参与南区公文、财务台账、档案资料的分类整理与归档；协助核对基础财务报表。<br><button onclick="openInternshipDetail()" style="margin-top:8px;padding:4px 14px;background:var(--pink-soft);border:1px solid var(--accent);border-radius:20px;font-size:12px;color:var(--accent-deep);cursor:pointer;font-family:var(--hand);">📁 查看实习记录</button></div></div>
+        <div class="tl-item"><div class="yr">校园</div><div class="tx"><strong>项目化学习培养方案 · 项目负责人</strong>（大一上）<br>承接学院专项任务，独立推进方案设计、师生访谈调研、需求整理与整套培养方案撰写落地。</div></div>
+        <div class="tl-item"><div class="yr">校园</div><div class="tx"><strong>第四届全国大学生预见未来行研大赛 · 团队队长</strong>（大一下）<br>带队从0到1完成行业研究，自主学习AI智能体搭建与自动化工作流，用AI辅助Python数据清洗与行业分析。<br><button onclick="openHangyanDetail()" style="margin-top:8px;padding:4px 14px;background:var(--pink-soft);border:1px solid var(--accent);border-radius:20px;font-size:12px;color:var(--accent-deep);cursor:pointer;font-family:var(--hand);">📁 查看比赛详情</button></div></div>
+        <div class="tl-item"><div class="yr">校园</div><div class="tx"><strong>北京童年一课 · 云课堂支教讲师</strong>（大一寒假至今）<br>独立完成备课、授课、课堂互动、课后复盘全流程，长期开展公开授课。<br><button onclick="openZhijiao()" style="margin-top:8px;padding:4px 14px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:1px solid #81c784;border-radius:20px;font-size:12px;color:#2e7d32;cursor:pointer;font-family:var(--hand);">🌱 查看支教详情</button></div></div>
+      </div>
+      <div class="chips" style="margin-top:18px;"><span class="chip">AI工作流搭建</span><span class="chip">Python数据清洗</span><span class="chip">用户访谈</span><span class="chip">项目统筹</span><span class="chip">结构化思维</span><span class="chip">公开授课</span><span class="chip">公文整理</span></div>
+      <!-- 「下载完整简历」按钮已暂时移除。
+     原因：它下载的是占位内容（提示"请替换为真实内容后使用"），与真实简历不一致。
+     需要恢复时：删掉本注释，并把下面这行取消注释即可。
+     <div style="text-align:center;margin-top:18px;"><button class="plat" id="resumeBtn">↓ 下载完整简历</button></div> -->
+    </div>
+  </section>
+
+  <section class="win" id="win-exp" data-win="exp">
+    <div class="win-bar"><div class="win-dots"><span class="d-red"></span><span class="d-yel"></span><span class="d-grn"></span></div><div class="win-title glitch-title" data-title="projects.folder">projects.folder</div><div class="win-btns"><button class="wb-min" title="缩小">—</button><button class="wb-max" title="放大">▢</button><button class="wb-close" title="关闭">✕</button></div></div>
+    <div class="win-body">
+      <div class="kicker">// projects.folder</div>
+      <div class="sec-title">我在做什么</div>
+      <div class="journal"><div class="j-head">doing.sys</div><div class="screen"><p>&gt; AIGC实践者 · AI工作流建设者</p><p>&gt; 做项目、搭工作流、写东西</p><p>&gt; 都是跟世界对话的方式</p><span class="lcd-mini">state: building ♥　mem: ok</span></div></div>
+      <div class="exp-grid">
+        <div class="exp-card project-card" data-pid="peiyang" style="cursor:pointer;"><span class="tag">方案</span><h3>项目化学习培养方案</h3><p>项目负责人，承接学院专项任务，独立推进方案设计、师生访谈调研、需求整理与整套培养方案撰写落地。</p><p style="font-size:11px;color:var(--accent-deep);margin-top:8px;">▸ 点击查看详情</p></div>
+        <div class="exp-card project-card" data-pid="hangyan" style="cursor:pointer;"><span class="tag">竞赛</span><h3>潮流盲盒玩具行研报告</h3><p>团队队长，带队从0到1完成行业研究，用AI辅助Python数据清洗与行业分析，零基础自主攻坚。</p><p style="font-size:11px;color:var(--accent-deep);margin-top:8px;">▸ 点击查看详情</p></div>
+        <div class="exp-card project-card" data-pid="skill" style="cursor:pointer;"><span class="tag">AIGC</span><h3>求职面试AI Skill</h3><p>北辰青年实习产出，设计5步人机协作工作流，明确"人做判断、AI做分析"的边界，已用真实岗位测试验证。</p><p style="font-size:11px;color:var(--accent-deep);margin-top:8px;">▸ 点击查看详情</p></div>
+        <div class="exp-card project-card" data-pid="workflow" style="cursor:pointer;"><span class="tag">AIGC</span><h3>AI智能体与工作流搭建</h3><p>从零基础自主学习AI智能体搭建、自动化工作流设计，把AI从"工具"升级为"可复用的工作流"。</p><p style="font-size:11px;color:var(--accent-deep);margin-top:8px;">▸ 点击查看详情</p></div>
+        <div class="exp-card project-card" data-pid="brand" style="cursor:pointer;"><span class="tag">品牌</span><h3>《一只喵》品牌战略推演</h3><p>26个部分的完整战略推演，从"账号为什么存在"到品牌宪法、长期系统设计，核心是减少信息差。</p><p style="font-size:11px;color:var(--accent-deep);margin-top:8px;">▸ 点击查看详情</p></div>
+        <div class="exp-card project-card" data-pid="navsite" style="cursor:pointer;"><span class="tag">网站</span><h3>CTBU一只喵学习干货导航站</h3><p>已上线，面向新生的校园信息导航，把复杂信息整理成能行动的方法。</p><p style="font-size:11px;color:var(--accent-deep);margin-top:8px;">▸ 点击查看详情</p></div>
+        <div class="exp-card project-card" data-pid="teachsite" style="cursor:pointer;"><span class="tag">网站</span><h3>小余老师专属网站</h3><p>已上线，为老师定制的个人展示网站。</p><p style="font-size:11px;color:var(--accent-deep);margin-top:8px;">▸ 点击查看详情</p></div>
+        <div class="exp-card project-card" data-pid="speech" style="cursor:pointer;"><span class="tag">演讲</span><h3>《我和你，是一样的中华魂》</h3><p>从重庆"四公里站"站名切入抗日战争运输坐标，到渣滓洞红岩信仰，已公开演讲。</p><p style="font-size:11px;color:var(--accent-deep);margin-top:8px;">▸ 点击查看详情</p></div>
+      
+        <div class="exp-card project-card" data-pid="insight" style="cursor:pointer;"><span class="tag">研究</span><h3>校园招募洞察报告</h3><p>基于一线实践观察（做校园账号 + 卖校园卡 + 评论区）形成的校园招募洞察，覆盖消费、社交、学习、职业焦虑等维度，形成可落地的用户画像与商业建议。</p><p style="font-size:11px;color:var(--accent-deep);margin-top:8px;">▸ 点击查看详情</p></div>
+        <div class="exp-card project-card" data-pid="manual" style="cursor:pointer;"><span class="tag">个人</span><h3>AI时代个人说明书</h3><p>在AI时代重新定义"我是谁"的个人说明书，从能力图谱、工作风格到价值观，系统梳理个人定位与优势。</p><p style="font-size:11px;color:var(--accent-deep);margin-top:8px;">▸ 点击查看详情</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="win" id="win-note" data-win="note">
+    <div class="win-bar"><div class="win-dots"><span class="d-red"></span><span class="d-yel"></span><span class="d-grn"></span></div><div class="win-title glitch-title" data-title="writings.txt">writings.txt</div><div class="win-btns"><button class="wb-min" title="缩小">—</button><button class="wb-max" title="放大">▢</button><button class="wb-close" title="关闭">✕</button></div></div>
+    <div class="win-body">
+      <div class="kicker">// writings.txt</div>
+      <div class="sec-title">文字作品</div>
+      <p style="text-align:center;color:var(--ink-soft);margin-bottom:18px;font-size:14px;">一些理解世界的瞬间，随手记下</p>
+      <div class="notes">
+        <div class="note"><span class="tape tl"></span><div class="q">《火车》</div><div class="body">我身体里的火车从来不会错轨，所以允许大雪、风暴、泥石流和荒谬，我的灵魂永远笔直向前，所以允许愚蠢、欺骗、流言蜚语和谎言。而只要生命还在继续，我就欢迎一切未知的降临。</div><div class="meta">随笔 · 韧性</div></div>
+        <div class="note"><span class="tape tl"></span><div class="q">《古老的尊重》</div><div class="body">“……品尝苹果和欣赏月亮的时候用的是嘴巴和眼睛两个器官…这是一种古老的尊重…人也是这样……其实苹果和月亮没有什么分别，而月亮的背面总是很难看到，扁平化苹果和月亮的话会让它们感到难过”
+
+你说难过在哪里
+
+“苹果的味道变苦了，看月亮的眼睛流出泪来”</div><div class="meta">随笔 · 哲思</div></div>
+        <div class="note"><span class="tape tr"></span><div class="q">《咀嚼》</div><div class="body" style="line-height:1.9;font-size:13px;">大抵是焦虑烦躁的缘故，<br>几个蛋挞、四寸小蛋糕、<br>一盒手撕鸡、一盘葡萄……<br>重复性的咀嚼似乎可以抵挡陌生的情绪。<br>你想吐出来，你还是咽了下去，<br>胃酸上泛，你还是咽了下去。<br>我怀念你湿润的眼睛，<br>能够映出南极洲下积淀的亿亿年。<br>我希望它们湿润，<br>正如同我希望你的下一次咀嚼，<br>只是为你带来美味的幸福。</div><div class="meta">诗歌 · 情绪</div></div>
+      </div>
+
+      <!-- 关于高考 长文 -->
+      <div style="margin-top:28px;padding:22px 24px;background:var(--paper);border-radius:14px;border:1px solid rgba(160,155,148,.35);box-shadow:0 12px 30px rgba(120,100,85,.12);">
+        <h3 style="font-family:var(--hand);font-size:26px;color:var(--ink);margin-bottom:4px;letter-spacing:1px;">《关于高考》</h3>
+        <p style="font-size:12px;color:var(--ink-soft);margin-bottom:18px;">凌晨三点零六分 · 写给正在难过的你</p>
+        <div style="line-height:2.1;font-size:14px;color:var(--ink);">
+
+          <p style="margin-bottom:16px;">🥤 睡到一半起来喝水，习惯性看了一下消息，QQ访客最近多了很多学弟学妹，还有一些久不联系的朋友。偶尔会在凌晨两点到六点，或是下午两点半这样的时间，收到一些克制又有礼貌的信息："那个……希望没有打扰到学姐""我真的很难过，怎么会考得这么糟糕，到底要怎么办？"</p>
+
+          <p style="margin-bottom:16px;">🍀 坦白来讲，我没有想到大家会选择向我提问这些问题。我是一个很普通的人，随着年岁增加越来越普通。从前成绩好像可以作为一个等次衡量，划出三六九等；慢慢上了大学才感受到，成绩的衡量性越来越低，而真正的"筛选作用"越来越明显。</p>
+
+          <h4 style="font-family:var(--hand);font-size:18px;margin:20px 0 10px;color:var(--accent-deep);">一、先给你一个拥抱</h4>
+          <p style="margin-bottom:14px;">高考失利很难过是真的，更难过的也许是这背后对自我价值的怀疑。所以，先给你一个拥抱——高考很累，这段时间你一定也不太容易，辛苦了。</p>
+          <p style="margin-bottom:14px;">我个人对高考的理解是：社会需要一套相对公平、大规模、可操作的"筛选"机制，决定我们先进"哪一个门"——也许是继续升学，也许是直接就业。但绝对不是就此"衡量"出谁更有价值、谁更值得拥有更好的未来。</p>
+          <p style="margin-bottom:14px;">世界上没有完美的系统，高考这套"筛选"系统也有陷阱🕳️：它带来的优绩主义，会让你误以为失败全是自己的错。社会长久以来传递一种信念——只要你足够努力就能成功；反过来说，没成功就是不够努力。这套逻辑最残酷的地方在于，它让赢家相信成功全凭实力，也让输家相信失败全因自己不够好。它完全遮蔽了运气、出身、家庭资源、地区教育资源、甚至考试当天身体状况的作用。</p>
+          <p style="margin-bottom:14px;">就像我们种了一百棵树🌲，眼睛看到了最高的一棵，但不能说明剩下的九十九棵就应该被砍掉。在眼睛看不到的地方，这九十九棵树的根系之发达，未必逊色于那棵"高佬树"。</p>
+
+          <h4 style="font-family:var(--hand);font-size:18px;margin:20px 0 10px;color:var(--accent-deep);">二、每个分数都有每条路</h4>
+          <p style="margin-bottom:14px;">高考是一种交通：考得好的人像上了高铁，快、直达，但票价贵，且一旦上错车（选错不适合的专业）不好调头；没考好的人像是下了高铁需要换乘——还有绿皮火车（专升本）、长途汽车（职业教育）、骑行（创业、自由职业）、甚至先打工攒钱再买下一段车票（工作后继续深造）。</p>
+          <p style="margin-bottom:14px;">漫长的人生里，我们只是在18岁这个节点用了不一样的通行方式而已。公办专科的好专业有学前教育、护理、口腔医学技术、数字媒体、老年服务与管理（朝阳产业），这些学的是真本事，就业率不低；专升本很多省份比例不低，只考专业课和英语，压力远小于高考。</p>
+          <p style="margin-bottom:14px;">如果你有一双巧手，或对某样事物有特别的喜爱——烘焙、园艺、宠物美容、电商运营、非物质文化遗产手艺……这些路不需要高学历，但需要热爱和持续精进。花一点时间去了解它们，可以问大模型，也可以问B站、抖音、学校老师。</p>
+          <p style="margin-bottom:14px;font-weight:bold;">命运不会把一个真诚的人拒之门外。</p>
+
+          <h4 style="font-family:var(--hand);font-size:18px;margin:20px 0 10px;color:var(--accent-deep);">三、钱的问题</h4>
+          <p style="margin-bottom:14px;">💰 复读没有错，不读或者读专科本科也没有错，不要怕觉得给家人造成负担就擅自决定。如果想复读，坐下来好好评估真实可行性，和家里算一笔完整开销：学费、资料费、生活费；同时客观看这次失利是发挥失常，还是本身基础薄弱、厌学——要是极度畏惧高三节奏，强行复读只会心态崩盘。</p>
+          <p style="margin-bottom:14px;">如果要读下去，可以问学校资助办和当地政府，甚至联系妇联：生源地助学贷款怎么申请？大学有绿色通道吗？国家励志奖学金需要什么条件？周末和假期可以怎么兼职？不要一个人扛着"拖累全家"的负罪感，把它变成可以一步步解决的具体财务问题。</p>
+
+          <h4 style="font-family:var(--hand);font-size:18px;margin:20px 0 10px;color:var(--accent-deep);">最后</h4>
+          <p style="margin-bottom:14px;">这是一个充满不确定性的时代，AI和时代不停发展，刚刚跨出校门从题海里抬头，我们当然会更加迷茫惶恐。还好，不确定性也意味着更多的可能性。</p>
+          <p style="margin-bottom:14px;">不用逼迫自己两天内立刻消化所有崩溃，允许自己难过、逃避、短暂停滞。</p>
+          <p style="margin-bottom:8px;font-weight:bold;font-size:15px;">分数只能定格一场考试，永远无法定格你的人生。<br>感知、思考、扛住困境的韧性，是不确定时代里永远确定、不会失效的力量。</p>
+          <p style="text-align:right;color:var(--ink-soft);font-size:13px;margin-top:16px;">晚安 ♡</p>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:18px;color:var(--ink-soft);font-size:13px;line-height:1.9;">另有3首诗歌入选中国诗歌网每日好诗。<br><span style="font-size:12px;opacity:.72;">诗歌属性指向太明，不做展示。</span></div>
+    </div>
+  </section>
+
+  <section class="win" id="win-contact" data-win="contact">
+    <div class="win-bar"><div class="win-dots"><span class="d-red"></span><span class="d-yel"></span><span class="d-grn"></span></div><div class="win-title glitch-title" data-title="contact_msg.exe">contact_msg.exe</div><div class="win-btns"><button class="wb-min" title="缩小">—</button><button class="wb-max" title="放大">▢</button><button class="wb-close" title="关闭">✕</button></div></div>
+    <div class="win-body contact">
+      <h2>怎么找到我</h2>
+      <p>如果你也在认识世界的路上，或者想聊聊AI、文学、青年成长——<br>屏幕这一头的小窗口，一直开着。</p>
+      <div class="journal" style="max-width:480px;margin:0 auto;"><div class="j-head">inbox.sys</div><div class="screen"><p>&gt; 邮箱：2050164148@qq.com</p><p>&gt; 微信：DYWE330</p><p>&gt; 小红书 / 抖音：CTBU一只喵</p><span class="lcd-mini">waiting for hello _</span></div></div>
+      <div style="max-width:520px;margin:18px auto;text-align:left;line-height:2;font-size:14px;">
+        <p><strong>我对什么感兴趣：</strong>AI工作流 · 品牌战略 · 文学创作 · 青年成长 · 市场营销</p>
+        <p><strong>欢迎什么样的连接：</strong>前辈的指导 · 同辈的交流 · 项目合作 · 实习机会</p>
+        <p><strong>一些祝愿：</strong>期待我们带着共同的初衷和向往，发起有意义的沟通和探讨，在此产生一次又一次有重量的对话与协作✨</p>
+      </div>
+      <div class="platforms"><span class="plat">邮箱</span><span class="plat">小红书</span><span class="plat">抖音</span></div>
+      <div class="footer">© 龙秋玲 · 我们与世界，是帧帧瞬间</div>
+    </div>
+  </section>
+
+  <!-- 项目详情窗口（通用，点击项目卡片动态填充） -->
+  <section class="win" id="win-project-detail" data-win="project-detail">
+    <div class="win-bar"><div class="win-dots"><span class="d-red"></span><span class="d-yel"></span><span class="d-grn"></span></div><div class="win-title glitch-title" data-title="project.detail">project.detail</div><div class="win-btns"><button class="wb-min" title="缩小">—</button><button class="wb-max" title="放大">▢</button><button class="wb-close" title="关闭" onclick="closeProjectDetail()">✕</button></div></div>
+    <div class="win-body">
+      <div id="pd-tag" style="display:inline-block;padding:3px 12px;background:var(--pink-soft);border-radius:20px;font-size:12px;color:var(--accent-deep);margin-bottom:8px;"></div>
+      <h2 id="pd-title" style="font-family:var(--hand);font-size:28px;margin-bottom:12px;"></h2>
+      <div id="pd-meta" style="font-size:13px;color:var(--ink-soft);margin-bottom:18px;line-height:1.8;"></div>
+      <div id="pd-desc" style="line-height:2;font-size:14px;margin-bottom:20px;"></div>
+      <div id="pd-gallery" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:20px;"></div>
+      <div id="pd-video" style="margin-bottom:20px;"></div>
+      <div id="pd-result" style="padding:14px 18px;background:var(--paper);border-radius:10px;border-left:3px solid var(--accent);line-height:1.9;font-size:14px;"></div>
+      <div id="pd-pdf-preview" style="display:none;margin-top:20px;">
+        <div style="font-size:14px;font-weight:bold;color:var(--accent-deep);margin-bottom:12px;">📄 行研报告预览</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+          <img loading="lazy" decoding="async" src="assets/img/img03.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img04.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img05.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img06.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+        </div>
+        <a href="潮流盲盒玩具行研报告.pdf" target="_blank" style="display:inline-block;padding:10px 20px;background:var(--accent);color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:bold;margin-bottom:24px;">📥 下载完整报告PDF</a>
+      </div>
+      <div id="pd-pdf-preview-peiyang" style="display:none;margin-top:20px;">
+        <div style="font-size:14px;font-weight:bold;color:var(--accent-deep);margin-bottom:12px;">📄 人才培养方案项目化学习汇报</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+          <img loading="lazy" decoding="async" src="assets/img/img07.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img08.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img09.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img10.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+        </div>
+        <div style="text-align:center;">
+          <a href="人才培养方案项目化学习汇报.pdf" target="_blank" style="display:inline-block;padding:12px 28px;background:var(--accent);color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:bold;box-shadow:0 4px 12px rgba(212,138,160,.3);">📥 下载完整汇报PDF</a>
+        </div>
+      </div>
+
+      <div id="pd-pdf-preview-insight" style="display:none;margin-top:20px;">
+        <div style="font-size:14px;font-weight:bold;color:var(--accent-deep);margin-bottom:12px;">📄 校园招募洞察报告预览</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+          <img loading="lazy" decoding="async" src="assets/img/img11.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img12.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img13.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img14.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+        </div>
+        <div style="text-align:center;">
+          <a href="校园招募洞察报告.pdf" target="_blank" style="display:inline-block;padding:12px 28px;background:var(--accent);color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:bold;box-shadow:0 4px 12px rgba(212,138,160,.3);">📥 下载完整报告PDF</a>
+        </div>
+      </div>
+
+      <div id="pd-pdf-preview-manual" style="display:none;margin-top:20px;">
+        <div style="font-size:14px;font-weight:bold;color:var(--accent-deep);margin-bottom:12px;">📄 AI时代个人说明书预览</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+          <img loading="lazy" decoding="async" src="assets/img/img15.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img16.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img17.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+          <img loading="lazy" decoding="async" src="assets/img/img18.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+        </div>
+        <div style="text-align:center;">
+          <a href="AI时代个人说明书.pdf" target="_blank" style="display:inline-block;padding:12px 28px;background:var(--accent);color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:bold;box-shadow:0 4px 12px rgba(212,138,160,.3);">📥 下载完整说明书PDF</a>
+        </div>
+      </div>
+  </section>
+  <!-- 教育局实习详情窗口 -->
+  <section class="win" id="win-internship" data-win="internship">
+    <div class="win-bar"><div class="win-dots"><span class="d-red"></span><span class="d-yel"></span><span class="d-grn"></span></div><div class="win-title glitch-title" data-title="internship.record">internship.record</div><div class="win-btns"><button class="wb-min" title="缩小">—</button><button class="wb-max" title="放大">▢</button><button class="wb-close" title="关闭" onclick="closeInternshipDetail()">✕</button></div></div>
+    <div class="win-body">
+      <div style="text-align:center;margin-bottom:16px;">
+        <span style="display:inline-block;padding:4px 16px;background:var(--pink-soft);border-radius:20px;font-size:13px;color:var(--accent-deep);">实习记录</span>
+      </div>
+      <h2 style="font-family:var(--hand);font-size:26px;text-align:center;margin-bottom:6px;">钦南区教育局 · 计财股</h2>
+      <p style="text-align:center;color:var(--ink-soft);font-size:13px;margin-bottom:20px;">2026.1.19 ~ 2026.2.14 · 返家乡社会实践</p>
+
+      <div style="max-width:560px;margin:0 auto;line-height:2.1;font-size:14px;margin-bottom:20px;">
+        <p><strong>工作内容：</strong>在彭老师等多位实习老师的指导下，参与财政票据整理、经费报表核对、多类数据录入等工作；协助处理日常电话咨询，倾听群众关于政策、办学条件的诉求。通过处理具体账目，理解财政拨付与民生保障的紧密联系；通过接听热线，直观感受基层群众的教育期盼。实践期间参与南区各幼儿园、小学、中学票据的归档与核对工作；日均接听群众来电 3–4 通，持续一个多月，获得单位带教老师肯定。</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:560px;margin:0 auto 20px;">
+        <div style="aspect-ratio:4/3;border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.15);">
+          <img loading="lazy" decoding="async" src="assets/img/img19.jpg" style="width:100%;height:100%;object-fit:cover;" alt="实习工作场景">
+        </div>
+        <div style="aspect-ratio:4/3;border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.15);">
+          <img loading="lazy" decoding="async" src="assets/img/img20.png" style="width:100%;height:100%;object-fit:cover;" alt="实习工作照">
+        </div>
+      </div>
+      <p style="text-align:center;color:var(--ink-soft);font-size:12px;margin-bottom:20px;">左：日常处理的财务文件｜右：实习工作照</p>
+
+      <div style="max-width:560px;margin:0 auto 20px;">
+        <div style="border-radius:10px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.18);border:1px solid rgba(160,155,148,.3);">
+          <img loading="lazy" decoding="async" src="assets/img/img21.png" style="width:100%;display:block;" alt="实习证明">
+        </div>
+        <p style="text-align:center;color:var(--ink-soft);font-size:12px;margin-top:8px;">重庆工商大学2026年寒假社会实践鉴定表 · 钦南区教育局盖章</p>
+      </div>
+
+      <div style="max-width:560px;margin:0 auto;padding:18px 22px;background:var(--paper);border-radius:12px;border-left:3px solid var(--accent);line-height:2;font-size:14px;">
+        <p style="font-weight:bold;margin-bottom:8px;">实习收获：</p>
+        <p>第一次走进政府机关，真实体验了行政工作的严谨与规范。学会了财务档案的分类整理方法，培养了细致耐心的工作习惯。理解了基层教育部门的运作逻辑，对"体制内"工作有了更立体的认知。</p>
+        <p style="margin-top:8px;">这段经历让我明白，任何看似琐碎的工作，都有其不可替代的价值——那些被认真归档的文件、被仔细核对的数字，背后是整个教育系统的平稳运转。</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 北辰青年实习详情窗口 -->
+  <section class="win" id="win-beichen-detail" data-win="beichen-detail">
+    <div class="win-bar"><div class="win-dots"><span class="d-red"></span><span class="d-yel"></span><span class="d-grn"></span></div><div class="win-title glitch-title" data-title="beichen.internship">beichen.internship</div><div class="win-btns"><button class="wb-min" title="缩小">—</button><button class="wb-max" title="放大">▢</button><button class="wb-close" title="关闭" onclick="closeBeichenDetail()">✕</button></div></div>
+    <div class="win-body">
+      <div style="text-align:center;margin-bottom:14px;">
+        <span style="display:inline-block;padding:4px 16px;background:linear-gradient(135deg,#fff5e6,#ffe8cc);border:1px solid #f0c674;border-radius:20px;font-size:13px;color:#b8860b;">🏆 优秀个人提名 · 28 / 250+ 人</span>
+      </div>
+      <h2 style="font-family:var(--hand);font-size:26px;text-align:center;margin-bottom:6px;">北辰青年 · 暑期线上实习</h2>
+      <p style="text-align:center;color:var(--ink-soft);font-size:13px;margin-bottom:20px;">2026.7 - 2026.8 · AI时代青年成长项目</p>
+
+      <!-- 工作内容 -->
+      <div style="max-width:560px;margin:0 auto 20px;line-height:2.1;font-size:14px;">
+        <p style="font-weight:bold;margin-bottom:8px;">📋 工作内容：</p>
+        <p>• 产出《AI时代个人说明书》，系统梳理个人能力与协作方式</p>
+        <p>• 产出校园招募洞察报告，深度分析Z世代校园用户需求</p>
+        <p>• 制作50+张校园内容卡片，覆盖新生攻略、学习方法、校园生活等主题</p>
+        <p>• 开发求职面试AI Skill，助力大学生面试准备</p>
+        <p>• 担任训练营面试官，参与候选人选拔与评估</p>
+        <p style="margin-top:14px;text-align:center;">
+          <a href="portfolio.html" target="_blank" style="display:inline-block;padding:10px 24px;background:linear-gradient(135deg,#d48aa0,#b87088);color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:bold;box-shadow:0 4px 12px rgba(212,138,160,.3);">🎨 查看AI作品集</a>
+        </p>
+      </div>
+
+      <div style="max-width:560px;margin:0 auto 20px;padding:18px 22px;background:var(--paper);border-radius:12px;border-left:3px solid var(--accent);line-height:2;font-size:14px;">
+        <p style="font-weight:bold;margin-bottom:8px;">🔄 完整工作流路径：</p>
+        <p>接收任务（老师给方向 + 飞书文档步骤指引）→ 结合一线实践独立思考 → 产出初稿 → 小组会讨论分工 → 协作执行 → 复盘</p>
+        <p style="color:var(--ink-soft);font-size:13px;margin-top:8px;">个人任务我会先照文档步骤走，但不照搬。比如做校园招募时，我把自己在<b>卖校园卡</b>一线真正碰到的问题和痛点融进去，再形成自己的判断——不是把指令执行完就交差。</p>
+      </div>
+
+      <!-- 证书图片 -->
+      <div style="max-width:520px;margin:0 auto 20px;">
+        <p style="font-weight:bold;margin-bottom:10px;font-size:14px;">📜 实习实践证书：</p>
+        <div style="border-radius:10px;overflow:hidden;box-shadow:0 10px 36px rgba(90,70,55,.25);border:1px solid rgba(160,155,148,.3);">
+          <img loading="lazy" decoding="async" src="assets/img/img22.jpg" style="width:100%;display:block;" alt="北辰青年实习证书">
+        </div>
+        <p style="text-align:center;color:var(--ink-soft);font-size:12px;margin-top:8px;">北辰青年创始人CEO 宋超 签发</p>
+      </div>
+
+      <!-- 保荐信图片 -->
+      <div style="max-width:520px;margin:0 auto 20px;">
+        <p style="font-weight:bold;margin-bottom:10px;font-size:14px;">✉️ 实习结业后保荐信：</p>
+        <div style="border-radius:10px;overflow:hidden;box-shadow:0 10px 36px rgba(90,70,55,.25);border:1px solid rgba(160,155,148,.3);">
+          <img loading="lazy" decoding="async" src="assets/img/img_beichen_letter.jpg" style="width:100%;display:block;" alt="北辰青年保荐信">
+        </div>
+        <p style="text-align:center;color:var(--ink-soft);font-size:12px;margin-top:8px;">腾讯云AI校园大使项目 · 个人保荐资格 · 24小时内回复</p>
+      </div>
+
+      <div style="max-width:560px;margin:0 auto;padding:18px 22px;background:var(--paper);border-radius:12px;border-left:3px solid #f0c674;line-height:2;font-size:14px;">
+        <p style="font-weight:bold;margin-bottom:8px;">💡 实习收获：</p>
+        <p>过去，AI于我而言，是云端之上一个遥远而模糊的概念；学完之后，它成了我手中具体可感的工具。我忽然意识到，表达与对话原来可以突破语言的边界——用代码，这种全新的语法，去和世界交流。</p><p style="margin-top:8px;">作为市场营销专业的学生，我做了一个“不务正业”的决定：去学计算机，去亲手搭建一个网站。当页面真正在浏览器里跑起来的刹那，感觉到自己好像个现代魔法师——不必依赖现成的魔杖，仅凭清晰的逻辑和准确的表达，就能在虚无之中构建出实体。</p><p style="margin-top:8px;">这段经历重塑了我对很多事情的认知：关于个人潜力的边界，关于与世界交互的方式，关于如何真正帮朋友解决实际问题。我更加确信，学习本身就是一种勇敢。它允许你跨过专业的栅栏，去摘取属于任何领域的星光。</p>
+      </div>
+    </div>
+  </section>
+  <!-- 童年一课支教详情窗口 -->
+  <section class="win" id="win-zhijiao" data-win="zhijiao">
+    <div class="win-bar"><div class="win-dots"><span class="d-red"></span><span class="d-yel"></span><span class="d-grn"></span></div><div class="win-title glitch-title" data-title="zhijiao.detail">zhijiao.detail</div><div class="win-btns"><button class="wb-min" title="缩小">—</button><button class="wb-max" title="放大">▢</button><button class="wb-close" title="关闭" onclick="closeZhijiao()">✕</button></div></div>
+    <div class="win-body">
+      <div style="text-align:center;margin-bottom:14px;">
+        <span style="display:inline-block;padding:4px 16px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:1px solid #81c784;border-radius:20px;font-size:13px;color:#2e7d32;">🌱 乡村教育支教</span>
+      </div>
+      <h2 style="font-family:var(--hand);font-size:26px;text-align:center;margin-bottom:6px;">北京童年一课 · 云课堂支教讲师</h2>
+      <p style="text-align:center;color:var(--ink-soft);font-size:13px;margin-bottom:20px;">大一寒假起 · 趣味阅读 · 四年级一个班 50 余人</p>
+
+      <!-- 宣传图 -->
+      <div style="max-width:520px;margin:0 auto 20px;border-radius:10px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.15);">
+        <img loading="lazy" decoding="async" src="assets/img/img23.jpg" style="width:100%;display:block;" alt="童年一课宣传图">
+      </div>
+
+      <!-- 工作内容 -->
+      <div style="max-width:560px;margin:0 auto 20px;line-height:2.1;font-size:14px;">
+        <p style="font-weight:bold;margin-bottom:8px;">📋 工作内容：</p>
+        <p>• 独立完成备课、授课、课堂互动、课后复盘全流程</p>
+        <p>• 长期开展公开授课，为乡村孩子提供优质教育资源</p>
+        <p>• 通过云课堂平台，跨越地域限制，让教育没有距离</p>
+        <p>• 与孩子互动交流，激发学习兴趣，陪伴成长</p>
+      </div>
+
+      <div style="max-width:560px;margin:0 auto 20px;padding:18px 22px;background:var(--paper);border-radius:12px;border-left:3px solid #81c784;line-height:2;font-size:14px;">
+        <p style="font-weight:bold;margin-bottom:8px;">🔄 完整授课流程：</p>
+        <p>需求沟通 → 课程设计 → 备课准备 → 云端授课 → 课堂互动 → 课后复盘 → 持续优化</p>
+        <p style="color:var(--ink-soft);font-size:13px;margin-top:8px;"><b>科目：</b>趣味阅读｜<b>对象：</b>四年级一个班，50 多人｜<b>频率：</b>原计划一学期每周一节<br><b>实际情况：</b>偏远地区网络设备不稳定，对方小学那边常出问题，多次被迫停课，满打满算只上了 2–3 节课。<br><b>备课：</b>提前备课、做 PPT、与助学老师反复沟通，沟通成本比较高。</p>
+      </div>
+
+      <!-- 培训证书 -->
+      <div style="max-width:480px;margin:0 auto 20px;">
+        <p style="font-weight:bold;margin-bottom:10px;font-size:14px;">📜 岗前培训通过证书：</p>
+        <div style="border-radius:10px;overflow:hidden;box-shadow:0 10px 36px rgba(0,0,0,.2);border:1px solid rgba(160,155,148,.3);">
+          <img loading="lazy" decoding="async" src="assets/img/img24.jpg" style="width:100%;display:block;" alt="童年一课培训证书">
+        </div>
+        <p style="text-align:center;color:var(--ink-soft);font-size:12px;margin-top:8px;">2026-02-27 · 北京童年一课助学发展中心 签发</p>
+      </div>
+
+      <div style="max-width:560px;margin:0 auto;padding:18px 22px;background:var(--paper);border-radius:12px;border-left:3px solid #81c784;line-height:2;font-size:14px;">
+        <p style="font-weight:bold;margin-bottom:8px;">💡 支教收获：</p>
+        <p>有个孩子在下课后问我：「老师，你明天还来吗？」</p><p style="margin-top:8px;">那一刻我特别受触动——原来有人真的在期待我的到来。</p><p style="margin-top:8px;">所以我讲趣味阅读的时候，会有意识地放一些动物世界的科普视频，还有「为什么要刷牙」这类十万个为什么。我希望带给他们的不只是知识，还有生活里真正用得上的东西。很多农村的孩子长大以后第一件事就是去补牙，其实是因为小时候没有人好好讲过这些。</p><p style="margin-top:8px;">我希望教育是平等的。不是说大家用的书一样就是平等，而是让教育的花开在每一个人的手里面——那才是真正的公平。</p>
+      </div>
+    </div>
+  </section><section class="win closed" id="win-hangyan-detail" data-win="hangyan-detail">
+    <div class="win-bar"><div class="win-dots"><span class="d-red"></span><span class="d-yel"></span><span class="d-grn"></span></div><div class="win-title glitch-title" data-title="hangyan.detail">hangyan.detail</div><div class="win-btns"><button class="wb-min" title="缩小">—</button><button class="wb-max" title="放大">▢</button><button class="wb-close" title="关闭" onclick="closeHangyanDetail()">✕</button></div></div>
+    <div class="win-body">
+      <div class="kicker">// competition.detail</div>
+      <div class="sec-title">2026预见未来行研大赛</div>
+      <div style="padding:14px 18px;background:var(--paper);border-radius:10px;border-left:3px solid var(--accent);line-height:1.9;font-size:14px;margin-bottom:20px;">
+        <strong>项目：</strong>潮流盲盒玩具——产品与用户研究视角<br>
+        <strong>角色：</strong>团队队长<br>
+        <strong>时间：</strong>2026年4月<br>
+        <strong>赛事：</strong>2026第四届全国大学生预见未来行研大赛（复赛）
+      </div>
+      
+      <div style="font-size:14px;font-weight:bold;color:var(--accent-deep);margin-bottom:12px;">📝 比赛详细内容</div>
+      <p style="font-size:14px;line-height:2;color:var(--ink);margin-bottom:20px;">带队从0到1完成潮流盲盒玩具行业研究，以"产品与用户研究视角"切入。负责团队分工、进度管理与任务统筹。自主学习并运用AI智能体搭建、自动化工作流，辅助完成Python数据清洗与行业分析。通过实地考察、用户调研与数据分析，产出完整的行业研究报告，成功晋级复赛。</p>
+
+      <div style="font-size:14px;font-weight:bold;color:var(--accent-deep);margin-bottom:12px;">📄 行研报告预览</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;">
+        <img loading="lazy" decoding="async" src="assets/img/img03.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+        <img loading="lazy" decoding="async" src="assets/img/img04.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+        <img loading="lazy" decoding="async" src="assets/img/img05.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+        <img loading="lazy" decoding="async" src="assets/img/img06.jpg" style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+      </div>
+      <div style="text-align:center;margin-bottom:24px;">
+        <a href="潮流盲盒玩具行研报告.pdf" target="_blank" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:bold;box-shadow:0 4px 12px rgba(212,138,160,.3);">📥 下载完整报告PDF</a>
+      </div>
+
+      <div style="font-size:14px;font-weight:bold;color:var(--accent-deep);margin-bottom:12px;">📸 实地考察照片</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;">
+        <img loading="lazy" decoding="async" src="assets/img/img25.jpg" style="width:100%;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.12);">
+        <img loading="lazy" decoding="async" src="assets/img/img26.jpg" style="width:100%;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.12);">
+        <img loading="lazy" decoding="async" src="assets/img/img27.jpg" style="width:100%;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.12);grid-column:1/-1;">
+      </div>
+      
+      <div style="font-size:14px;font-weight:bold;color:var(--accent-deep);margin-bottom:12px;">🏆 复赛证书</div>
+      <img loading="lazy" decoding="async" src="assets/img/img28.jpg" style="width:100%;max-width:520px;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);display:block;margin:0 auto;margin-bottom:24px;">
+      
+      <div style="font-size:14px;font-weight:bold;color:var(--accent-deep);margin-bottom:12px;">💡 我的收获</div>
+      <div style="padding:14px 18px;background:linear-gradient(135deg,#fff5f7,#ffe8ee);border-radius:10px;border-left:3px solid #d48aa0;line-height:1.9;font-size:14px;">
+        零基础掌握AI智能体搭建和Python数据清洗；提升项目管理与团队协作能力；学会从0到1拆解复杂问题；在自主攻坚的过程中，大幅提升自学能力、抗压能力与问题解决能力。
+      </div>
+    </div>
+  </section>
+
+
+</div>
+
+<div class="taskbar">
+  <div class="task-start" id="startBtn">
+    <svg class="flag" viewBox="0 0 8 8" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="4" height="4" fill="#d99fb0"/><rect x="4" y="0" width="4" height="4" fill="#9be8ff"/><rect x="0" y="4" width="4" height="4" fill="#e7a9b8"/><rect x="4" y="4" width="4" height="4" fill="#f0c2cf"/></svg>
+    start
+  </div>
+  <div class="task-btns" id="taskBtns"></div>
+  <div class="task-tray">
+    <svg class="qq-ico" viewBox="0 0 20 20" width="18" height="18"><ellipse cx="10" cy="11" rx="6" ry="7" fill="#fff" stroke="#000" stroke-width="1"/><ellipse cx="10" cy="8" rx="4.5" ry="4" fill="#fff"/><circle cx="8" cy="7.5" r="1.2" fill="#000"/><circle cx="12" cy="7.5" r="1.2" fill="#000"/><path d="M8 10 Q10 12 12 10" stroke="#e04040" stroke-width="1" fill="none"/><ellipse cx="4" cy="13" rx="1.5" ry="2" fill="#ffb6c1"/><ellipse cx="16" cy="13" rx="1.5" ry="2" fill="#ffb6c1"/></svg>
+    <button class="theme-toggle" id="themeToggle" aria-label="昼夜切换" title="昼夜切换">✦</button><div class="task-clock" id="taskClock">--:--</div></div>
+</div>
+
+<div class="start-menu hidden" id="startMenu"><div class="sm-title">✿ menu.sys</div><div class="start-row" id="startRow"></div></div>
+
+    </div><!-- /monitor-screen -->
+    <!-- 照片探出屏幕 -->
+    <div class="avatar-popup">
+      <div class="avatar-glow"></div>
+      <!-- 头像图已移除：原引用的 94819ad9f88953517b4b991c77aca9d8.jpg 这个文件在任何地方都不存在（死链）。
+           且本容器当前被 CSS 隐藏（.avatar-popup{display:none}，壁纸已有人物，避免重复探出）。
+           需要重新启用时：把图片放进 site\ 目录，再把 src 补回来即可。 -->
+    </div>
+    <div class="monitor-brand">CTBU-OS · v2.0</div>
+  </div><!-- /monitor-body -->
+  <div class="monitor-tower">
+    <div class="tower-logo">CTBU</div>
+    <div class="tower-drives">
+      <div class="tower-drive"></div>
+      <div class="tower-drive"></div>
+    </div>
+    <div class="tower-power"></div>
+  </div>
+  <div class="monitor-stand"></div>
+  <div class="monitor-base"></div>
+</div><!-- /monitorFrame -->
+
+<script src="assets/js/app.js?v=20260909"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
