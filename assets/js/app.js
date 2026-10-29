@@ -184,15 +184,11 @@ const PROJECTS={
   skill:{tag:'AIGC',title:'求职面试AI Skill',meta:'角色：设计者｜时间：2026暑期｜项目：北辰青年实习',
     desc:'北辰青年实习期间产出。把「精准投递」做成5步工作流：岗位拆解 → 经历匹配 → 简历定制 → 面试准备 → 面试官视角复盘。每一步都明确划分AI做什么、人做什么。四条不可违背的原则：一岗一策、证据导向（不编造）、诚实面对缺口、人做判断。',
     images:[],video:'',
-    result:'产出可复用的AI Skill文档（v1.1，Step5 为迭代新增）；已用阿里巴巴产品经理-用户研究方向岗位完成真实测试验证；协作原则可迁移到其他工作流设计。',doc:'skill_doc.html'},
+    result:'产出可复用的AI Skill文档（v1.1，Step5 为迭代新增）；已用阿里巴巴产品经理-用户研究方向岗位完成真实测试验证；协作原则可迁移到其他工作流设计。',doc:'skill_doc.html',docLabel:'📖 查看skill'},
   workflow:{tag:'AIGC',title:'AI智能体与工作流搭建',meta:'角色：自主学习者｜时间：持续进行中',
     desc:'从零基础自学AI智能体搭建与自动化工作流设计，把AI从「一次性工具」升级为「可复用的工作流」。实践包括Hermes本地化部署、WorkBuddy工具联动等。我的判断标准：重复做超过3次的事，就该固化成工作流。',
     images:[],video:'',
     result:'掌握AI智能体搭建与自动化工作流设计；求职面试AI Skill是这套能力的实际产出。'},
-  brand:{tag:'品牌',title:'《一只喵》品牌战略推演',meta:'角色：品牌主理人｜时间：2026暑期｜版本：V1.0',
-    desc:'26个部分的完整战略推演，从"账号为什么存在"到品牌宪法、长期系统设计。核心定位：帮助大学生减少信息差，把复杂信息讲成能行动的方法。品牌价值观：清晰、可靠、有温度、成长。从"做账号"升级为"做品牌"，从"流量变现"升级为"可持续价值交换系统"。',
-    images:[],video:'',
-    result:'完成品牌战略文件V1.0；确立品牌定位和价值观；推翻线性转化路径，重新设计私域逻辑；对"伸手党"完成从抱怨到系统设计的认知升级。',doc:'yizhimiao_brand.html'},
   navsite:{tag:'网站',title:'CTBU一只喵学习干货导航站',meta:'角色：独立开发者｜状态：已上线｜对象：CTBU新生',
     desc:'面向新生的校园信息导航网站，把分散在各个群和公众号里的信息，按「入学 / 学习 / 生活」重组为能按场景检索的结构，减少新生信息差。从信息梳理到设计开发独立完成。',
     images:[],video:'',
@@ -201,10 +197,10 @@ const PROJECTS={
     desc:'这是为喜欢花的小余老师定制的个人网站，从发现需求到设计完成，均为独立进行。做成温馨的花园风格——因为她爱花；页面里还留了护嗓小贴士，讲几节课，嗓子最辛苦。',
     images:[],video:'',
     result:'网站已上线；获得老师认可。',website:'xiaoyulaoshi.html'},
-  speech:{tag:'演讲',title:'《我和你，是一样的中华魂》',meta:'角色：演讲者｜状态：已公开演讲',
-    desc:'从重庆"四公里站"站名切入抗日战争运输坐标——这些数字不是丈量城市的距离，是当年卡车碾过碎石路、士兵扛着弹药箱时刻在土地上的运输坐标。到渣滓洞、白公馆的红岩信仰，最后落到"我们和先辈是一样的中华魂"。将在地历史知识与情感传达结合。',
+  kepu:{tag:'课件',title:'云课堂创意课件与插件',meta:'角色：课程设计 & 前端实现｜时间：2026 秋 · 六年级趣味科学｜形式：单文件交互网页',
+    desc:'给云课堂六年级孩子做的互动课件《生物的启示》。不是把 PPT 搬到网页上，而是按真实课堂节奏重新设计：12 页，含 40 分钟倒计时、教师提示（T 键随时看）、动手环节、过关挑战和收口金句页；下课前还能打开「班级花园」——一个把举手、答题、分享换成花朵与积分的班级积分插件，把课堂氛围和纪律一起解决。整个项目写成单个 HTML 文件，不依赖网络和外部素材，对方学校电脑再旧、网再卡，也能直接打开就讲。',
     images:[],video:'',
-    result:'完成公开演讲；锻炼表达能力和在地知识研究能力；演讲文稿可作为文字作品展示。'},
+    result:'完成 12 页《生物的启示》40 分钟完整课件，已在 2026.10.28 的云课堂讲授；配套倒计时、教师提示、随机点名与班级花园积分插件；课件、教案、学情数据同源维护，按每周一课的节奏持续迭代。',doc:'kepu-lesson06.html',docLabel:'🌱 打开这节课的课件'},
   insight:{tag:'研究',title:'校园招募洞察报告',meta:'角色：主笔｜时间：2026暑期｜北辰青年实习产出',
     desc:'面向Z世代大学生群体的系统化洞察，覆盖消费行为、社交习惯、学习方式、职业焦虑四个维度。方法上我没有做问卷和正式访谈——而是把自己放在一线：一边做校园账号、卖校园卡，一边在评论区接触大量学生和家长，再和同在一线的同事交流，把真正碰到的问题和痛点沉淀成用户画像与商业建议。',
     images:[],video:'',
@@ -263,7 +259,8 @@ function openProjectDetail(pid){
     }else{videoDiv.innerHTML='';}
     document.getElementById('pd-result').innerHTML=p.result?`<strong>成果与收获：</strong>${p.result}`:'';
     if(p.doc){
-      var docBtn = '<br><br><a href="' + p.doc + '" target="_blank" style="display:inline-block;padding:12px 28px;background:var(--accent);color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:bold;box-shadow:0 4px 12px rgba(212,138,160,.3);">📖 查看完整品牌探讨文档</a>';
+      var docLabel = p.docLabel || '📖 查看完整文档';
+      var docBtn = '<br><br><a href="' + p.doc + '" target="_blank" style="display:inline-block;padding:12px 28px;background:var(--accent);color:#fff;border-radius:24px;text-decoration:none;font-size:14px;font-weight:bold;box-shadow:0 4px 12px rgba(212,138,160,.3);">' + docLabel + '</a>';
       document.getElementById('pd-result').innerHTML += docBtn;
     }
     if(p.website){

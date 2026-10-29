@@ -1,0 +1,2825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>六年级趣味科学 · 第六课（生物的启示）40分钟</title>
+<style>
+  :root{
+    --navy:#1F497D;
+    --green:#9BBB59;
+    --green-light:#EFF5E3;
+    --teal:#4BACC6;
+    --teal-light:#E6F4F7;
+    --orange:#F79646;
+    --orange-light:#FDEEE0;
+    --purple:#7B5EA7;
+    --purple-light:#F0EAF7;
+    --red:#C0504D;
+    --red-light:#FBEAE9;
+    --brown:#A9744F;
+    --brown-light:#F3E7DC;
+    --cream:#EEECE1;
+    --paper:#FAF9F5;
+    --card:#ffffff;
+    --line:#D6D9DE;
+    --ink:#26344A;
+    --muted:#7A8494;
+    --shadow:0 6px 22px rgba(31,73,125,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB","Heiti SC",SimHei,"WenQuanYi Micro Hei",sans-serif;
+    background:var(--paper);color:var(--ink);overflow:hidden;
+  }
+
+  /* ---------- 顶部计时器 ---------- */
+  #topbar{
+    position:fixed;left:0;right:0;top:0;height:6.4vh;z-index:100;
+    background:#fff;border-bottom:2px solid var(--line);
+    display:flex;align-items:center;gap:1.2vw;padding:0 1.5vw;
+  }
+  #clock{
+    font-size:clamp(24px, 3.6vh, 52px);font-weight:bold;color:var(--navy);
+    font-variant-numeric:tabular-nums;letter-spacing:.5px;min-width:15vh;
+  }
+  #clock.over{color:#C0504D;}
+  #bar-wrap{flex:1;height:2.2vh;background:var(--cream);border-radius:999px;overflow:hidden;}
+  #bar{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--purple));transition:width 1s linear;}
+  #bar.over{background:#C0504D;}
+  #topbar button{
+    font-size:3.2vh;padding:.6vh 1.3vw;border:none;border-radius:8px;
+    background:var(--navy);color:#fff;cursor:pointer;font-family:inherit;
+  }
+  #topbar button.gray{background:#9AA3B0;}
+  #topbar button#tipBtn.on{background:var(--orange);}
+  #partTag{
+    font-size:3.2vh;color:#fff;background:var(--navy);
+    padding:.5vh 1.2vw;border-radius:999px;white-space:nowrap;
+  }
+  #partTag.p2{background:var(--teal);}
+  #partTag.p3{background:var(--orange);}
+
+  /* ---------- 页面框架 ---------- */
+  .slide{
+    position:absolute;top:6.4vh;left:0;right:0;bottom:7.4vh;
+    display:none;flex-direction:column;padding:1.8vh 2.4vw 1vh;overflow-y:auto;scrollbar-width:none;
+  }
+  .slide.active{display:flex;animation:slideIn .4s ease;}
+  .slide::-webkit-scrollbar{display:none;}
+  @keyframes slideIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+  .slide h1{font-size:clamp(36px, 6vh, 86px);color:var(--navy);margin-bottom:.6vh;}
+  .slide h2{font-size:clamp(36px, 5vh, 72px);color:var(--navy);margin-bottom:1vh;}
+  .slide h3{font-size:clamp(24px, 3.6vh, 52px);color:var(--navy);margin-bottom:.6vh;}
+  .teacher-tip{
+    font-size:3.2vh;color:#6B7480;background:#F4F5F7;line-height:1.5;
+    border-left:6px solid var(--orange);
+    padding:.8vh 1.2vw;border-radius:0 8px 8px 0;margin-bottom:1.2vh;
+    display:none;
+  }
+  body.show-tips .teacher-tip{display:block;}
+  .grow{flex:1;min-height:0;}
+
+  /* ---------- 底部导航 ---------- */
+  #navbar{
+    position:fixed;left:0;right:0;bottom:0;height:7.4vh;
+    background:#fff;border-top:2px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 1.5vw;z-index:99;
+  }
+  #navbar button{
+    font-size:3.4vh;padding:.9vh 2vw;border:none;border-radius:10px;
+    background:var(--navy);color:#fff;cursor:pointer;font-family:inherit;
+  }
+  #navbar button:disabled{background:#C6CBD3;cursor:default;}
+  #navbar button:not(:disabled):hover{filter:brightness(1.1);}
+  #dots{display:flex;gap:.6vw;align-items:center;flex-wrap:wrap;}
+  #dots span{
+    min-width:2.6vh;height:2.6vh;border-radius:50%;background:#D6D9DE;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    font-size:3vh;color:transparent;padding:0 .5vh;
+  }
+  #dots span.on{background:var(--navy);color:#fff;}
+  #dots span.p2.on{background:var(--teal);}
+  #dots span.p3.on{background:var(--orange);}
+  #hint{font-size:3vh;color:#9AA3B0;}
+
+  /* ---------- 封面 ---------- */
+  #cover{align-items:center;justify-content:center;text-align:center;}
+  #cover .big{font-size:clamp(48px, 10vh, 144px);line-height:1.15;}
+  #cover h1{font-size:clamp(48px, 7.6vh, 109px);margin:.8vh 0;}
+  #cover .sub{font-size:clamp(28px, 4vh, 58px);color:var(--muted);margin-top:.8vh;}
+  #cover .badge{
+    margin-top:2.4vh;font-size:clamp(24px, 3.4vh, 49px);color:var(--purple);
+    background:var(--purple-light);padding:1vh 2.4vw;border-radius:999px;
+  }
+  #cover .meta{margin-top:1.6vh;font-size:clamp(24px, 3.4vh, 49px);color:var(--muted);line-height:1.7;}
+
+  /* ---------- 通用卡片 ---------- */
+  .card{
+    background:var(--card);border:2px solid var(--line);border-radius:14px;
+    padding:1.6vh 1.4vw;box-shadow:var(--shadow);
+  }
+  .row{display:flex;gap:1vw;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.2vh 1vw;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2vh 1vw;}
+  .say{font-size:clamp(24px, 3.4vh, 49px);color:var(--navy);line-height:1.5;}
+  .btn{
+    font-size:clamp(24px, 3.4vh, 49px);padding:.9vh 1.8vw;border:none;border-radius:10px;
+    background:var(--navy);color:#fff;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{filter:brightness(1.1);}
+  .btn.teal{background:var(--teal);}
+  .btn.purple{background:var(--purple);}
+  .btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--line);}
+
+  /* ---------- 色块级强调（重点不靠加粗） ---------- */
+  .key-r{
+    display:inline-block;background:var(--red);color:#fff;
+    padding:.2vh .9vw;border-radius:8px;font-weight:bold;line-height:1.4;
+  }
+  .key-y{
+    display:inline-block;background:#FFD24A;color:#1a1a1a;
+    padding:.2vh .9vw;border-radius:8px;font-weight:bold;line-height:1.4;
+  }
+  .key-g{
+    display:inline-block;background:var(--green);color:#fff;
+    padding:.2vh .9vw;border-radius:8px;font-weight:bold;line-height:1.4;
+  }
+
+  /* ---------- 橙色提示框 ---------- */
+  .safe-tip{
+    margin-top:1vh;background:#FFF1E2;border:3px solid var(--orange);border-radius:12px;
+    padding:1vh 1.4vw;font-size:clamp(24px, 3.4vh, 49px);line-height:1.5;color:#B45F0B;
+  }
+  .next-line{
+    margin-top:.6vh;background:var(--teal-light);border-left:6px solid var(--teal);
+    border-radius:0 12px 12px 0;padding:1vh 1.4vw;font-size:clamp(26px, 3.8vh, 55px);color:#2A7C92;line-height:1.5;
+  }
+
+  /* ---------- 第 2 页：荒漠化 ---------- */
+  #tail .tailline{
+    display:flex;align-items:center;gap:.8vw;flex-wrap:wrap;
+    font-size:clamp(24px, 3.4vh, 49px);line-height:1.45;color:var(--muted);
+  }
+  .desert-fig{width:100%;max-height:30vh;display:block;margin:.4vh auto;}
+  .chain4{display:flex;align-items:stretch;gap:.5vw;margin-top:.6vh;}
+  .chain4 .c4{
+    flex:1;background:var(--card);border:2px solid var(--line);border-radius:12px;
+    padding:.7vh .8vw;font-size:clamp(24px, 3.1vh, 44px);line-height:1.35;
+    box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:all .3s ease;
+  }
+  .chain4 .c4.show{opacity:1;transform:none;}
+  .chain4 .c4 .n{
+    display:inline-flex;width:3.4vh;height:3.4vh;border-radius:50%;background:var(--brown);color:#fff;
+    align-items:center;justify-content:center;font-weight:bold;font-size:clamp(24px, 2.9vh, 40px);
+    margin-right:.4vw;vertical-align:middle;
+  }
+  .chain4 .arw{
+    flex:none;display:flex;align-items:center;color:var(--brown);font-size:clamp(28px, 4vh, 56px);font-weight:900;
+    opacity:0;transition:opacity .3s ease;
+  }
+  .chain4 .arw.show{opacity:1;}
+
+  /* ---------- 第 3 页：什么是仿生 ---------- */
+  .tri{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:.6vw;margin:.4vh 0;}
+  .tri .tb{
+    background:var(--card);border:3px solid var(--line);border-radius:16px;text-align:center;
+    padding:1.2vh .8vw;box-shadow:var(--shadow);opacity:0;transform:translateY(12px);transition:all .35s ease;
+  }
+  .tri .tb.show{opacity:1;transform:none;}
+  .tri .tb .te{font-size:clamp(32px, 5vh, 72px);line-height:1.1;}
+  .tri .tb .tt{font-size:clamp(24px, 3.3vh, 48px);font-weight:bold;color:var(--navy);margin-top:.3vh;}
+  .tri .tb .tx{font-size:clamp(24px, 3vh, 44px);color:var(--muted);line-height:1.35;}
+  .tri .tb.b1{border-color:var(--orange);} .tri .tb.b1 .tt{color:#B45F0B;}
+  .tri .tb.b2{border-color:var(--green);}  .tri .tb.b2 .tt{color:#4E6224;}
+  .tri .tb.b3{border-color:var(--teal);}   .tri .tb.b3 .tt{color:#2A7C92;}
+  .tri .tar{font-size:clamp(28px, 4vh, 56px);color:var(--red);font-weight:900;opacity:0;transition:opacity .3s;}
+  .tri .tar.show{opacity:1;}
+
+  /* ---------- 案例页：故事卡片 + 对比图 ---------- */
+  .case-fig{width:100%;max-height:30vh;display:block;margin:.3vh auto;}
+  .case-line{
+    display:flex;align-items:flex-start;gap:1vw;background:var(--card);
+    border:2px solid var(--line);border-left:8px solid var(--purple);border-radius:10px;
+    padding:.8vh 1.2vw;margin-bottom:.8vh;font-size:clamp(24px, 3.2vh, 46px);line-height:1.45;
+    box-shadow:var(--shadow);opacity:0;transform:translateX(-10px);transition:all .3s ease;
+  }
+  .case-line.show{opacity:1;transform:none;}
+  .case-line .yr{
+    flex:none;font-weight:900;color:var(--purple);font-size:clamp(24px, 3.2vh, 46px);
+    min-width:8.5vh;
+  }
+  .case-line.hi{border-left-color:var(--red);background:var(--red-light);}
+  .case-line.hi .yr{color:var(--red);}
+  .do-now{
+    margin-top:.6vh;background:var(--green-light);border:3px solid var(--green);border-radius:12px;
+    padding:.8vh 1.2vw;font-size:clamp(24px, 3.4vh, 49px);line-height:1.45;color:#4E6224;
+  }
+
+  /* ---------- 第 7 页：辟谣时间轴 ---------- */
+  .myth-q{
+    background:var(--red-light);border:3px solid var(--red);border-radius:14px;
+    padding:1vh 1.4vw;font-size:clamp(26px, 3.8vh, 55px);line-height:1.45;color:#8C3B38;
+  }
+  .tl{margin-top:.6vh;position:relative;padding-left:2.4vw;}
+  .tl::before{
+    content:"";position:absolute;left:.9vw;top:1vh;bottom:1vh;width:6px;border-radius:3px;background:var(--line);
+  }
+  .tl .ev{
+    position:relative;margin-bottom:.7vh;background:var(--card);border:2px solid var(--line);
+    border-radius:10px;padding:.6vh 1vw;font-size:clamp(24px, 3.1vh, 44px);line-height:1.35;
+    box-shadow:var(--shadow);opacity:0;transform:translateX(-8px);transition:all .3s ease;
+  }
+  .tl .ev.show{opacity:1;transform:none;}
+  .tl .ev::before{
+    content:"";position:absolute;left:-1.72vw;top:50%;transform:translateY(-50%);
+    width:2.2vh;height:2.2vh;border-radius:50%;background:var(--line);border:3px solid #fff;
+  }
+  .tl .ev.radar{border-color:var(--teal);background:var(--teal-light);}
+  .tl .ev.radar::before{background:var(--teal);}
+  .tl .ev.bat{border-color:var(--purple);background:var(--purple-light);}
+  .tl .ev.bat::before{background:var(--purple);}
+  .tl .ev .y{font-weight:900;margin-right:.8vw;}
+  .tl .ev.radar .y{color:#2A7C92;}
+  .tl .ev.bat .y{color:#4A2F70;}
+
+  /* ---------- 第 8 页：三栏归纳 ---------- */
+  .learn{
+    background:var(--card);border:3px solid var(--line);border-radius:16px;text-align:center;
+    padding:1.2vh .8vw;box-shadow:var(--shadow);opacity:0;transform:translateY(14px);transition:all .35s ease;
+  }
+  .learn.show{opacity:1;transform:none;}
+  .learn .lh{
+    display:inline-block;color:#fff;font-size:clamp(24px, 3.3vh, 48px);font-weight:bold;
+    padding:.3vh 1.2vw;border-radius:999px;
+  }
+  .learn.l1{border-color:var(--teal);}   .learn.l1 .lh{background:var(--teal);}
+  .learn.l2{border-color:var(--green);}  .learn.l2 .lh{background:var(--green);}
+  .learn.l3{border-color:var(--orange);} .learn.l3 .lh{background:var(--orange);}
+  .learn .le{font-size:clamp(32px, 4.6vh, 64px);line-height:1.2;margin-top:.4vh;}
+  .learn .lx{font-size:clamp(24px, 3.2vh, 46px);color:var(--muted);line-height:1.4;}
+
+  /* ---------- 第 9 页：动手 ---------- */
+  .idea{
+    background:var(--card);border:2px dashed var(--line);border-radius:12px;
+    padding:.7vh .9vw;font-size:clamp(24px, 3.1vh, 44px);line-height:1.4;color:var(--muted);
+  }
+  .idea b{color:var(--navy);}
+  #dsteps .step{margin-bottom:.7vh;}
+  #obsBox{
+    display:inline-flex;align-items:center;gap:.8vw;background:#E8EEF6;
+    border-radius:999px;padding:.6vh 1.4vw;margin-top:.8vh;font-size:clamp(24px, 3.4vh, 49px);
+  }
+  #obsClock{font-size:clamp(28px, 4vh, 58px);font-weight:bold;color:var(--navy);font-variant-numeric:tabular-nums;}
+  #obsBox.done #obsClock{color:var(--red);}
+
+  /* ---------- 分步展示 ---------- */
+  .step{
+    display:flex;align-items:center;gap:1.2vw;background:var(--card);
+    border:2px solid var(--line);border-radius:12px;padding:.9vh 1.2vw;margin-bottom:.8vh;
+    font-size:clamp(24px, 3.6vh, 52px);line-height:1.5;box-shadow:var(--shadow);
+    opacity:0;transform:translateY(12px);transition:all .35s ease;
+  }
+  .step.show{opacity:1;transform:none;}
+  .step .s-n{
+    flex:none;width:5.2vh;height:5.2vh;border-radius:50%;background:var(--navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:clamp(24px, 3.6vh, 52px);font-weight:bold;
+  }
+  .story-btnrow{display:flex;align-items:center;gap:.8vw;margin-top:1vh;}
+  .story-btnrow .spacer{flex:1;}
+  .big-say{
+    margin-top:1.2vh;font-size:clamp(36px, 5.6vh, 81px);font-weight:900;color:var(--navy);
+    line-height:1.45;text-align:center;
+  }
+  .read-aloud{
+    margin-top:1.2vh;background:var(--orange-light);border:3px solid var(--orange);
+    border-radius:14px;padding:1.2vh 1.5vw;font-size:clamp(28px, 4vh, 58px);font-weight:bold;color:#B45F0B;line-height:1.5;
+  }
+  .concl{
+    margin-top:1vh;background:var(--green-light);border:3px solid var(--green);
+    border-radius:14px;padding:1vh 1.4vw;font-size:clamp(26px, 3.8vh, 55px);font-weight:bold;
+    color:#4E6224;text-align:center;line-height:1.5;
+    opacity:0;transform:translateY(10px);transition:all .35s ease;
+  }
+  .concl.show{opacity:1;transform:none;}
+
+  /* ---------- 过关挑战 · 一次只出一题 ---------- */
+  .q-lab{
+    font-size:clamp(24px,3.6vh,48px);color:var(--muted);font-weight:bold;margin-bottom:.8vh;
+  }
+  #quiz .q-item{display:none;}
+  #quiz .q-item.on{display:block;animation:slideIn .35s ease;}
+  .q-item .q-t{
+    font-size:clamp(24px, 3.8vh, 55px);font-weight:bold;color:var(--navy);line-height:1.45;margin-bottom:1vh;
+  }
+  .q-opt{
+    background:var(--card);border:2px solid var(--line);border-radius:12px;
+    padding:1.1vh 1.4vw;margin-bottom:.8vh;font-size:clamp(24px, 3.4vh, 49px);line-height:1.45;
+    cursor:pointer;transition:all .18s ease;box-shadow:var(--shadow);
+  }
+  .q-opt:hover{border-color:var(--teal);}
+  .q-opt.right{background:var(--green-light);border-color:var(--green);font-weight:bold;color:#4E6224;}
+  .q-opt.wrong{background:var(--red-light);border-color:var(--red);opacity:.6;}
+  .q-why{margin-top:.7vh;font-size:clamp(24px, 3.4vh, 49px);color:var(--muted);line-height:1.5;display:none;}
+  .q-why.show{display:block;}
+  .q-nav{display:flex;align-items:center;gap:.8vw;margin-top:.6vh;}
+  .q-nav .spacer{flex:1;}
+
+  /* ---------- 结尾：保护老师 ---------- */
+  #end .hug{
+    background:var(--green-light);border:3px solid var(--green);border-radius:16px;
+    padding:1.4vh 1.6vw;font-size:clamp(28px, 4.2vh, 61px);line-height:1.5;color:#4E6224;text-align:center;font-weight:bold;
+  }
+  #end .hug .big{display:block;font-size:clamp(32px, 5vh, 72px);margin-top:.4vh;}
+  #end .quiet{
+    margin-top:1vh;font-size:clamp(24px, 3.3vh, 48px);color:var(--muted);line-height:1.55;text-align:center;
+  }
+
+  /* ---------- 逻辑链 ---------- */
+  #sum .flow{display:flex;flex-direction:column;gap:.1vh;min-height:0;}
+  #sum .flow-item{
+    display:flex;align-items:center;gap:1vw;background:var(--card);border-radius:12px;
+    padding:.5vh 1vw;box-shadow:var(--shadow);border:2px solid var(--line);
+    opacity:0;transform:translateY(10px);transition:all .3s ease;
+  }
+  #sum .flow-item.show{opacity:1;transform:none;}
+  #sum .flow-item .fq{
+    flex:none;background:var(--navy);color:#fff;border-radius:10px;
+    padding:.4vh 1vw;font-size:clamp(24px, 3.6vh, 52px);font-weight:bold;min-width:14vh;text-align:center;
+  }
+  #sum .flow-item .fa{font-size:clamp(24px, 3.4vh, 49px);line-height:1.4;}
+  #sum .flow-item .fa .why{font-size:clamp(24px, 3.4vh, 49px);color:var(--muted);margin-left:.6vw;}
+  #sum .flow-arrow{text-align:center;font-size:2.6vh;color:var(--muted);line-height:1;opacity:0;transition:opacity .3s;}
+  #sum .flow-arrow.show{opacity:1;}
+  .flow-item:nth-child(1) .fq{background:var(--navy);}
+  .flow-item:nth-child(3) .fq{background:var(--brown);}
+  .flow-item:nth-child(5) .fq{background:var(--green);}
+  .flow-item:nth-child(7) .fq{background:var(--teal);}
+  .flow-item:nth-child(9) .fq{background:var(--purple);}
+  .flow-item:nth-child(11) .fq{background:var(--orange);}
+  #finalLine{
+    margin-top:1vh;background:var(--green-light);border:3px solid var(--green);
+    border-radius:14px;padding:1vh 1.4vw;text-align:center;
+    font-size:clamp(32px, 4.4vh, 63px);font-weight:900;color:#4E6224;line-height:1.45;
+    opacity:0;transform:scale(.9);transition:all .4s cubic-bezier(.2,1.4,.4,1);
+  }
+  #finalLine.show{opacity:1;transform:none;}
+  #summaryGarden{
+    margin-top:.8vh;padding:.9vh 1.2vw;text-align:center;background:var(--green-light);
+    border:2px dashed var(--green);border-radius:12px;font-size:clamp(24px, 3.6vh, 52px);color:#4E6224;line-height:1.5;
+    opacity:0;transition:opacity .4s ease;
+  }
+  #summaryGarden.show{opacity:1;}
+  #summaryGarden button{
+    font-size:clamp(24px, 3.4vh, 49px);padding:.6vh 1.6vw;margin-left:.6vw;border:none;border-radius:10px;
+    background:var(--green);color:#fff;cursor:pointer;font-family:inherit;
+  }
+
+  /* ================= 中高屏（≤900px 高） ================= */
+  @media (max-height:900px){
+    #sum .flow-item{padding:.4vh .9vw;}
+    #sum .flow-item .fq{min-width:12vh;padding:.3vh .9vw;font-size:clamp(24px, 3.2vh, 46px);}
+    #sum .flow-item .fa{font-size:clamp(24px, 3.1vh, 44px);}
+    #sum .flow-item .fa .why{font-size:clamp(24px, 3.1vh, 44px);}
+    #finalLine{margin-top:.6vh;padding:.7vh 1.2vw;line-height:1.35;font-size:clamp(30px, 4vh, 56px);}
+    #summaryGarden{margin-top:.5vh;padding:.6vh 1vw;font-size:clamp(24px, 3.2vh, 46px);}
+    .desert-fig{max-height:26vh;}
+    .case-fig{max-height:26vh;}
+  }
+
+  /* ================= 矮屏（≤700px 高，1024×576 学生端） ================= */
+  @media (max-height:700px){
+    /* 逻辑链 7 环：矮屏竖排出屏，改两列网格；箭头隐藏（徽章自带顺序） */
+    #sum h2{margin-bottom:.1vh;font-size:clamp(26px, 3.3vh, 50px);}
+    #sum .flow{display:grid;grid-template-columns:1fr 1fr;gap:.35vh .7vw;}
+    #sum .flow-arrow{display:none;}
+    #sum .flow-item{padding:.1vh .7vw;gap:.5vw;}
+    #sum .flow-item .fq{min-width:8vh;padding:.1vh .6vw;font-size:clamp(24px, 2.8vh, 42px);}
+    #sum .flow-item .fa{font-size:clamp(24px, 2.8vh, 40px);line-height:1.12;}
+    #sum .flow-item .fa .why{font-size:clamp(24px, 2.8vh, 40px);margin-left:.4vw;}
+    #finalLine{margin-top:.2vh;padding:.3vh 1vw;font-size:clamp(26px, 3.1vh, 46px);line-height:1.18;}
+    #summaryGarden{margin-top:.15vh;padding:.1vh .8vw;border-width:2px;font-size:clamp(24px, 2.9vh, 44px);line-height:1.2;}
+    #summaryGarden button{font-size:clamp(24px, 2.9vh, 42px);padding:.1vh 1.2vw;}
+
+    /* 荒漠化页 */
+    #tail h2{margin-bottom:.2vh;}
+    .desert-fig{max-height:22vh;}
+    #tail .tailline{font-size:clamp(24px, 3vh, 44px);}
+    .chain4{gap:.35vw;margin-top:.3vh;}
+    .chain4 .c4{padding:.3vh .6vw;font-size:clamp(24px, 2.8vh, 40px);line-height:1.25;}
+    .chain4 .c4 .n{width:2.8vh;height:2.8vh;font-size:clamp(24px, 2.6vh, 36px);}
+    .chain4 .arw{font-size:clamp(24px, 3vh, 44px);}
+    .next-line{padding:.3vh 1vw;font-size:clamp(24px, 3vh, 44px);line-height:1.3;}
+
+    /* 案例页 / 什么是仿生 */
+    .case-fig{max-height:21vh;}
+    .case-line{padding:.35vh .9vw;margin-bottom:.35vh;font-size:clamp(24px, 2.9vh, 42px);line-height:1.28;}
+    .case-line .yr{font-size:clamp(24px, 2.9vh, 42px);min-width:7.5vh;}
+    .do-now{padding:.35vh .9vw;font-size:clamp(24px, 2.9vh, 42px);line-height:1.3;}
+    .tri .tb{padding:.5vh .6vw;}
+    .tri .tb .te{font-size:clamp(26px, 3.4vh, 48px);}
+    .tri .tb .tt{font-size:clamp(24px, 2.9vh, 42px);}
+    .tri .tb .tx{font-size:clamp(24px, 2.7vh, 38px);line-height:1.25;}
+
+    /* 辟谣时间轴 */
+    .myth-q{padding:.5vh 1vw;font-size:clamp(24px, 3.1vh, 46px);line-height:1.3;}
+    .tl .ev{padding:.3vh .8vw;margin-bottom:.35vh;font-size:clamp(24px, 2.8vh, 40px);line-height:1.25;}
+
+    /* 三栏归纳 */
+    .learn{padding:.5vh .6vw;}
+    .learn .lh{font-size:clamp(24px, 2.9vh, 42px);}
+    .learn .le{font-size:clamp(26px, 3.4vh, 48px);}
+    .learn .lx{font-size:clamp(24px, 2.8vh, 40px);line-height:1.28;}
+
+    /* 动手页 */
+    .idea{padding:.35vh .7vw;font-size:clamp(24px, 2.8vh, 40px);line-height:1.28;}
+    .step{padding:.35vh 1vw;margin-bottom:.4vh;font-size:clamp(24px, 3vh, 44px);line-height:1.3;}
+    .step .s-n{width:4.2vh;height:4.2vh;font-size:clamp(24px, 3vh, 44px);}
+    .story-btnrow{margin-top:.4vh;}
+    #obsBox{margin-top:.4vh;padding:.3vh 1.2vw;}
+    #obsClock{font-size:clamp(24px, 3.4vh, 48px);}
+    .safe-tip{margin-top:.4vh;padding:.4vh 1vw;font-size:clamp(24px, 3vh, 44px);line-height:1.32;border-width:2px;}
+
+    /* 结尾 */
+    #end .hug{padding:.7vh 1.2vw;font-size:clamp(24px, 3.4vh, 48px);line-height:1.35;}
+    #end .hug .big{font-size:clamp(26px, 3.8vh, 54px);}
+    #end .quiet{font-size:clamp(24px, 3vh, 44px);line-height:1.35;}
+
+    #cover .big{font-size:clamp(48px, 8vh, 110px);}
+    .big-say{font-size:clamp(28px, 4.4vh, 64px);line-height:1.3;}
+  }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <span id="clock">00:00</span>
+  <div id="bar-wrap"><div id="bar"></div></div>
+  <button id="tStart">▶ 开始计时</button>
+  <button id="tPause" class="gray">⏸</button>
+  <button id="tReset" class="gray">↺</button>
+  <button id="tipBtn" class="gray">教师提示 (T)</button>
+  <span id="partTag">Part 1 · 开场回顾</span>
+</div>
+
+<!-- ============ 1 封面 ============ -->
+<section class="slide" id="cover" data-part="1" data-min="1">
+  <div class="teacher-tip">开场就问：「上节课我们说兔子、蝗虫都吃草——那如果草被吃光了，会怎么样？」<b>别急着讲今天的新内容</b>，先把上节课那个尾巴收住。他们说「变沙漠」就对了，但那只说了一半，今天第一页要把中间那几步补上。</div>
+  <div class="grow"></div>
+  <div class="big">🔧</div>
+  <h1>生物的启示</h1>
+  <div class="sub">——人类最厉害的老师，不是人</div>
+  <div class="badge">先收上节课的尾巴，再学一个本事</div>
+  <div class="meta">六年级趣味科学 · 第 6 课 · 40 分钟</div>
+  <div class="grow"></div>
+</section>
+
+<!-- ============ 2 接住尾巴：草没了会怎样 ============ -->
+<section class="slide" id="tail" data-part="1" data-min="2">
+  <div class="teacher-tip">这页是<b>补上节课的机制</b>，不是新单元。他们上节课已经说出了「草没了会变荒漠」这个结果，但不知道中间的步骤——把 4 步点出来，他们会有「哦原来是这样」的感觉。<b>红框那句必须讲</b>：荒漠化不是沙漠变多，是本该长草的地方退化了。最后一句是转场，别漏。</div>
+  <h2>🌾 先接上节课：草被吃光了，会怎样？</h2>
+  <div class="tailline">兔子吃草，蝗虫也吃草 —— 如果草被吃光了？<b style="color:var(--red);">（他们说：会变沙漠）</b></div>
+
+  <svg class="desert-fig" viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="有草的地和有草被吃光后的地面对比">
+    <defs>
+      <marker id="windar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#B0805A"/>
+      </marker>
+    </defs>
+    <!-- 左：有草 -->
+    <rect x="40" y="150" width="360" height="70" rx="6" fill="#8B6244"/>
+    <rect x="40" y="150" width="360" height="12" rx="4" fill="#6E4A32"/>
+    <!-- 根系网 -->
+    <g stroke="#C9A227" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M120,155 L120,205"/>
+      <path d="M120,168 L96,196"/> <path d="M120,168 L146,196"/>
+      <path d="M180,155 L180,205"/>
+      <path d="M180,170 L156,200"/> <path d="M180,170 L206,200"/>
+      <path d="M240,155 L240,202"/>
+      <path d="M240,172 L216,198"/> <path d="M240,172 L266,198"/>
+      <path d="M96,196 L146,196"/> <path d="M156,200 L206,200"/> <path d="M216,198 L266,198"/>
+    </g>
+    <!-- 草 -->
+    <g stroke="#6FA83C" stroke-width="7" fill="none" stroke-linecap="round">
+      <path d="M120,152 L112,110"/> <path d="M120,152 L128,104"/> <path d="M120,152 L120,116"/>
+      <path d="M180,152 L172,106"/> <path d="M180,152 L188,112"/> <path d="M180,152 L180,118"/>
+      <path d="M240,152 L232,112"/> <path d="M240,152 L248,108"/> <path d="M240,152 L240,120"/>
+    </g>
+    <text x="220" y="60" text-anchor="middle" font-size="28" fill="#4E6224" font-weight="bold">草的根像一张网，抓住土</text>
+    <text x="220" y="240" text-anchor="middle" font-size="24" fill="#F3E7DC">✅ 有草的地</text>
+
+    <!-- 右：草没了 -->
+    <rect x="500" y="150" width="360" height="70" rx="6" fill="#C9A88C"/>
+    <rect x="500" y="150" width="360" height="12" rx="4" fill="#A98363"/>
+    <!-- 裂缝 -->
+    <g stroke="#8C6A4D" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M560,166 L568,198"/> <path d="M640,166 L630,200"/> <path d="M720,166 L732,196"/>
+      <path d="M800,166 L790,200"/>
+    </g>
+    <!-- 风 -->
+    <g stroke="#B0805A" stroke-width="5" fill="none" stroke-linecap="round" marker-end="url(#windar)">
+      <path d="M470,96 L700,96"/>
+      <path d="M470,120 L740,120"/>
+    </g>
+    <!-- 扬起的沙 -->
+    <g fill="#B99A7C">
+      <circle cx="700" cy="80" r="6"/> <circle cx="745" cy="72" r="5"/>
+      <circle cx="790" cy="84" r="7"/> <circle cx="836" cy="70" r="5"/>
+      <circle cx="770" cy="58" r="4"/>
+    </g>
+    <text x="700" y="196" text-anchor="middle" font-size="28" fill="#7A4F33" font-weight="bold">土松了，被吹走</text>
+    <text x="680" y="240" text-anchor="middle" font-size="24" fill="#7A4F33">❌ 草被吃光以后</text>
+  </svg>
+
+  <div class="chain4" id="chain4">
+    <div class="c4"><span class="n">1</span>草的根抓住土</div>
+    <div class="arw">→</div>
+    <div class="c4"><span class="n">2</span>草没了，土就松了</div>
+    <div class="arw">→</div>
+    <div class="c4"><span class="n">3</span>风吹走沙，水冲走土</div>
+    <div class="arw">→</div>
+    <div class="c4"><span class="n">4</span>日子久了，变成荒漠</div>
+  </div>
+
+  <div class="next-line" style="margin-top:.8vh;">⚠️ <span class="key-r">荒漠化 ≠ 沙漠变多</span>　是本该长草的地方，一点点退化了</div>
+  <div class="next-line" style="margin-top:.5vh;background:var(--purple-light);border-left-color:var(--purple);color:#4A2F70;">那今天我们换个方向 —— 生物不只是要保护的对象，它们还是我们的<b>老师</b>。</div>
+</section>
+
+<!-- ============ 3 什么是仿生 ============ -->
+<section class="slide" id="what" data-part="2" data-min="2">
+  <div class="teacher-tip">三步走，别一次全出。先说「人类遇到难题会想办法」，再问「除了自己想，还能问谁？」——这个问题留 5 秒。他们答不上来就指窗外的树、地上的蚂蚁。第 3 步出来以后，金句让全班念一遍。</div>
+  <h2>🤔 人类遇到难题，除了自己想，还能问谁？</h2>
+  <div class="tri" id="triRow">
+    <div class="tb b1"><div class="te">🧑</div><div class="tt">遇到麻烦</div><div class="tx">想把东西粘住，<br>又不想用针线</div></div>
+    <div class="tar" id="tar1">→</div>
+    <div class="tb b2"><div class="te">🌿</div><div class="tt">看生物怎么做</div><div class="tx">苍耳身上全是小钩子，<br>钩住动物的毛</div></div>
+    <div class="tar" id="tar2">→</div>
+    <div class="tb b3"><div class="te">🔧</div><div class="tt">学过来用</div><div class="tx">做一片小钩子 +<br>一片小毛圈 = 魔术贴</div></div>
+  </div>
+  <div class="story-btnrow">
+    <button class="btn teal" id="tNext" onclick="tNextStep()">下一步 ▶</button>
+    <button class="btn ghost" onclick="tAll()">一次全出</button>
+    <button class="btn ghost" onclick="tReset()">↺ 重来</button>
+    <div class="spacer"></div>
+  </div>
+  <div class="big-say" id="wSay" style="opacity:0;transition:opacity .4s ease;">
+    仿生 = 向生物<span class="key-y">借一个答案</span>
+  </div>
+</section>
+
+<!-- ============ 4 苍耳 → 魔术贴 ============ -->
+<section class="slide" id="case1" data-part="2" data-min="5">
+  <div class="teacher-tip"><b>这节课的绝杀案例，别赶。</b>讲完第 2 步让他们低头看自己的鞋——很多人鞋上就是魔术贴，摸一下那个「刺啦」响的地方。<b>重点落在第 4 步的红字</b>：不是「看起来像」，是真的学了那对小钩子。这是仿生和「看着像就瞎模仿」的分界线。</div>
+  <h2>🧲 你脚上就有一个仿生发明</h2>
+  <svg class="case-fig" viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="苍耳的小钩子钩住毛圈，魔术贴的两片结构">
+    <!-- 左：苍耳 -->
+    <g>
+      <ellipse cx="180" cy="120" rx="62" ry="56" fill="#8B7B4F"/>
+      <g stroke="#6B5C35" stroke-width="5" stroke-linecap="round">
+        <path d="M180,64 L180,40"/><path d="M148,72 L132,52"/><path d="M212,72 L228,52"/>
+        <path d="M130,104 L106,96"/><path d="M230,104 L254,96"/>
+        <path d="M134,146 L110,158"/><path d="M226,146 L250,158"/>
+        <path d="M162,168 L150,190"/><path d="M198,168 L210,190"/>
+        <path d="M180,176 L180,200"/>
+      </g>
+      <g fill="none" stroke="#4A3F22" stroke-width="4" stroke-linecap="round">
+        <path d="M180,40 q10,-14 20,-4"/><path d="M132,52 q-2,-16 12,-14"/>
+        <path d="M228,52 q14,-8 16,6"/><path d="M106,96 q-16,2 -14,14"/>
+        <path d="M254,96 q14,4 10,16"/><path d="M110,158 q-14,8 -6,18"/>
+        <path d="M250,158 q14,4 10,16"/><path d="M150,190 q-8,14 6,16"/>
+        <path d="M210,190 q10,12 -2,16"/>
+      </g>
+      <text x="180" y="236" text-anchor="middle" font-size="26" fill="#4A3F22" font-weight="bold">苍耳：全身都是小钩子</text>
+    </g>
+    <!-- 中：箭头 -->
+    <text x="330" y="130" text-anchor="middle" font-size="54" fill="#C0504D" font-weight="900">→</text>
+    <text x="330" y="166" text-anchor="middle" font-size="26" fill="#7A8494">学结构</text>
+    <!-- 右：魔术贴 -->
+    <g>
+      <rect x="410" y="70" width="420" height="34" rx="6" fill="#4BACC6"/>
+      <g stroke="#2A7C92" stroke-width="5" fill="none" stroke-linecap="round">
+        <path d="M432,104 q0,20 14,20 q14,0 14,-20"/>
+        <path d="M486,104 q0,20 14,20 q14,0 14,-20"/>
+        <path d="M540,104 q0,20 14,20 q14,0 14,-20"/>
+        <path d="M594,104 q0,20 14,20 q14,0 14,-20"/>
+        <path d="M648,104 q0,20 14,20 q14,0 14,-20"/>
+        <path d="M702,104 q0,20 14,20 q14,0 14,-20"/>
+        <path d="M756,104 q0,20 14,20 q14,0 14,-20"/>
+      </g>
+      <rect x="410" y="152" width="420" height="34" rx="6" fill="#F79646"/>
+      <g stroke="#B45F0B" stroke-width="5" fill="none" stroke-linecap="round">
+        <path d="M440,152 L440,128"/><path d="M494,152 L494,128"/><path d="M548,152 L548,128"/>
+        <path d="M602,152 L602,128"/><path d="M656,152 L656,128"/><path d="M710,152 L710,128"/>
+        <path d="M764,152 L764,128"/>
+      </g>
+      <text x="620" y="224" text-anchor="middle" font-size="26" fill="#2A7C92" font-weight="bold">魔术贴：一片钩子 + 一片毛圈</text>
+    </g>
+  </svg>
+
+  <div id="caseSteps">
+    <div class="case-line"><div class="yr">1941</div><div>瑞士工程师<b>德·梅斯特拉尔</b>带狗打猎回来，发现裤子和狗毛上粘满了苍耳，怎么也弄不掉。</div></div>
+    <div class="case-line"><div class="yr">🔬</div><div>他把苍耳放到显微镜下一看 —— 上面全是<b>小钩子</b>，钩住了衣服和毛上的<b>小毛圈</b>。</div></div>
+    <div class="case-line"><div class="yr">🧵</div><div>于是他做了两片布：一片全是小钩子，一片全是小毛圈。一按就粘住，一撕就开。</div></div>
+    <div class="case-line hi"><div class="yr">1955</div><div>魔术贴拿到专利。名字 <b>Velcro</b> = 法语「天鹅绒」+「钩子」。他前后花了 <b>14 年</b>。</div></div>
+  </div>
+  <div class="story-btnrow">
+    <button class="btn teal" id="c1Next" onclick="c1NextStep()">下一步 ▶</button>
+    <button class="btn ghost" onclick="c1All()">一次全出</button>
+    <button class="btn ghost" onclick="c1Reset()">↺ 重来</button>
+    <div class="spacer"></div>
+  </div>
+  <div class="do-now" id="c1Do" style="opacity:0;transition:opacity .4s ease;">
+    👟 <b>现在低头看看你的鞋</b>（或书包、笔袋）—— 找到那个「刺啦」一撕就开的地方，摸一下。<span class="key-r">你身上带着一个仿生发明</span>
+  </div>
+</section>
+
+<!-- ============ 5 鸟 → 飞机 ============ -->
+<section class="slide" id="case2" data-part="2" data-min="3">
+  <div class="teacher-tip">这页的重点<b>不是「飞机像鸟」</b>，是「仿生不是照抄」。先讲早期有人做一对大翅膀扇——结果摔了。真正突破是<b>看懂了翅膀的形状</b>。升力讲一句就够：上面弯、下面平，空气从上面走得更快，压力小，就把翅膀托起来了。别讲伯努利方程。</div>
+  <h2>✈️ 飞机能飞，是因为「照着鸟做」吗？</h2>
+  <div class="grid2" style="margin-top:.2vh;">
+    <div class="card" style="border-color:var(--red);background:var(--red-light);">
+      <h3 style="color:#8C3B38;">❌ 早期的人这么干</h3>
+      <div class="say" style="color:#8C3B38;">给自己绑上一对大翅膀，<b>使劲扇</b>——<br>结果一个也没飞起来，还摔伤了不少人。</div>
+    </div>
+    <div class="card" style="border-color:var(--green);background:var(--green-light);">
+      <h3 style="color:#4E6224;">✅ 后来的人换了思路</h3>
+      <div class="say" style="color:#4E6224;">不扇了。<b>先看懂鸟的翅膀是什么形状</b>，<br>再想「这个形状为什么能托住身体」。</div>
+    </div>
+  </div>
+  <div class="next-line" style="margin-top:1vh;">
+    鸟的翅膀<span class="key-y">上面是弯的，下面是平的</span>　→　空气从上面走得更快，压力变小 → 翅膀被「托」起来
+  </div>
+  <div class="concl show" style="background:var(--purple-light);border-color:var(--purple);color:#4A2F70;">
+    仿生不是照抄，是<span class="key-r">看懂原理</span>
+  </div>
+  <div class="say" style="margin-top:.8vh;color:var(--muted);">🔎 小彩蛋：现在很多飞机翅膀尖上翘起来的那一小块，是学<b>老鹰翅尖的羽毛</b>——能省油。</div>
+</section>
+
+<!-- ============ 6 鲸 → 轮船 ============ -->
+<section class="slide" id="case3" data-part="2" data-min="2">
+  <div class="teacher-tip">这页最短，一句话讲完就行：<b>形状也是学问</b>。可以问「为什么鱼和鲸长得都像鱼？」——因为它们都要在水里跑，谁形状不对谁费劲。这就是「形状是被水逼出来的答案」。</div>
+  <h2>🐋 为什么轮船的头是圆的？</h2>
+  <div class="row" style="margin-top:.2vh;">
+    <div class="card" style="flex:1;border-color:var(--red);background:var(--red-light);">
+      <h3 style="color:#8C3B38;">以前的船</h3>
+      <div class="say" style="color:#8C3B38;">船头<b>方方的、平平的</b><br>水迎头撞上来 → 又慢又费油</div>
+    </div>
+    <div class="card" style="flex:1;border-color:var(--teal);background:var(--teal-light);">
+      <h3 style="color:#2A7C92;">鲸和鱼的身体</h3>
+      <div class="say" style="color:#2A7C92;"><b>头圆、身子滑、尾巴尖</b><br>水从身边滑过去 → 阻力小</div>
+    </div>
+    <div class="card" style="flex:1;border-color:var(--green);background:var(--green-light);">
+      <h3 style="color:#4E6224;">现在的轮船</h3>
+      <div class="say" style="color:#4E6224;">照着改成<b>流线型</b><br>跑得更快，还省燃料</div>
+    </div>
+  </div>
+  <div class="big-say" style="margin-top:1.2vh;">
+    连<span class="key-y">形状</span>，都是可以借的
+  </div>
+</section>
+
+<!-- ============ 7 蝙蝠和雷达：被讲错的故事 ============ -->
+<section class="slide" id="myth" data-part="3" data-min="3">
+  <div class="teacher-tip"><b>这页是全课最有价值的一页，但也是最需要你把住的一页。</b>人教版四年级课文《蝙蝠和雷达》说「人类模仿蝙蝠发明了雷达」——<b>这是错的</b>，中科院声学所专门辟过谣：雷达比「发现蝙蝠用超声波」还早。别用「课本骗人」这种说法，用「以前的人弄错了，后来科学家查清楚了」。<b>结尾那句「真的吗」是本课的魂</b>，一定要慢。</div>
+  <h2>🦇 你们学过《蝙蝠和雷达》吗？</h2>
+  <div class="myth-q">课文说：人类<b>模仿蝙蝠</b>发明了雷达。<br><span style="font-size:max(24px, .85em);">……这个说法，其实是错的。</span></div>
+
+  <div class="tl" id="tlBox" style="margin-top:.6vh;">
+    <div class="ev radar"><span class="y">1886</span>德国物理学家赫兹证实了电磁波的存在</div>
+    <div class="ev radar"><span class="y">1935</span>英国造出<b>第一部雷达</b>——这时候还没人知道蝙蝠会发超声波</div>
+    <div class="ev bat"><span class="y">1938</span>美国学生格里芬才开始研究蝙蝠</div>
+    <div class="ev bat"><span class="y">1944</span>他才把这种本领命名为<b>「回声定位」</b></div>
+  </div>
+  <div class="story-btnrow">
+    <button class="btn purple" id="myNext" onclick="myNextStep()">下一步 ▶</button>
+    <button class="btn ghost" onclick="myAll()">一次全出</button>
+    <div class="spacer"></div>
+  </div>
+  <div class="concl" id="myConcl">
+    雷达比「发现蝙蝠用超声波」还早 <b style="color:var(--red);">9 年</b>。<br>
+    它们不是「谁学谁」，是<span class="key-g">同一个思路，两条各自独立的路</span>
+  </div>
+  <div class="next-line" id="myTurn" style="opacity:0;transition:opacity .4s ease;margin-top:.6vh;">
+    🔍 所以科学家最厉害的本事，不是记答案 —— 是永远多问一句：<span class="key-y">「真的吗？」</span>
+  </div>
+</section>
+
+<!-- ============ 8 三栏归纳 ============ -->
+<section class="slide" id="three" data-part="3" data-min="3">
+  <div class="teacher-tip">让学生自己归类：「魔术贴学的是形状还是结构？」——让他们说，别替他们答。三栏出齐后，<b>金句全班念</b>：「生物用几亿年试出来的答案，我们借过来用。」这一句是整节课的落点。</div>
+  <h2>🧩 仿生，到底在学什么？</h2>
+  <div class="grid3" id="learnGrid" style="margin-top:.4vh;">
+    <div class="learn l1"><div class="lh">学形状</div><div class="le">🐋 → 🚢</div><div class="lx">鲸的流线型<br>→ 轮船不再方头</div></div>
+    <div class="learn l2"><div class="lh">学结构</div><div class="le">🌿 → 🧲</div><div class="lx">苍耳的小钩子<br>→ 魔术贴的钩与圈</div></div>
+    <div class="learn l3"><div class="lh">学原理</div><div class="le">🦅 → ✈️</div><div class="lx">翅膀为什么能托住身体<br>→ 机翼的弯度</div></div>
+  </div>
+  <div class="big-say" id="threeSay" style="opacity:0;transition:opacity .4s ease;margin-top:1.4vh;">
+    生物用<span class="key-y">几亿年</span>试出来的答案，我们借过来用
+  </div>
+</section>
+
+<!-- ============ 9 动手 ============ -->
+<section class="slide" id="do" data-part="3" data-min="6">
+  <div class="teacher-tip"><b>这节课的核心动手，时间再紧也要保。</b>纸笔任务，线上完全做得了。三个引子只用来「救场」——有人卡住就念一个，别一开始全给，否则全班会照抄同一句。<b>念作品时挑一个「不完美」的</b>，全班一起帮他改，改的过程就是学的过程。</div>
+  <h2>💡 现在换你来：向生物借一个答案</h2>
+  <div class="grid3" style="margin-bottom:.8vh;">
+    <div class="idea">☔ <b>书包总被淋湿</b><br>→ 荷叶为什么不沾水？</div>
+    <div class="idea">🧹 <b>擦黑板全是灰</b><br>→ 哪种生物身上不沾灰？</div>
+    <div class="idea">🧗 <b>搬东西上楼梯很累</b><br>→ 壁虎怎么贴着墙走？</div>
+  </div>
+  <div id="dsteps">
+    <div class="step"><div class="s-n">1</div><div>写下你身边的一个<b>小麻烦</b>（越具体越好）</div></div>
+    <div class="step"><div class="s-n">2</div><div>想一想：<b>哪种生物</b>遇到过同样的麻烦？它怎么解决的？</div></div>
+    <div class="step"><div class="s-n">3</div><div>画出或写出你的<b>小发明</b>：它长什么样？</div></div>
+  </div>
+  <div class="story-btnrow">
+    <button class="btn teal" id="dNext" onclick="dNextStep()">下一步 ▶</button>
+    <button class="btn ghost" onclick="dAll()">一次全出</button>
+    <button class="btn ghost" onclick="dReset()">↺ 重来</button>
+    <div class="spacer"></div>
+    <button class="btn purple" onclick="startObs()">⏱ 计时 5 分钟</button>
+  </div>
+  <div id="obsBox"><span>⏱</span><span id="obsClock">05:00</span></div>
+  <div class="safe-tip">📢 <b>线上怎么做</b>：写好以后<b>举手</b>，老师请一位同学念，全班一起帮他想。想得不完美没关系 —— 真正的发明，一开始都不完美。没带纸笔就和同桌合用一张。</div>
+</section>
+
+<!-- ============ 10 过关挑战 ============ -->
+<section class="slide" id="quiz" data-part="3" data-min="4">
+  <div class="teacher-tip">一次只出一题。<b>第 2 题是重点</b>：彩虹→彩灯只是「颜色像」，没学结构也没学原理，所以不算仿生。这题用来分清「看着像」和「真的学了」。答错别批评，正确答案会自动亮出来。</div>
+  <h2>🎯 过关挑战：3 道题</h2>
+  <div class="q-lab" id="qLab">第 1 题 / 共 3 题</div>
+
+  <div class="q-item on">
+    <div class="q-t">1. 苍耳能粘在衣服上，靠的是什么？</div>
+    <div class="q-opt" onclick="answer(this,false,'苍耳没有粘胶，它是靠<b>钩子</b>钩住的 —— 这就是魔术贴学的东西。')">A. 它身上有粘胶</div>
+    <div class="q-opt" onclick="answer(this,false,'正好反过来：是苍耳<b>钩住</b>衣服，不是衣服抓住它。')">B. 衣服上有吸铁石</div>
+    <div class="q-opt" data-ok="1" onclick="answer(this,true,'对！苍耳上全是<b>小钩子</b>，钩住了衣服和毛发上的小毛圈 —— 魔术贴就是照这个做的。')">C. 它身上有小钩子，钩住了毛圈</div>
+    <div class="q-why"></div>
+  </div>
+
+  <div class="q-item">
+    <div class="q-t">2. 下面哪一个，<b>不算</b>仿生？</div>
+    <div class="q-opt" data-ok="1" onclick="answer(this,true,'对！彩虹有七种颜色，彩灯也有七种颜色 —— 但那只是<b>颜色像</b>，没有学结构，也没有学原理。')">A. 彩虹 → 彩色灯泡</div>
+    <div class="q-opt" onclick="answer(this,false,'这是仿生：学了鲸和鱼的<b>流线型</b>，属于「学形状」。')">B. 鲸 → 轮船的流线型</div>
+    <div class="q-opt" onclick="answer(this,false,'这是仿生：学了鸟翅膀的<b>形状为什么能托住身体</b>，属于「学原理」。')">C. 鸟 → 飞机的机翼</div>
+    <div class="q-why"></div>
+  </div>
+
+  <div class="q-item">
+    <div class="q-t">3. 做仿生发明，最关键的一步是什么？</div>
+    <div class="q-opt" onclick="answer(this,false,'长得像不代表有用 —— 早期的人绑上大翅膀扇，一个也没飞起来。')">A. 做得越像生物越好</div>
+    <div class="q-opt" data-ok="1" onclick="answer(this,true,'对！先<b>看懂它是怎么做到的</b>，再想办法用人类的材料做出来 —— 这才是仿生。')">B. 先看懂生物是怎么做到的</div>
+    <div class="q-opt" onclick="answer(this,false,'抄下来能用一次，但换个场合就不行了。真正管用的是搞懂它为什么能行。')">C. 把生物的样子原样抄下来</div>
+    <div class="q-why"></div>
+  </div>
+
+  <div class="q-nav">
+    <button class="btn ghost" id="qPrevBtn" onclick="qPrev()">◀ 上一题</button>
+    <div class="spacer"></div>
+    <button class="btn teal" id="qNextBtn" onclick="qNext()">下一题 ▶</button>
+  </div>
+</section>
+
+<!-- ============ 11 结尾：保护老师 ============ -->
+<section class="slide" id="end" data-part="3" data-min="2">
+  <div class="teacher-tip">这页是<b>把上节课的荒漠化扣回来</b>，全课收口。<b>慢一点，别喊。</b>念完金句停 3 秒，再开花园。撒花给今天举手分享发明的同学。</div>
+  <h2>🌱 回到上节课那张网</h2>
+  <div class="say" style="margin-bottom:.8vh;">魔术贴、飞机、轮船、雷达 —— 这些本事，全都是生物教我们的。</div>
+  <div class="say" style="margin-bottom:.8vh;">可如果上节课那片草原，真的变成了荒漠呢？</div>
+  <div class="say" style="color:var(--muted);margin-bottom:1vh;">我们失去的不只是草，也不只是兔子和蝗虫 ——<br>还有草里那些，<b>我们还没来得及看懂的答案</b>。</div>
+  <div class="hug">
+    保护生物，不只是保护它们
+    <span class="big">也是保护我们的老师</span>
+  </div>
+  <div class="quiet" style="margin-top:.8vh;">（这句话，今天请全班一起念一遍）</div>
+</section>
+
+<!-- ============ 12 逻辑链 ============ -->
+<section class="slide" id="sum" data-part="3" data-min="2">
+  <div class="teacher-tip">7 环会自动播放。念完齐读，开花园撒花。最后布置一句：下节课我们去看<b>蚂蚁和蜜蜂</b>——蚂蚁那么小，为什么能搬动比自己大几十倍的东西？它们没有队长喊口令，又是怎么排好队的？</div>
+  <h2>🧭 从头串一遍：今天我是怎么想明白的</h2>
+  <div id="flow">
+    <div class="flow-item"><div class="fq">🍄 回顾</div><div class="fa">草被吃光 → 土松了 → 风吹水冲 → 变成荒漠<span class="why">→ 生物之间是连着的，拽断一环整张网都受影响</span></div></div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item"><div class="fq">❓ 问题</div><div class="fa">人类遇到难题，除了自己想，还能问谁？<span class="why">→ 可以问生物</span></div></div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item"><div class="fq">🌿 发现</div><div class="fa">苍耳身上全是小钩子 → 魔术贴就是这么来的<span class="why">→ 原来我鞋子上就有一个仿生发明</span></div></div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item"><div class="fq">🔍 看懂</div><div class="fa">不是照着长得像，是看懂它为什么能行<span class="why">→ 光绑一对大翅膀，是飞不起来的</span></div></div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item"><div class="fq">🦇 追问</div><div class="fa">课本说「模仿蝙蝠发明雷达」，其实是错的<span class="why">→ 科学家最厉害的本事，是多问一句「真的吗」</span></div></div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item"><div class="fq">💡 应用</div><div class="fa">找一个身边的麻烦，向生物借一个答案<span class="why">→ 形状能借，结构能借，原理也能借</span></div></div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item"><div class="fq">🌱 收束</div><div class="fa">保护生物，也是保护我们的老师<span class="why">→ 少拽断一根线，就多留一个答案</span></div></div>
+  </div>
+  <div id="finalLine">生物用<span style="background:#FFD24A;color:#1a1a1a;padding:0 .8vw;border-radius:8px;">几亿年</span>试出来的答案<br>——我们借过来用</div>
+  <div id="summaryGarden"><button onclick="openGarden()">打开花园 🌱</button></div>
+</section>
+
+<div id="navbar">
+  <button id="prevBtn">◀ 上一页</button>
+  <div id="dots"></div>
+  <div style="display:flex;align-items:center;gap:1vw;">
+    <span id="hint">← → 翻页 · T 提示 · R 点名 · G 花园 · P 进度 · D 动手</span>
+    <button id="nextBtn">下一页 ▶</button>
+  </div>
+</div>
+
+<script>
+/* ================= 翻页 ================= */
+const slides = [...document.querySelectorAll('.slide')];
+const dotsBox = document.getElementById('dots');
+let cur = 0;
+slides.forEach((s,i)=>{
+  const d = document.createElement('span');
+  d.textContent = i+1;
+  d.title = s.dataset.min + ' 分钟';
+  d.className = 'p'+s.dataset.part;
+  d.addEventListener('click',()=>go(i));
+  dotsBox.appendChild(d);
+});
+
+const partTag = document.getElementById('partTag');
+function go(i){
+  cur = Math.max(0, Math.min(slides.length-1, i));
+  slides.forEach((s,j)=>s.classList.toggle('active', j===cur));
+  [...dotsBox.children].forEach((d,j)=>d.classList.toggle('on', j===cur));
+  document.getElementById('prevBtn').disabled = cur===0;
+  document.getElementById('nextBtn').disabled = cur===slides.length-1;
+  const p = slides[cur].dataset.part;
+  partTag.textContent = p==='1' ? 'Part 1 · 开场回顾' : (p==='2' ? 'Part 2 · 探究新知' : 'Part 3 · 练习总结');
+  partTag.className = 'p'+p;
+  if(slides[cur].id==='tail' && typeof tailPlay === 'function'){ setTimeout(tailPlay, 150); }
+  if(slides[cur].id==='three' && typeof learnPlay === 'function'){ setTimeout(learnPlay, 200); }
+  if(slides[cur].id==='sum' && typeof flowPlay === 'function'){ setTimeout(flowPlay, 200); }
+}
+document.getElementById('prevBtn').addEventListener('click',()=>go(cur-1));
+document.getElementById('nextBtn').addEventListener('click',()=>go(cur+1));
+
+document.addEventListener('keydown',e=>{
+  if(e.target && (e.target.tagName==='INPUT' || e.target.tagName==='TEXTAREA')) return;
+  const layerOpen = ['ktCert','ktPick','ktAsk','ktGarden','ktRoster','ktCfg'].some(id=>{
+    const el = document.getElementById(id);
+    return el && el.classList.contains('on');
+  });
+  if(layerOpen){
+    if(e.key==='Escape') return;
+    if(e.key==='ArrowRight'||e.key==='ArrowLeft'||e.key===' ') { e.preventDefault(); return; }
+  }
+  if(e.key==='ArrowRight') go(cur+1);
+  if(e.key==='ArrowLeft') go(cur-1);
+  if(e.key==='t'||e.key==='T') toggleTips();
+});
+function toggleTips(){
+  document.body.classList.toggle('show-tips');
+  document.getElementById('tipBtn').classList.toggle('on');
+}
+document.getElementById('tipBtn').addEventListener('click', toggleTips);
+
+/* ================= 主计时器（40 分钟） ================= */
+const TOTAL = 40*60;
+let sec = 0, timer = null;
+const clockEl = document.getElementById('clock'), barEl = document.getElementById('bar');
+function fmt(s){
+  const m=Math.floor(s/60), ss=s%60;
+  return String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0');
+}
+function paint(){
+  clockEl.textContent = fmt(sec);
+  const pct = Math.min(100, sec/TOTAL*100);
+  barEl.style.width = pct+'%';
+  const over = sec > TOTAL;
+  clockEl.classList.toggle('over', over);
+  barEl.classList.toggle('over', over);
+}
+document.getElementById('tStart').addEventListener('click',()=>{
+  if(timer) return;
+  timer = setInterval(()=>{ sec++; paint(); }, 1000);
+  document.getElementById('tStart').textContent = '▶ 计时中';
+});
+document.getElementById('tPause').addEventListener('click',()=>{
+  clearInterval(timer); timer=null;
+  document.getElementById('tStart').textContent = '▶ 继续';
+});
+document.getElementById('tReset').addEventListener('click',()=>{
+  clearInterval(timer); timer=null; sec=0; paint();
+  document.getElementById('tStart').textContent = '▶ 开始计时';
+});
+paint();
+
+/* ================= 第 2 页：荒漠化 4 步 ================= */
+let tailDone = false;
+function tailPlay(){
+  if(tailDone) return;
+  [...document.querySelectorAll('#chain4 > *')].forEach((el,i)=>setTimeout(()=>el.classList.add('show'), 260*(i+1)));
+  tailDone = true;
+}
+
+/* ================= 第 3 页：什么是仿生（三步） ================= */
+const tSteps = [...document.querySelectorAll('#triRow .tb')];
+const tArrows = [document.getElementById('tar1'), document.getElementById('tar2')];
+let tIdx = 0;
+function tShow(n){
+  tSteps.forEach((s,i)=>s.classList.toggle('show', i<n));
+  tArrows.forEach((a,i)=>a.classList.toggle('show', i < n-1));
+  document.getElementById('wSay').style.opacity = n>=3 ? '1' : '0';
+  tIdx = n;
+  document.getElementById('tNext').textContent = n>=3 ? '讲完啦 ✓' : '下一步 ▶';
+}
+function tNextStep(){ if(tIdx < tSteps.length) tShow(tIdx+1); }
+function tAll(){ tShow(tSteps.length); }
+function tReset(){ tShow(0); }
+
+/* ================= 第 4 页：苍耳故事（4 步） ================= */
+const c1Steps = [...document.querySelectorAll('#caseSteps .case-line')];
+let c1Idx = 0;
+function c1Show(n){
+  c1Steps.forEach((s,i)=>s.classList.toggle('show', i<n));
+  document.getElementById('c1Do').style.opacity = n>=c1Steps.length ? '1' : '0';
+  c1Idx = n;
+  document.getElementById('c1Next').textContent = n>=c1Steps.length ? '讲完啦 ✓' : '下一步 ▶';
+}
+function c1NextStep(){ if(c1Idx < c1Steps.length) c1Show(c1Idx+1); }
+function c1All(){ c1Show(c1Steps.length); }
+function c1Reset(){ c1Show(0); }
+
+/* ================= 第 7 页：辟谣时间轴 ================= */
+const mySteps = [...document.querySelectorAll('#tlBox .ev')];
+let myIdx = 0;
+function myShow(n){
+  mySteps.forEach((s,i)=>s.classList.toggle('show', i<n));
+  document.getElementById('myConcl').classList.toggle('show', n>=mySteps.length);
+  document.getElementById('myTurn').style.opacity = n>=mySteps.length ? '1' : '0';
+  myIdx = n;
+  document.getElementById('myNext').textContent = n>=mySteps.length ? '讲完啦 ✓' : '下一步 ▶';
+}
+function myNextStep(){ if(myIdx < mySteps.length) myShow(myIdx+1); }
+function myAll(){ myShow(mySteps.length); }
+
+/* ================= 第 8 页：三栏归纳 ================= */
+let learnDone = false;
+function learnPlay(){
+  if(learnDone) return;
+  [...document.querySelectorAll('#learnGrid .learn')].forEach((el,i)=>setTimeout(()=>el.classList.add('show'), 200*(i+1)));
+  setTimeout(()=>{ document.getElementById('threeSay').style.opacity='1'; }, 200*3+300);
+  learnDone = true;
+}
+
+/* ================= 第 9 页：分步 + 5 分钟子计时 ================= */
+const dSteps = [...document.querySelectorAll('#dsteps .step')];
+let dIdx = 0;
+function dShow(n){
+  dSteps.forEach((s,i)=>s.classList.toggle('show', i<n));
+  dIdx = n;
+  document.getElementById('dNext').textContent = n>=dSteps.length ? '开始写 ✓' : '下一步 ▶';
+}
+function dNextStep(){ if(dIdx < dSteps.length) dShow(dIdx+1); }
+function dAll(){ dShow(dSteps.length); }
+function dReset(){ dShow(0); }
+
+/* 动手倒计时：独立变量，绝不碰主计时器（历史 bug：子计时清零主计时） */
+const OBS_TOTAL = 5*60;
+let obsLeft = OBS_TOTAL, obsTimer = null;
+const obsBoxEl = document.getElementById('obsBox'), obsClockEl = document.getElementById('obsClock');
+function obsPaint(){
+  obsClockEl.textContent = fmt(obsLeft);
+  if(obsLeft<=0){ obsBoxEl.classList.add('done'); obsClockEl.textContent = '时间到 ✓'; }
+}
+function startObs(){
+  clearInterval(obsTimer);
+  obsLeft = OBS_TOTAL;
+  obsBoxEl.classList.remove('done');
+  obsPaint();
+  obsTimer = setInterval(()=>{
+    obsLeft--;
+    obsPaint();
+    if(obsLeft<=0){ clearInterval(obsTimer); obsTimer=null; }
+  }, 1000);
+}
+obsPaint();
+
+/* ================= 过关挑战：一次一题 ================= */
+const qItems = [...document.querySelectorAll('#quiz .q-item')];
+let qIdx = 0;
+function qShow(i){
+  qIdx = Math.max(0, Math.min(qItems.length-1, i));
+  qItems.forEach((it,j)=>it.classList.toggle('on', j===qIdx));
+  document.getElementById('qLab').textContent = '第 '+(qIdx+1)+' 题 / 共 '+qItems.length+' 题';
+  document.getElementById('qPrevBtn').disabled = qIdx===0;
+  document.getElementById('qNextBtn').disabled = qIdx===qItems.length-1;
+  document.getElementById('qNextBtn').textContent = qIdx===qItems.length-1 ? '最后一题 ✓' : '下一题 ▶';
+}
+function qNext(){ if(qIdx < qItems.length-1) qShow(qIdx+1); }
+function qPrev(){ if(qIdx > 0) qShow(qIdx-1); }
+
+function answer(el, ok, why){
+  const item = el.closest('.q-item');
+  const opts = item.querySelectorAll('.q-opt');
+  opts.forEach(o=>{ o.classList.remove('right','wrong'); });
+  el.classList.add(ok ? 'right' : 'wrong');
+  /* 答错也要把正确答案亮出来——否则只知道"我错了"，不知道"什么是对的" */
+  if(!ok){
+    const right = item.querySelector('.q-opt[data-ok="1"]');
+    if(right) right.classList.add('right');
+  }
+  const box = item.querySelector('.q-why');
+  box.innerHTML = why;
+  box.classList.add('show');
+}
+
+/* ================= 逻辑链 ================= */
+let flowDone = false;
+function flowPlay(){
+  if(flowDone) return;
+  const items = [...document.querySelectorAll('#flow > *')];
+  items.forEach((it,i)=>setTimeout(()=>it.classList.add('show'), 240*i));
+  setTimeout(()=>{
+    document.getElementById('finalLine').classList.add('show');
+    document.getElementById('summaryGarden').classList.add('show');
+    flowDone = true;
+  }, 240*items.length + 200);
+}
+document.getElementById('flow').addEventListener('click', ()=>{
+  const items = [...document.querySelectorAll('#flow > *')];
+  items.forEach(it=>it.classList.add('show'));
+  document.getElementById('finalLine').classList.add('show');
+  document.getElementById('summaryGarden').classList.add('show');
+  flowDone = true;
+});
+
+/* ================= 班级花园（工具包没装时安全跳过） ================= */
+function openGarden(){
+  try{ if(window.KTools && KTools.garden){ KTools.garden(); return; } }catch(e){}
+}
+
+go(0);
+tailPlay();
+tShow(0);
+c1Show(0);
+myShow(0);
+dShow(0);
+qShow(0);
+</script>
+<!-- KTOOLS-BEGIN -->
+<script>
+/* ============================================================
+   课堂工具包 KTools  ——  注入到任意课件 HTML 后常驻可用
+   包含：随机点名（花名册·不重复） / 撒花 / 在线奖状 / 计时器 / 名单管理 / 设置
+   用法：由 inject.mjs 内联进课件；也可手动在 </body> 前粘贴本文件内容
+   设计原则：单文件离线、零外部依赖、不干扰课件原有翻页与快捷键
+   ============================================================ */
+(function () {
+  'use strict';
+  if (window.__KToolsLoaded) { return; }
+  window.__KToolsLoaded = true;
+
+  /* ---------- 默认花名册（由注入脚本填充；只含姓名，无任何身份证信息） ---------- */
+  var DEFAULT_ROSTER = ["郑幸睿","刘轩硕","王瑄","赵佳璐","孟思宇","张艺涵","张愉晗","孟佳涵","孟婉瑜","杨皓月","孟宸宇","杨绍恩","纪欣羽","张依依","王睿琳","曲研硕","赵梦雨","刘婉晴","杨雨含","张欣苒","杨晨睿","袁祥","路馨岚","张静瑜","张睿博","周航","程世展","张佳昊","吕科延","孟义凯","张艺颖","朱梦欢","姜涵月","孟怡菲","刘一瑶","张晋硕","刘乐宁","刘玥含","刘怡珮","龚御辰","范宇博","苏嘉琪","周思彤","孙艺硕","孟嘉城","张育硕","秦金果","杨佩霖","刘卓依","刘念","孟睿妍","张琪琦","杨艺霖","张金浩"];
+
+  var LS_ROSTER = 'kt_roster_v1';   // 名单
+  var LS_POOL = 'kt_pool_v1';       // 本轮未点到的名字池
+  var LS_CFG = 'kt_cfg_v1';         // 设置（老师署名/课程名/位置/不重复）
+  var LS_DONE = 'kt_done_v1';       // 本节课已奖励过的记录（仅本地）
+
+  /* ---------- 存储 ---------- */
+  function lsGet(k, def) {
+    try { var v = localStorage.getItem(k); return v === null ? def : JSON.parse(v); }
+    catch (e) { return def; }
+  }
+  function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } }
+
+  var cfg = lsGet(LS_CFG, null) || {
+    teacher: '小秋老师',
+    course: (document.title || '').replace(/\.(html?|pptx?)$/i, '').replace(/_/g, ' ').trim() || '趣味科学',
+    pos: 'bottom',
+    norepeat: true
+  };
+  /* 老版本存过的 cfg 没有这两个字段，必须补默认：
+     否则 cfg.waitSec 是 undefined，undefined > 0 恒为 false，等答模块会静默失效 */
+  if (typeof cfg.waitSec !== 'number') { cfg.waitSec = 5; }
+
+  function roster() {
+    var r = lsGet(LS_ROSTER, null);
+    if (!Array.isArray(r) || !r.length) { r = DEFAULT_ROSTER.slice(); }
+    return r.filter(function (x) { return x && ('' + x).trim(); });
+  }
+  function saveRoster(arr) { lsSet(LS_ROSTER, arr); lsSet(LS_POOL, []); }
+
+  /* ---------- 公共小工具 ---------- */
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return ('' + s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function today() {
+    var d = new Date();
+    return d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日';
+  }
+
+  /* ================= 样式 ================= */
+  var CSS = [
+    /* width:max-content 很关键：fixed + left:50% 的可用宽度只有视口一半，
+       不写它，按钮一多就会被挤成多行，工具条变高挡住课件底部 */
+    '#ktBar{position:fixed;left:50%;transform:translateX(-50%);z-index:9990;display:flex;align-items:center;gap:6px;flex-wrap:nowrap;justify-content:center;width:max-content;max-width:96vw;',
+    'padding:7px 10px;border-radius:26px;background:rgba(31,73,125,.94);box-shadow:0 6px 22px rgba(0,0,0,.28);',
+    'font-family:"Microsoft YaHei","PingFang SC",sans-serif;user-select:none;backdrop-filter:blur(4px)}',
+    '#ktBar.pos-bottom{bottom:14px}#ktBar.pos-top{top:14px}',
+    '#ktBar .kt-btn{border:0;border-radius:999px;padding:8px 13px;margin:2px 3px;font-size:15px;cursor:pointer;color:#1F497D;',
+    'background:#fff;font-weight:600;line-height:1;white-space:nowrap;transition:transform .12s,filter .12s}',
+    '#ktBar .kt-btn:hover{filter:brightness(1.06);transform:translateY(-1px)}',
+    '#ktBar .kt-btn:active{transform:translateY(0) scale(.97)}',
+    '#ktBar .kt-btn.kt-alarm{background:#FFD7D2;color:#A32A1C}',
+    '#ktBar .kt-btn.small{padding:8px 10px;font-size:14px}',
+    '#ktBar .kt-cur{color:#FFE9B8;font-size:14px;font-weight:700;padding:0 6px;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+    '#ktBar.mini{gap:0;padding:0}',
+    '#ktBar.mini .kt-btn:not(.kt-toggle),#ktBar.mini .kt-cur,#ktBar.mini .kt-sep{display:none}',
+    '#ktBar .kt-toggle{background:#FFD966;color:#7a4b00;font-size:15px;padding:8px 12px}',
+
+    '.kt-layer{position:fixed;top:0;right:0;bottom:0;left:0;z-index:9995;display:none;align-items:center;justify-content:center;',
+    'background:rgba(16,26,45,.62);font-family:"Microsoft YaHei","PingFang SC",sans-serif}',
+    '.kt-layer.on{display:flex}',
+    /* 奖状/点名/奖励谁：盖在花园之上，花园里点「发奖状」才点得到 */
+    '#ktCert,#ktPick,#ktAsk{z-index:9996}',
+
+    /* 抽人 */
+    '#ktPick .kt-card{width:min(760px,92vw);background:#fff;border-radius:22px;padding:34px 30px 26px;text-align:center;',
+    'box-shadow:0 24px 60px rgba(0,0,0,.34);animation:ktPop .22s ease-out}',
+    '@keyframes ktPop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}',
+    '#ktPickName{font-size:72px;font-size:clamp(46px,9vw,96px);font-weight:800;color:#1F497D;letter-spacing:6px;min-height:1.4em;line-height:1.35}',
+    '#ktPickName.roll{color:#4BACC6;letter-spacing:10px}',
+    '#ktPickSub{margin-top:6px;color:#7b8794;font-size:15px;min-height:22px}',
+    '#ktPickBtns{margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}',
+    '.kt-b{border:0;border-radius:12px;padding:12px 20px;margin:4px;font-size:16px;font-weight:700;cursor:pointer;color:#fff;background:#4BACC6}',
+    '.kt-b.orange{background:#F79646}.kt-b.green{background:#9BBB59}.kt-b.gray{background:#adb5bd}.kt-b.navy{background:#1F497D}',
+    '.kt-b:hover{filter:brightness(1.07)}.kt-b:disabled{opacity:.45;cursor:not-allowed}',
+
+    /* 奖状 */
+    '#ktCert .kt-cert-card{width:min(900px,94vw);background:linear-gradient(180deg,#fffdf7,#fff);border:10px solid #C0392B;',
+    'border-radius:10px;padding:44px 40px;text-align:center;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.4)}',
+    '#ktCert .kt-cert-card:before{content:"";position:absolute;top:8px;right:8px;bottom:8px;left:8px;border:2px solid #E0B44A;border-radius:4px;pointer-events:none}',
+    '#ktCert .kt-c1{font-size:40px;font-size:clamp(30px,5.2vw,50px);font-weight:800;color:#C0392B;letter-spacing:10px}',
+    '#ktCert .kt-c2{margin-top:18px;font-size:20px;color:#333}',
+    '#ktCert .kt-c3{margin:10px auto 0;font-size:42px;font-size:clamp(30px,5vw,52px);font-weight:800;color:#1F497D;letter-spacing:4px}',
+    '#ktCert .kt-c4{margin-top:16px;font-size:22px;font-size:clamp(19px,2.4vw,26px);color:#333;line-height:1.9}',
+    '#ktCert .kt-c4 b{color:#C0392B}',
+    '#ktCert .kt-c5{margin-top:30px;display:flex;justify-content:space-between;font-size:16px;color:#666;padding:0 6px}',
+    '.kt-cert-actions{margin-top:18px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center}',
+    '.kt-inp{border:2px solid #d9dee5;border-radius:10px;padding:10px 12px;font-size:16px;font-family:inherit;outline:none;min-width:150px}',
+    '.kt-inp:focus{border-color:#4BACC6}',
+
+    /* 名单 / 设置 面板 */
+    '.kt-panel{width:min(620px,92vw);background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.32)}',
+    '.kt-panel h3{margin:0 0 6px;font-size:19px;color:#1F497D}',
+    '.kt-panel .kt-tip{color:#7b8794;font-size:13px;line-height:1.7;margin:0 0 12px}',
+    '.kt-panel textarea{width:100%;height:230px;border:2px solid #d9dee5;border-radius:10px;padding:10px;font-size:15px;',
+    'font-family:inherit;line-height:1.8;outline:none;resize:vertical;box-sizing:border-box}',
+    '.kt-panel textarea:focus{border-color:#4BACC6}',
+    '.kt-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}',
+    '.kt-row label{font-size:14px;color:#555;display:flex;align-items:center;gap:6px}',
+    '.kt-row input[type=text]{border:2px solid #d9dee5;border-radius:9px;padding:8px 10px;font-size:15px;font-family:inherit;outline:none}',
+
+    /* 计时器 */
+    '#ktTimer{position:fixed;right:18px;top:18px;z-index:9992;background:rgba(255,255,255,.96);border-radius:14px;',
+    'padding:12px 14px;box-shadow:0 10px 28px rgba(0,0,0,.24);font-family:"Microsoft YaHei",sans-serif;display:none;text-align:center}',
+    '#ktTimer.on{display:block}',
+    '#ktTimer .kt-t{font-size:34px;font-weight:800;color:#1F497D;letter-spacing:2px;font-variant-numeric:tabular-nums}',
+    '#ktTimer .kt-t.warn{color:#C0392B}',
+    '#ktTimer .kt-tb{display:flex;gap:6px;margin-top:8px;justify-content:center;flex-wrap:wrap}',
+    '#ktTimer .kt-tb button{border:0;border-radius:8px;padding:6px 10px;font-size:13px;cursor:pointer;background:#eef2f6;color:#1F497D;font-weight:600}',
+
+    /* 撒花 */
+    '#ktFetti{position:fixed;top:0;right:0;bottom:0;left:0;z-index:9998;pointer-events:none;overflow:hidden;display:none}',
+    '#ktFetti.on{display:block}',
+    '.kt-piece{position:absolute;top:-24px;width:9px;height:14px;opacity:.95;border-radius:2px;animation:ktFall linear forwards}',
+    '@keyframes ktFall{0%{transform:translateY(-10vh) rotate(0)}100%{transform:translateY(108vh) rotate(720deg)}}',
+    '#ktCheer{position:fixed;left:50%;top:34%;transform:translate(-50%,-50%) scale(.8);z-index:9999;opacity:0;pointer-events:none;',
+    'font-size:56px;font-size:clamp(34px,6vw,72px);font-weight:900;color:#fff;text-shadow:0 6px 18px rgba(0,0,0,.45);white-space:nowrap;',
+    'font-family:"Microsoft YaHei",sans-serif}',
+    '#ktCheer.on{animation:ktCheerPop 2.4s ease-out forwards}',
+    '@keyframes ktCheerPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}18%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}',
+    '30%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-58%) scale(1)}}',
+
+    /* 打印整份课件 / 导出 PDF 时：工具条与浮层一律不印出来（不带 kt-printing 条件，任何时候都成立） */
+    /* 轻量提示条：ClassIn / 旧内核里 alert、confirm、prompt 会被拦截，一律改用页面内提示 */
+    '#ktToast{position:fixed;left:50%;top:14%;transform:translateX(-50%);z-index:10000;display:none;',
+    'max-width:78%;padding:12px 20px;border-radius:10px;background:rgba(28,42,58,.94);color:#fff;',
+    'font-size:17px;line-height:1.6;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.28)}',
+    '#ktToast.on{display:block}',
+
+    /* ---------- 班级花园（积分可视化） ---------- */
+    '#ktGarden .kt-g-card{width:min(1060px,95vw);max-height:92vh;display:flex;flex-direction:column;',
+    'background:linear-gradient(180deg,#F4FAED 0%,#FFFFFF 36%);border-radius:20px;padding:16px 18px 14px;',
+    'box-shadow:0 24px 60px rgba(0,0,0,.36);animation:ktPop .22s ease-out}',
+    '#ktGarden .kt-g-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}',
+    '#ktGarden .kt-g-title{font-size:20px;font-weight:800;color:#3C6B1F;margin-right:auto;letter-spacing:1px}',
+    '#ktGarden .kt-g-stats{font-size:13px;color:#4C5C3C;background:#EAF6DF;border-radius:999px;padding:6px 13px;font-weight:600}',
+    '#ktGarden .kt-g-bar{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px;align-items:center}',
+    '#ktGarden .kt-g-bar button{border:0;border-radius:9px;padding:7px 11px;font-size:13px;font-weight:700;cursor:pointer;color:#fff}',
+    '.kt-gb-green{background:#9BBB59}.kt-gb-navy{background:#1F497D}.kt-gb-gray{background:#adb5bd}.kt-gb-orange{background:#F79646}',
+    '#ktGarden .kt-g-grid{flex:1;min-height:120px;overflow-y:auto;margin-top:10px;padding:6px 6px 10px;',
+    'display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}',
+    '.kt-plant{background:#fff;border:2px solid #DDE8D2;border-radius:14px;padding:6px 3px 5px;text-align:center;',
+    'cursor:pointer;transition:transform .14s,box-shadow .14s,border-color .14s;position:relative}',
+    '.kt-plant:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(60,107,31,.18);border-color:#9BBB59}',
+    '.kt-plant.me{border-color:#F79646;box-shadow:0 0 0 3px rgba(247,150,70,.22)}',
+    '.kt-plant.top{background:#FFF8E4;border-color:#F2C14E}',
+    '.kt-plant svg{display:block;margin:0 auto;width:58px;height:64px}',
+    '.kt-plant .pn{font-size:13px;font-weight:700;color:#2C3A28;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}',
+    '.kt-plant .pp{font-size:12px;color:#7A8A6A;margin-top:1px}',
+    '.kt-plant .pp b{color:#3C6B1F}',
+    '.kt-plant .crown{position:absolute;top:-8px;right:-4px;font-size:16px}',
+    '.kt-plant .plus{position:absolute;top:-6px;left:50%;font-size:14px;font-weight:800;color:#F79646;opacity:0;pointer-events:none}',
+    '.kt-plant .plus.on{animation:ktPlus 1.15s ease-out}',
+    '@keyframes ktPlus{0%{opacity:0;transform:translate(-50%,8px)}22%{opacity:1}100%{opacity:0;transform:translate(-50%,-24px)}}',
+    '.kt-g-detail{margin-top:9px;background:#fff;border:2px solid #9BBB59;border-radius:14px;padding:9px 12px;',
+    'display:flex;align-items:center;gap:9px;flex-wrap:wrap}',
+    '.kt-g-detail .dn{font-size:19px;font-weight:800;color:#1F497D}',
+    '.kt-g-detail .dl{font-size:13px;color:#5B6B4B}',
+    '.kt-g-detail .db{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}',
+    '.kt-g-detail .db button{border:0;border-radius:9px;padding:8px 12px;font-size:13px;font-weight:700;cursor:pointer;color:#fff}',
+    '.kt-g-tip{font-size:12.5px;color:#7A8A6A;margin-top:8px;line-height:1.7}',
+    '.kt-g-legend{display:flex;gap:5px;flex-wrap:wrap;align-items:center;font-size:12px;color:#5B6B4B;margin-top:7px}',
+    '.kt-g-legend i{font-style:normal;background:#EAF6DF;border-radius:999px;padding:3px 9px}',
+
+    /* ---- 学期总结面板 ---- */
+    '#ktTerm .kt-t-card,#ktCertTerm .kt-ct-card{background:#fff;border-radius:18px;max-width:min(900px,94vw);max-height:90vh;overflow:auto;padding:20px 22px;box-shadow:0 18px 50px rgba(0,0,0,.28)}',
+    '.kt-t-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid #EEECE1;padding-bottom:10px;margin-bottom:14px}',
+    '.kt-t-title{font-size:21px;font-weight:900;color:#1F497D}',
+    '.kt-t-sub{font-size:13px;color:#7A8494}',
+    '.kt-t-body{font-size:14px;color:#26344A;line-height:1.7}',
+    '.kt-t-sec{margin-bottom:16px}',
+    '.kt-t-sec h4{font-size:15px;color:#1F497D;margin-bottom:8px}',
+    '.kt-t-kpi{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}',
+    '.kt-t-kpi div{flex:1;min-width:120px;background:#F5F8FC;border:2px solid #E2EAF4;border-radius:12px;padding:10px 12px;text-align:center}',
+    '.kt-t-kpi b{display:block;font-size:24px;color:#1F497D;line-height:1.2}',
+    '.kt-t-kpi span{font-size:12px;color:#7A8494}',
+    '.kt-t-dist{display:flex;flex-direction:column;gap:6px}',
+    '.kt-t-drow{display:flex;align-items:center;gap:10px;font-size:13px}',
+    '.kt-t-drow .nm{width:52px;flex:none;color:#5B6B4B;font-weight:700}',
+    '.kt-t-drow .bar{flex:1;height:16px;background:#F1F3F0;border-radius:999px;overflow:hidden}',
+    '.kt-t-drow .bar i{display:block;height:100%;background:linear-gradient(90deg,#9BBB59,#6FB14E);border-radius:999px}',
+    '.kt-t-drow .ct{width:64px;flex:none;text-align:right;color:#7A8494}',
+    '.kt-t-top{display:flex;flex-direction:column;gap:5px}',
+    '.kt-t-trow{display:flex;align-items:center;gap:10px;background:#FAFBF7;border-radius:10px;padding:7px 12px;font-size:14px}',
+    '.kt-t-trow .rk{width:30px;flex:none;font-weight:900;color:#F79646;text-align:center}',
+    '.kt-t-trow .nm{flex:1;font-weight:700}',
+    '.kt-t-trow .pt{color:#1F497D;font-weight:900}',
+    '.kt-t-trow .lv{width:52px;flex:none;text-align:center;font-size:12px;color:#5B6B4B}',
+    '.kt-t-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px;padding-top:12px;border-top:2px solid #EEECE1}',
+    '.kt-t-bar button{border:0;border-radius:9px;padding:9px 14px;font-size:13px;font-weight:700;cursor:pointer;color:#fff}',
+    '.kt-t-tip{font-size:12.5px;color:#7A8494;margin-top:8px;line-height:1.7}',
+    /* ---- 学期证书 ---- */
+    '.kt-ct-paper{width:760px;max-width:100%;margin:0 auto;background:#fff;border:8px solid #9BBB59;border-radius:14px;padding:30px 38px;text-align:center;font-family:inherit}',
+    '.kt-ct-paper .t1{font-size:15px;color:#7A8494;letter-spacing:4px}',
+    '.kt-ct-paper .t2{font-size:34px;font-weight:900;color:#1F497D;margin:8px 0 4px}',
+    '.kt-ct-paper .t3{font-size:19px;color:#26344A;margin:14px 0}',
+    '.kt-ct-paper .t3 b{color:#F79646;font-size:27px}',
+    '.kt-ct-paper .lv{display:inline-block;background:#EFF5E3;border-radius:999px;padding:5px 18px;font-size:16px;color:#4A6B1F;font-weight:700;margin:6px 0}',
+    '.kt-ct-paper .nums{display:flex;justify-content:center;gap:26px;margin:16px 0;font-size:14px;color:#5B6B4B}',
+    '.kt-ct-paper .nums b{display:block;font-size:22px;color:#1F497D}',
+    '.kt-ct-paper .word{font-size:15px;color:#26344A;line-height:1.9;background:#FAFBF7;border-radius:10px;padding:12px 16px;margin:12px 0}',
+    '.kt-ct-paper .sign{margin-top:18px;font-size:14px;color:#7A8494}',
+    '.kt-ct-idx{font-size:13px;color:#7A8494;min-width:80px;text-align:center}',
+
+    /* ---- 模块 B：等答计时（提问后给思考留白，不再"刚问完就点名"）---- */
+    '#ktWait{position:fixed;left:50%;transform:translateX(-50%);bottom:70px;z-index:9994;background:rgba(31,73,125,.95);',
+    'color:#fff;border-radius:999px;padding:9px 22px;font-size:22px;font-weight:700;display:none;text-align:center;',
+    'box-shadow:0 8px 22px rgba(0,0,0,.3);font-family:"Microsoft YaHei","PingFang SC",sans-serif}',
+    '#ktWait.on{display:block}',
+    '#ktWait .w-bar{height:3px;background:rgba(255,255,255,.32);border-radius:9px;margin-top:7px;overflow:hidden}',
+    '#ktWait .w-bar i{display:block;height:100%;background:#FFD98A;width:100%;transition:width .3s linear}',
+
+    /* ---- 模块 D：线上实操卡 / 模块 C：时间守卫面板 ---- */
+    '.kt-docards{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}',
+    '.kt-docard{flex:1 1 210px;border:2px solid #E3E8EE;border-radius:14px;padding:14px;background:#FCFDFA}',
+    '.kt-docard h4{margin:0 0 5px;font-size:17px;color:#1F497D}',
+    '.kt-docard .when{font-size:13px;color:#7A8494;margin-bottom:8px;line-height:1.6}',
+    '.kt-docard .say{font-size:16px;line-height:1.75;color:#26344A;background:#F2F7EC;border-radius:10px;padding:9px 11px}',
+    '.kt-docard .meta{margin-top:8px;font-size:13px;color:#5B6B4B}',
+    '.kt-plan-now{font-size:24px;font-weight:800;margin:4px 0 10px}',
+    '.kt-plan-now.ok{color:#3C6B1F}.kt-plan-now.warn{color:#C87F1E}.kt-plan-now.bad{color:#C0392B}',
+    '.kt-plan-fix{background:#FFF4DC;border-radius:12px;padding:12px 14px;font-size:17px;line-height:1.8;color:#5A4310;margin-top:10px}',
+    '.kt-plan-fix b{color:#C0392B}',
+    '.kt-chk{display:flex;gap:9px;align-items:flex-start;font-size:15px;padding:8px 0;color:#26344A;cursor:pointer;line-height:1.6}',
+    '.kt-chk input{width:18px;height:18px;margin-top:2px;flex:none}',
+    '.kt-hr{height:1px;background:#e3e8ee;margin:16px 0}',
+
+    '@media print{#ktBar,#ktTimer,#ktFetti,#ktCheer,#ktPick,#ktRoster,#ktCfg,#ktAsk,#ktToast,#ktGarden,#ktTerm,#ktCertTerm,',
+    '#ktWait,#ktPlan,#ktDo{display:none!important}}',
+    '@media print{body.kt-printing2 > *{display:none!important}',
+    'body.kt-printing2 > #ktCertTerm{display:block!important;position:static!important;background:#fff!important}',
+    'body.kt-printing2 > #ktCertTerm .kt-ct-card{box-shadow:none!important;max-height:none!important}',
+    'body.kt-printing2 > #ktCertTerm .kt-t-bar,body.kt-printing2 > #ktCertTerm .kt-t-tip{display:none!important}',
+    'body.kt-printing2 > #ktCertTerm .kt-ct-paper{border-width:6px!important}',
+    '}',
+    /* 打印：只有加了 kt-printing 才只打奖状，绝不破坏课件自身的 PDF 导出 */
+    '@media print{',
+    'body.kt-printing > *{display:none!important}',
+    'body.kt-printing > #ktCert{display:block!important;position:static!important;background:#fff!important}',
+    'body.kt-printing > #ktCert .kt-cert-card{box-shadow:none!important;width:100%!important;border-width:8px!important}',
+    'body.kt-printing > #ktCert .kt-cert-actions{display:none!important}',
+    '}'
+  ].join('\n');
+
+  var style = document.createElement('style');
+  style.id = 'ktStyle';
+  style.appendChild(document.createTextNode(CSS));
+  (document.head || document.documentElement).appendChild(style);
+
+  /* ================= DOM ================= */
+  var bar = document.createElement('div');
+  bar.id = 'ktBar';
+  bar.className = 'pos-' + cfg.pos;
+  bar.innerHTML = [
+    '<button class="kt-btn" id="ktRoll">🎲 随机点名</button>',
+    '<span class="kt-cur" id="ktCur" style="display:none"></span>',
+    '<button class="kt-btn" id="ktCheerBtn">🎉 撒花</button>',
+    '<button class="kt-btn" id="ktCertBtn">🏆 奖状</button>',
+    '<button class="kt-btn small" id="ktTimerBtn">⏱ 计时</button>',
+    '<button class="kt-btn small" id="ktFsBtn" title="全屏（屏幕共享/投屏前点一下，F11 也行）">⛶ 全屏</button>',
+    '<button class="kt-btn small" id="ktPlanBtn" title="时间守卫：对照每页建议分钟数，慢了会提醒你砍哪一页、保住动手环节">⏳ 进度</button>',
+    '<button class="kt-btn small" id="ktDoBtn" title="线上怎么带学生动手：三种方案，挑一种念那句话就能开始">✋ 动手</button>',
+    '<button class="kt-btn" id="ktGardenBtn" title="班级花园：积分排行榜，和名字一一对应">🌱 花园</button>',
+    '<button class="kt-btn small" id="ktRosterBtn">👥 名单</button>',
+    '<button class="kt-btn small" id="ktCfgBtn">⚙</button>',
+    '<button class="kt-btn small" id="ktHideBtn" title="隐藏工具条（H 键恢复）">✕</button>',
+    '<button class="kt-btn kt-toggle" id="ktShowBtn" style="display:none">🎁 工具</button>'
+  ].join('');
+  document.body.appendChild(bar);
+
+  var layerPick = document.createElement('div');
+  layerPick.id = 'ktPick';
+  layerPick.className = 'kt-layer';
+  layerPick.innerHTML = [
+    '<div class="kt-card">',
+    '  <div id="ktPickName">准备点名</div>',
+    '  <div id="ktPickSub"></div>',
+    '  <div id="ktPickBtns">',
+    '    <button class="kt-b" id="ktPickGo">🎲 抽一位</button>',
+    '    <button class="kt-b orange" id="ktPickCheer" disabled>🎉 就奖励他</button>',
+    '    <button class="kt-b navy" id="ktPickCert" disabled>🏆 发奖状</button>',
+    '    <button class="kt-b gray" id="ktPickClose">关闭（Esc）</button>',
+    '  </div>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(layerPick);
+
+  var layerCert = document.createElement('div');
+  layerCert.id = 'ktCert';
+  layerCert.className = 'kt-layer';
+  layerCert.innerHTML = [
+    '<div style="width:min(900px,94vw)">',
+    '  <div class="kt-cert-card">',
+    '<div style="width:min(900px,94vw)">',
+    '  <div class="kt-cert-card">',
+    '    <div class="kt-c1">奖　状</div>',
+    '    <div class="kt-c2" id="ktCertWho">—— 同学</div>',
+    '    <div class="kt-c4">在 <b id="ktCertCourse">趣味科学</b> 课上表现突出，<br>荣获 <b id="ktCertTitle">「科学小达人」</b> 称号。<br>特发此状，以资鼓励！</div>',
+    '    <div class="kt-c5"><span id="ktCertTeacher">小秋老师</span><span id="ktCertDate">——</span></div>',
+    '  </div>',
+    '  <div class="kt-cert-actions">',
+    '    <input class="kt-inp" id="ktCertName" placeholder="同学姓名（多人用、隔开）">',
+    '    <input class="kt-inp" id="ktCertTitleIn" placeholder="称号" style="min-width:120px">',
+    '    <button class="kt-b green" id="ktCertAward">🏆 颁奖 +3 分</button>',
+    '    <span id="ktCertScore" style="font-size:14px;color:#4C5C3C;font-weight:600"></span>',
+    '    <button class="kt-b navy" id="ktCertPrint">🖨 打印 / 存 PDF</button>',
+    '    <button class="kt-b gray" id="ktCertClose">关闭（Esc）</button>',
+    '  </div>',
+    '  <div style="text-align:center;color:#8a94a0;font-size:13px;margin-top:10px">正在屏幕共享/投屏时别点打印，会弹出打印窗口挡住画面；课后再打</div>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(layerCert);
+
+  var layerRoster = document.createElement('div');
+  layerRoster.id = 'ktRoster';
+  layerRoster.className = 'kt-layer';
+  layerRoster.innerHTML = [
+    '<div class="kt-panel">',
+    '  <h3>👥 班级名单</h3>',
+    '  <p class="kt-tip">每行一个名字。改完点「保存」，工具条和点名立即用新名单。<br>',
+    '  名单只保存在这台电脑的浏览器里，不会跟着文件发给别人。</p>',
+    '  <textarea id="ktRosterText" spellcheck="false"></textarea>',
+    '  <div class="kt-row">',
+    '    <button class="kt-b navy" id="ktRosterSave">保存</button>',
+    '    <button class="kt-b gray" id="ktRosterReset">恢复默认名单</button>',
+    '    <button class="kt-b gray" id="ktRosterClear">清空</button>',
+    '    <span id="ktRosterCount" style="color:#7b8794;font-size:13px"></span>',
+    '  </div>',
+    '  <div class="kt-row" style="border-top:1px dashed #e3e8ee;padding-top:12px">',
+    '    <button class="kt-b green" id="ktExportNoName">导出「不含名单」的副本</button>',
+    '    <span style="color:#7b8794;font-size:13px">要发给别人时，用这份更稳妥</span>',
+    '  </div>',
+    '  <div class="kt-row"><button class="kt-b gray" id="ktRosterClose">关闭</button></div>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(layerRoster);
+
+  var layerCfg = document.createElement('div');
+  layerCfg.id = 'ktCfg';
+  layerCfg.className = 'kt-layer';
+  layerCfg.innerHTML = [
+    '<div class="kt-panel">',
+    '  <h3>⚙ 工具条设置</h3>',
+    '  <div class="kt-row"><label>老师署名</label><input type="text" id="ktCfgTeacher" style="width:130px"></div>',
+    '  <div class="kt-row"><label>课程名称</label><input type="text" id="ktCfgCourse" style="width:220px"></div>',
+    '  <div class="kt-row">',
+    '    <label><input type="checkbox" id="ktCfgNoRepeat"> 点名不重复（一轮点完自动重来）</label>',
+    '  </div>',
+    '  <div class="kt-row" style="border-top:1px dashed #e3e8ee;padding-top:12px">',
+    '    <label>点名后等答</label>',
+    '    <button class="kt-b gray" data-wait="0">关</button>',
+    '    <button class="kt-b gray" data-wait="3">3 秒</button>',
+    '    <button class="kt-b gray" data-wait="5">5 秒</button>',
+    '    <button class="kt-b gray" data-wait="8">8 秒</button>',
+    '    <span style="color:#7b8794;font-size:13px">给学生真正想的时间，不再刚问完就点名</span>',
+    '  </div>',
+    '  <div class="kt-row">',
+    '    <label>位置</label>',
+    '    <button class="kt-b gray" id="ktCfgPos">切到页面顶部</button>',
+    '  </div>',
+    '  <p class="kt-tip" style="margin-top:14px">快捷键：R 随机点名 · F 撒花 · C 奖状 · H 显示/隐藏工具条 · Esc 关闭弹层</p>',
+    '  <div class="kt-row"><button class="kt-b navy" id="ktCfgSave">保存</button><button class="kt-b gray" id="ktCfgClose">关闭</button></div>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(layerCfg);
+
+  var layerGarden = document.createElement('div');
+  layerGarden.id = 'ktGarden';
+  layerGarden.className = 'kt-layer';
+  layerGarden.innerHTML = [
+    '<div class="kt-g-card">',
+    '  <div class="kt-g-head">',
+    '    <span class="kt-g-title">🌱 班级花园</span>',
+    '    <span class="kt-g-stats" id="ktGStats">—</span>',
+    '  </div>',
+    '  <div class="kt-g-bar">',
+    '    <button class="kt-gb-navy" id="ktGSort">按分数排</button>',
+    '    <button class="kt-gb-green" id="ktGAll">全班 +1</button>',
+    '    <button class="kt-gb-gray" id="ktGUndo">↩ 撤销</button>',
+    '    <button class="kt-gb-gray" id="ktGExport">导出 CSV</button>',
+    '    <button class="kt-gb-navy" id="ktGTerm">📊 学期总结</button>',
+    '    <button class="kt-gb-green" id="ktGBackup">💾 备份</button>',
+    '    <button class="kt-gb-green" id="ktGRestore">📂 恢复</button>',
+    '    <button class="kt-gb-gray" id="ktGReset">全部清零</button>',
+    '    <button class="kt-gb-orange" id="ktGClose">关闭（Esc）</button>',
+    '  </div>',
+    '  <div class="kt-g-detail" id="ktGDetail" style="display:none"></div>',
+    '  <div class="kt-g-grid" id="ktGGrid"></div>',
+    '  <div class="kt-g-legend" id="ktGLegend"></div>',
+    '  <p class="kt-g-tip">每一株小植物对应一位同学：撒花 +1 分、发奖状 +3 分，分数自动累计并跨节课保存在这台电脑里。',
+    '  点一株植物可以单独加减分、给他发奖状。',
+    '  期末点「📊 学期总结」看全班总榜和每个人的证书；每周下课后点一次「💾 备份」，一学期的数据才不会丢。</p>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(layerGarden);
+
+  /* ================= 学期总结面板 ================= */
+  var layerTerm = document.createElement('div');
+  layerTerm.id = 'ktTerm';
+  layerTerm.className = 'kt-layer';
+  layerTerm.innerHTML = [
+    '<div class="kt-t-card">',
+    '  <div class="kt-t-head">',
+    '    <span class="kt-t-title">📊 学期总结</span>',
+    '    <span class="kt-t-sub" id="ktTermSub">—</span>',
+    '  </div>',
+    '  <div class="kt-t-body" id="ktTermBody"></div>',
+    '  <div class="kt-t-bar">',
+    '    <button class="kt-gb-navy" id="ktTermCert">🖨 打印学期证书</button>',
+    '    <button class="kt-gb-gray" id="ktTermCsv">导出 CSV</button>',
+    '    <button class="kt-gb-orange" id="ktTermClose">关闭（Esc）</button>',
+    '  </div>',
+    '  <p class="kt-t-tip">数据一直累计到期末，不会自动清零。换电脑或清了浏览器缓存会丢——记得每周点一次「💾 备份」。</p>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(layerTerm);
+
+  /* ================= 学期证书（打印预览） ================= */
+  var layerCertTerm = document.createElement('div');
+  layerCertTerm.id = 'ktCertTerm';
+  layerCertTerm.className = 'kt-layer';
+  layerCertTerm.innerHTML = [
+    '<div class="kt-ct-card">',
+    '  <div class="kt-ct-paper" id="ktCtPaper"></div>',
+    '  <div class="kt-t-bar">',
+    '    <button class="kt-gb-gray" id="ktCtPrev">← 上一位</button>',
+    '    <span class="kt-ct-idx" id="ktCtIdx">—</span>',
+    '    <button class="kt-gb-gray" id="ktCtNext">下一位 →</button>',
+    '    <button class="kt-gb-navy" id="ktCtPrint">🖨 打印 / 存 PDF</button>',
+    '    <button class="kt-gb-orange" id="ktCtClose">关闭（Esc）</button>',
+    '  </div>',
+    '  <p class="kt-t-tip">打印前请在打印设置里选「横向」。一次打一位，也可以连续打完 54 张期末发给学生。</p>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(layerCertTerm);
+
+  var layerAsk = document.createElement('div');
+  layerAsk.id = 'ktAsk';
+  layerAsk.className = 'kt-layer';
+  layerAsk.innerHTML = [
+    '<div class="kt-panel" style="width:min(470px,92vw)">',
+    '  <h3>要奖励谁？</h3>',
+    '  <p class="kt-tip">写上名字 = 只表扬他；留空点撒花 = 全班一起撒花</p>',
+    '  <input class="kt-inp" id="ktAskName" placeholder="同学姓名" style="width:100%;box-sizing:border-box">',
+    '  <div class="kt-row">',
+    '    <button class="kt-b orange" id="ktAskCheer">🎉 撒花</button>',
+    '    <button class="kt-b navy" id="ktAskCert">🏆 发奖状</button>',
+    '    <button class="kt-b gray" id="ktAskClose">关闭</button>',
+    '  </div>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(layerAsk);
+
+  var timerBox = document.createElement('div');
+  timerBox.id = 'ktTimer';
+  timerBox.innerHTML = [
+    '<div class="kt-t" id="ktTimerText">05:00</div>',
+    '<div class="kt-tb">',
+    '  <button data-min="1">1分</button><button data-min="3">3分</button>',
+    '  <button data-min="5">5分</button><button data-min="10">10分</button>',
+    '  <button id="ktTimerToggle">开始</button><button id="ktTimerReset">归零</button>',
+    '  <button id="ktTimerClose">✕</button>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(timerBox);
+
+  /* ---- 模块 B：等答计时 ---- */
+  var waitEl = document.createElement('div');
+  waitEl.id = 'ktWait';
+  waitEl.innerHTML = '<div id="ktWaitText">🤔 想一想</div><div class="w-bar"><i id="ktWaitBar"></i></div>';
+  document.body.appendChild(waitEl);
+
+  /* ---- 模块 C：时间守卫面板（含模块 E 课前自检）---- */
+  var layerPlan = document.createElement('div');
+  layerPlan.id = 'ktPlan';
+  layerPlan.className = 'kt-layer';
+  layerPlan.innerHTML = [
+    '<div class="kt-panel">',
+    '  <h3>⏳ 时间守卫</h3>',
+    '  <p class="kt-tip">按每页课件自带的建议分钟数，对照你的实际进度。<b>只给建议，不会自动翻页。</b></p>',
+    '  <div class="kt-plan-now" id="ktPlanNow">还没开始翻页</div>',
+    '  <div id="ktPlanFix"></div>',
+    '  <div class="kt-hr"></div>',
+    '  <h3 style="font-size:17px">✅ 课前自检（设备损耗是最大的时间黑洞）</h3>',
+    '  <p class="kt-tip">上课前 10 分钟过一遍。上一次自检：<span id="ktPreWhen">—</span></p>',
+    '  <div id="ktPreList"></div>',
+    '  <div class="kt-row">',
+    '    <button class="kt-b gray" id="ktPreReset">清空重来</button>',
+    '    <button class="kt-b navy" id="ktPlanClose">关闭（Esc）</button>',
+    '  </div>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(layerPlan);
+
+  /* ---- 模块 D：线上实操卡 ---- */
+  var layerDo = document.createElement('div');
+  layerDo.id = 'ktDo';
+  layerDo.className = 'kt-layer';
+  layerDo.innerHTML = [
+    '<div class="kt-panel">',
+    '  <h3>✋ 线上怎么带学生动手</h3>',
+    '  <p class="kt-tip">远程看不到每个学生的手、材料不可能统一、通常只剩 3–5 分钟。挑一种，念那句话就能开始。</p>',
+    '  <div class="kt-plan-fix" style="background:#FDECEA;color:#8A2B20;margin-top:4px">',
+    '  涉及实物或实验的课，动手前<b>先把安全提示念一遍</b>。</div>',
+    '  <div class="kt-docards">',
+    '    <div class="kt-docard">',
+    '      <h4>A 老师做，学生跟着做</h4>',
+    '      <div class="when">适用：材料随手可得、动作简单、能在镜头前看清</div>',
+    '      <div class="say">老师在镜头前做一遍，你们跟着手里的东西一起做，做完把手举高，让老师看见。</div>',
+    '      <div class="meta">约 4–5 分钟 · 学生手边需要小物件</div>',
+    '    </div>',
+    '    <div class="kt-docard">',
+    '      <h4>B 写下预测，举手报</h4>',
+    '      <div class="when">适用：零材料，或材料不齐时的首选</div>',
+    '      <div class="say">在本子上写下你的预测，写完举手；老师请 3 位报，报完我们看谁猜对了。</div>',
+    '      <div class="meta">约 3–4 分钟 · 只需要纸笔</div>',
+    '    </div>',
+    '    <div class="kt-docard">',
+    '      <h4>C 先预测，下节课揭晓</h4>',
+    '      <div class="when">适用：时间被吃掉时的保底——不假装做了实验</div>',
+    '      <div class="say">先别做，把每个人的预测写在纸上交给助学老师，下节课开头 30 秒揭晓。写预测本身就是实验的记录环节。</div>',
+    '      <div class="meta">约 1–2 分钟 · 零材料</div>',
+    '    </div>',
+    '  </div>',
+    '  <div class="kt-row"><button class="kt-b navy" id="ktDoClose">关闭（Esc）</button></div>',
+    '</div>'
+  ].join('');
+  document.body.appendChild(layerDo);
+
+  var fetti = document.createElement('div');
+  fetti.id = 'ktFetti';
+  document.body.appendChild(fetti);
+
+  var cheerEl = document.createElement('div');
+  cheerEl.id = 'ktCheer';
+  document.body.appendChild(cheerEl);
+
+  /* ================= 状态 ================= */
+  var current = '';               // 当前"主角"
+  var rolling = false;
+  var pickCount = 0, pickTotal = 0;
+
+  function setCur(name) {
+    current = name || '';
+    var el = $('ktCur');
+    if (current) {
+      el.style.display = '';
+      el.textContent = '🎯 ' + current;
+    } else {
+      el.style.display = 'none';
+      el.textContent = '';
+    }
+    $('ktPickCheer').disabled = !current;
+    $('ktPickCert').disabled = !current;
+  }
+
+  /* ================= 撒花 ================= */
+  var CHEER_WORDS = ['太棒了！', '厉害！', '就是这个！', '漂亮！', '说得太好了！', '回答得真完整！'];
+  function fettiBurst(n) {
+    var colors = ['#F79646', '#9BBB59', '#4BACC6', '#1F497D', '#E8A0BF', '#FFD966', '#C0392B'];
+    fetti.innerHTML = '';
+    fetti.classList.add('on');
+    for (var i = 0; i < (n || 120); i++) {
+      var p = document.createElement('div');
+      p.className = 'kt-piece';
+      p.style.left = (Math.random() * 100) + 'vw';
+      p.style.background = colors[(Math.random() * colors.length) | 0];
+      p.style.animationDuration = (1.6 + Math.random() * 1.8) + 's';
+      p.style.animationDelay = (Math.random() * 0.6) + 's';
+      p.style.width = (6 + Math.random() * 7) + 'px';
+      p.style.height = (10 + Math.random() * 12) + 'px';
+      fetti.appendChild(p);
+    }
+    setTimeout(function () { fetti.classList.remove('on'); fetti.innerHTML = ''; }, 3800);
+  }
+  function cheer(name) {
+    fettiBurst(120);
+
+    var word = CHEER_WORDS[(Math.random() * CHEER_WORDS.length) | 0];
+    cheerEl.textContent = (name ? name + '　' : '') + word;
+    cheerEl.classList.remove('on'); void cheerEl.offsetWidth; cheerEl.classList.add('on');
+    if (name) {
+      setCur(name);
+      /* 撒花 = 自动 +1 分，和名字一一对应记进班级花园 */
+      var got = addScore(name, 1, 'cheer');
+      if (got.length) {
+        var r0 = one(got[0]);
+        toast('🎉 ' + got.join('、') + ' +1 分（现在 ' + r0.p + ' 分 · ' + LV_NAME[levelOf(r0.p)] + '）', 2400);
+      }
+    } else {
+      toast('🎉 全班一起撒花！（要给大家都加 1 分，去「🌱 花园」点「全班 +1」）', 2600);
+    }
+  }
+
+  /* ================= 随机点名 ================= */
+  function pool() {
+    var list = roster();
+    var p = lsGet(LS_POOL, null);
+    if (!Array.isArray(p) || !p.length) { p = list.slice(); lsSet(LS_POOL, p); }
+    // 名单变了 → 池同步
+    if (p.length > list.length || p.some(function (x) { return list.indexOf(x) < 0; })) {
+      p = list.slice(); lsSet(LS_POOL, p);
+    }
+    return p;
+  }
+  function stats() {
+    var list = roster();
+    var left = pool().length;
+    return { total: list.length, left: left, used: Math.max(0, list.length - left) };
+  }
+  function openPick() {
+    layerPick.classList.add('on');
+    var st = stats();
+    $('ktPickName').textContent = '准备点名';
+    $('ktPickSub').textContent = st.total
+      ? ('共 ' + st.total + ' 人 · 本轮还剩 ' + st.left + ' 人未点')
+      : '还没有名单，点「👥 名单」导入';
+    if (!current) { $('ktPickCheer').disabled = true; $('ktPickCert').disabled = true; }
+  }
+  function closePick() { layerPick.classList.remove('on'); }
+
+  function roll() {
+    if (rolling) { return; }
+    var list = roster();
+    if (!list.length) {
+      $('ktPickName').textContent = '名单是空的';
+      $('ktPickSub').textContent = '点工具条「👥 名单」把学生名字粘进去（每行一个）';
+      return;
+    }
+    var p = pool();
+    if (!p.length) { p = list.slice(); }   // 一轮点完 → 自动重来
+    var target = p[(Math.random() * p.length) | 0];
+
+    rolling = true;
+    $('ktPickCheer').disabled = true;
+    $('ktPickCert').disabled = true;
+    var el = $('ktPickName');
+    el.classList.add('roll');
+    var times = 0, maxTimes = 26, delay = 45;
+    (function spin() {
+      if (times >= maxTimes) {
+        el.classList.remove('roll');
+        el.textContent = target;
+        rolling = false;
+        setCur(target);
+        /* 模块 A+B：抽中后自动等答，等答归零自动浮出追问句 */
+        if (cfg.waitSec > 0) { startWait(target); }
+        if (cfg.norepeat) {
+          var np = pool().filter(function (x) { return x !== target; });
+          lsSet(LS_POOL, np.length ? np : list.slice());
+        }
+        var st = stats();
+        $('ktPickSub').textContent = st.total
+          ? ('共 ' + st.total + ' 人 · 本轮还剩 ' + st.left + ' 人未点')
+          : '';
+        return;
+      }
+      el.textContent = list[(Math.random() * list.length) | 0];
+      times++;
+      if (times > 16) { delay += 22; }
+      setTimeout(spin, delay);
+    })();
+  }
+
+  /* ================= 奖状 ================= */
+  var TITLES_HINT = ['科学小达人', '观察小能手', '提问小明星', '最佳搭档', '进步之星', '实验小能手', '思考小达人'];
+  var certAwarded = false;   /* 本次打开奖状是否已经记过分，避免重复 +3 */
+  function openCert(name, title) {
+    layerCert.classList.add('on');
+    $('ktCertName').value = name || current || '';
+    $('ktCertTitleIn').value = title || '';
+    certAwarded = false;
+    $('ktCertAward').textContent = '🏆 颁奖 +3 分';
+    $('ktCertAward').disabled = false;
+    if (name) { setCur(name); }
+    renderCert();
+    setTimeout(function () { $('ktCertName').focus(); $('ktCertName').select(); }, 60);
+  }
+  /* 颁奖 = 自动 +3 分（和撒花的 +1 一起构成积分） */
+  function awardCert() {
+    var ns = splitNames($('ktCertName').value);
+    if (!ns.length) {
+      var el = $('ktCertName');
+      el.style.borderColor = '#C0392B'; el.focus();
+      setTimeout(function () { el.style.borderColor = ''; }, 1200);
+      toast('先写上同学的名字，再点颁奖。', 2400);
+      return false;
+    }
+    if (certAwarded) { return true; }
+    certAwarded = true;
+    addScore(ns, 3, 'cert');
+    setCur(ns[0]);
+    fettiBurst(90);
+    $('ktCertAward').textContent = '✓ 已记 +3 分';
+    $('ktCertAward').disabled = true;
+    var r = one(ns[0]);
+    toast('🏆 ' + ns.join('、') + ' +3 分（现在 ' + r.p + ' 分 · ' + LV_NAME[levelOf(r.p)] + '）', 3000);
+    renderCert();
+    return true;
+  }
+  function closeCert() {
+    layerCert.classList.remove('on');
+    if (layerGarden.classList.contains('on')) { renderGarden(); }   /* 花园还开着就刷新分数 */
+  }
+
+  /* 不用原生 prompt —— 某些内嵌浏览器（如 ClassIn 教室浏览器）会禁用它 */
+  function openAsk() {
+    layerAsk.classList.add('on');
+    $('ktAskName').value = current || '';
+    setTimeout(function () { $('ktAskName').focus(); $('ktAskName').select(); }, 60);
+  }
+  function renderCert() {
+    var names = ($('ktCertName').value || '').trim();
+    var title = ($('ktCertTitleIn').value || '').trim() || '科学小达人';
+    $('ktCertWho').textContent = (names ? names.replace(/[、,，]/g, '、') : '——') + ' 同学';
+    $('ktCertTitle').textContent = '「' + title + '」';
+    $('ktCertCourse').textContent = cfg.course || '趣味科学';
+    $('ktCertTeacher').textContent = (cfg.teacher || '小秋老师') + ' 颁';
+    $('ktCertDate').textContent = today();
+    /* 积分提示：颁奖前后的分数，一眼看到「真的记上了」 */
+    var hint = $('ktCertScore');
+    if (hint) {
+      var ns = splitNames($('ktCertName').value);
+      if (!ns.length) { hint.textContent = ''; }
+      else {
+        var parts = ns.slice(0, 3).map(function (n) {
+          var r = one(n);
+          return n + ' ' + r.p + ' → ' + (r.p + 3) + ' 分';
+        });
+        hint.textContent = '当前积分：' + parts.join('，') + (ns.length > 3 ? ' 等 ' + ns.length + ' 人' : '');
+      }
+    }
+  }
+  function printCert() {
+    var names = ($('ktCertName').value || '').trim();
+    if (!names) {
+      var el = $('ktCertName');
+      el.style.borderColor = '#C0392B'; el.focus();
+      setTimeout(function () { el.style.borderColor = ''; }, 1200);
+      return;
+    }
+    renderCert();
+    /* 打印 = 这张奖状真的发出去了 → 自动记 +3 分（已经点过「颁奖」就不会重复记） */
+    awardCert();
+    var pageCss = document.createElement('style');
+    pageCss.id = 'ktPageStyle';
+    pageCss.appendChild(document.createTextNode('@page{size:A4 landscape;margin:10mm}'));
+    document.head.appendChild(pageCss);
+    document.body.classList.add('kt-printing');
+    var done = function () {
+      document.body.classList.remove('kt-printing');
+      if (pageCss.parentNode) { pageCss.parentNode.removeChild(pageCss); }
+      window.removeEventListener('afterprint', done);
+    };
+    window.addEventListener('afterprint', done);
+    setTimeout(done, 60000);   // 兜底：浏览器不触发 afterprint 也别把样式焊死
+    try { window.print(); } catch (e) { done(); }
+  }
+
+  /* ================= 计时器 ================= */
+  var tLeft = 300, tRunning = false, tH = null;
+  function paintTimer() {
+    var m = Math.floor(Math.abs(tLeft) / 60), s = Math.abs(tLeft) % 60;
+    var txt = (tLeft < 0 ? '-' : '') + pad(m) + ':' + pad(s);
+    var el = $('ktTimerText');
+    el.textContent = txt;
+    el.className = 'kt-t' + (tLeft <= 10 ? ' warn' : '');
+  }
+  function timerToggle() {
+    tRunning = !tRunning;
+    $('ktTimerToggle').textContent = tRunning ? '暂停' : '开始';
+    if (tRunning && !tH) {
+      tH = setInterval(function () {
+        tLeft--; paintTimer();
+        if (tLeft === 0) { beep(); tRunning = false; $('ktTimerToggle').textContent = '开始'; clearInterval(tH); tH = null; }
+      }, 1000);
+    }
+  }
+  function timerSet(min) { tLeft = min * 60; tRunning = false; clearInterval(tH); tH = null; $('ktTimerToggle').textContent = '开始'; paintTimer(); }
+  function beep() {
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) { return; }
+      var ac = new AC(), o = ac.createOscillator(), g = ac.createGain();
+      o.type = 'sine'; o.frequency.value = 880;
+      g.gain.setValueAtTime(0.0001, ac.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.25, ac.currentTime + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.6);
+      o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime + 0.62);
+    } catch (e) { }
+  }
+
+  /* ================= 模块 B：等答计时 =================
+     报告证据（第5课）：「提问后给学生的思考等待时间偏短，部分问题刚提出就点名」。
+     做法：抽中名字后先静默等几秒，给学生真正想的时间。
+     ⚠️ 独立变量 wLeft / wH / wRunning，绝不复用 tLeft / tH / tRunning，
+        也绝不读写课件主计时器的 sec —— 历史上"子计时器把主计时器清零"就是这么来的。 */
+  var wLeft = 0, wH = null, wRunning = false, wHideT = null;
+
+  function paintWait() {
+    var el = $('ktWaitText');
+    if (!el) { return; }
+    el.textContent = '🤔 想一想　' + wLeft;
+    var bar = $('ktWaitBar');
+    if (bar) { bar.style.width = (wLeft / Math.max(1, cfg.waitSec) * 100) + '%'; }
+  }
+  function stopWait() {
+    wRunning = false;
+    if (wH) { clearInterval(wH); wH = null; }
+    if (wHideT) { clearTimeout(wHideT); wHideT = null; }
+    if (waitEl) { waitEl.classList.remove('on'); }
+  }
+  function startWait(name) {
+    if (!cfg.waitSec || cfg.waitSec <= 0) { return; }
+    stopWait();
+    wLeft = cfg.waitSec;
+    wRunning = true;
+    waitEl.classList.add('on');
+    paintWait();
+    wH = setInterval(function () {
+      wLeft--;
+      if (wLeft > 0) { paintWait(); return; }
+      clearInterval(wH); wH = null; wRunning = false;
+      beep();
+      $('ktWaitText').textContent = '👉 请 ' + (name || '这位同学') + ' 说';
+      var bar = $('ktWaitBar'); if (bar) { bar.style.width = '0%'; }
+      wHideT = setTimeout(function () { waitEl.classList.remove('on'); wHideT = null; }, 2200);
+    }, 1000);
+  }
+
+  /* ================= 模块 C：时间守卫 =================
+     为什么需要：第5课开课设备调试吃掉约 7 分钟，最后动手环节被牺牲。
+     取数一律走 DOM —— kits.js 是后注入的，课件里的 slides/cur 是顶层 const/let，
+     不挂在 window 上；虽然在本 IIFE 里写标识符能读到，但依赖课件变量名太脆弱。
+     课件翻页是 go(i) 里 classList.toggle('active')，监听 class 变化即可，零改课件。 */
+  var ktSlides = [], planT0 = 0, planIdx = 0, moBound = false;
+
+  /* 优先读课件自己的主计时器（四个课件都有 #clock，老师点了 ▶ 就在走） */
+  function clockSec() {
+    var c = document.getElementById('clock');
+    if (!c) { return -1; }
+    var m = /^(\d+):(\d+)$/.exec((c.textContent || '').trim());
+    return m ? (parseInt(m[1], 10) * 60 + parseInt(m[2], 10)) : -1;
+  }
+  function elapsedSec() {
+    var cs = clockSec();
+    if (cs > 0) { return cs; }
+    if (!planT0) { return 0; }
+    return (Date.now() - planT0) / 1000;
+  }
+  function planSecTo(idx) {
+    var s = 0;
+    for (var i = 0; i < idx && i < ktSlides.length; i++) {
+      s += (parseFloat(ktSlides[i].dataset.min) || 0) * 60;
+    }
+    return s;
+  }
+  function planLag() { return elapsedSec() - planSecTo(planIdx); }
+  function fmtLag(l) {
+    var m = Math.round(Math.abs(l) / 60);
+    return (l >= 0 ? '慢 ' : '快 ') + m + ' 分钟';
+  }
+  /* 实操页识别：新课可以写 data-do="1"，旧课件靠 id/正文自动命中，不用改课件 */
+  function isDoPage(el) {
+    if (!el) { return false; }
+    if (el.dataset && el.dataset.do === '1') { return true; }
+    var id = (el.id || '').toLowerCase();
+    if (/^(do|practice|lab|observe|detective|make|try|hand|experiment)/.test(id)) { return true; }
+    if (el.querySelector && el.querySelector('.safe-tip')) { return true; }
+    var tx = (el.textContent || '').slice(0, 500);
+    if (/动手|做一做|试一试|一起做|实验操作/.test(tx)) { return true; }
+    return false;
+  }
+  function planAdvice(lag) {
+    if (lag < 120) { return ''; }
+    var mins = Math.round(lag / 60), cands = [];
+    for (var i = planIdx; i < ktSlides.length; i++) {
+      var el = ktSlides[i];
+      if (isDoPage(el)) { continue; }
+      if (i >= ktSlides.length - 1) { continue; }   /* 收尾页不砍 */
+      cands.push({ i: i, id: el.id || ('第' + (i + 1) + '页'), m: parseFloat(el.dataset.min) || 0 });
+    }
+    cands.sort(function (a, b) { return b.m - a.m; });
+    var cut = cands.slice(0, 2), save = 0;
+    cut.forEach(function (c) { save += c.m; });
+    var html = '<div class="kt-plan-fix">已经慢了 <b>' + mins + ' 分钟</b>。';
+    if (cut.length) {
+      html += '建议把 <b>' + cut.map(function (c) { return c.id + '（' + c.m + ' 分钟）'; }).join('、') +
+        '</b> 压掉或口头带过，能腾出约 ' + save + ' 分钟。';
+    }
+    var doIdx = -1;
+    for (var j = planIdx; j < ktSlides.length; j++) { if (isDoPage(ktSlides[j])) { doIdx = j; break; } }
+    if (doIdx >= 0) {
+      html += '<br>⚠️ 第 ' + (doIdx + 1) + ' 页是动手环节，<b>尽量保住</b>——实在挤不出时间，' +
+        '用工具条「✋ 动手」里的 C 方案（先写下预测，下节课揭晓），<b>别直接跳过</b>。';
+    }
+    html += '</div>';
+    return html;
+  }
+  function renderPlan() {
+    var el = $('ktPlanNow');
+    if (!el) { return; }
+    if (!planT0 && clockSec() <= 0) {
+      el.className = 'kt-plan-now';
+      el.textContent = '还没开始上课计时';
+      $('ktPlanFix').innerHTML = '';
+      return;
+    }
+    var lag = planLag();
+    el.className = 'kt-plan-now ' + (lag >= 240 ? 'bad' : (lag >= 120 ? 'warn' : 'ok'));
+    el.textContent = '第 ' + (planIdx + 1) + ' 页 · ' + fmtLag(lag) +
+      '（已用 ' + Math.round(elapsedSec() / 60) + ' 分钟 / 计划 ' + Math.round(planSecTo(planIdx) / 60) + ' 分钟）';
+    $('ktPlanFix').innerHTML = planAdvice(lag);
+  }
+  function paintPlanBtn() {
+    var b = $('ktPlanBtn');
+    if (!b) { return; }
+    if (!planT0 && clockSec() <= 0) { b.textContent = '⏳ 进度'; b.className = 'kt-btn small'; return; }
+    var lag = planLag();
+    if (Math.abs(lag) < 120) { b.textContent = '⏳ ✓'; b.className = 'kt-btn small'; return; }
+    b.textContent = '⏳ ' + (lag > 0 ? '慢' : '快') + Math.round(Math.abs(lag) / 60);
+    b.className = 'kt-btn small' + (lag >= 240 ? ' kt-alarm' : '');
+  }
+  function bindPlan() {
+    ktSlides = [].slice.call(document.querySelectorAll('.slide'));
+    if (!ktSlides.length || moBound) { return; }
+    moBound = true;
+    var act = document.querySelector('.slide.active');
+    planIdx = act ? ktSlides.indexOf(act) : 0;
+    if (window.MutationObserver) {
+      var mo = new MutationObserver(function (muts) {
+        muts.forEach(function (m) {
+          var el = m.target;
+          if (!el.classList.contains('active')) { return; }
+          var i = ktSlides.indexOf(el);
+          if (i < 0) { return; }
+          if (!planT0) { planT0 = Date.now(); }
+          planIdx = i;
+          paintPlanBtn();
+          if (layerPlan.classList.contains('on')) { renderPlan(); }
+        });
+      });
+      ktSlides.forEach(function (s) { mo.observe(s, { attributes: true, attributeFilter: ['class'] }); });
+    }
+    paintPlanBtn();
+  }
+  function openPlan() { renderPrecheck(); renderPlan(); layerPlan.classList.add('on'); }
+  function openDo() { layerDo.classList.add('on'); }
+
+  /* ================= 模块 E：课前自检 =================
+     为什么需要：三份报告里「其他」耗时占 14%~29%，第5课的 12 分钟全是设备调试。 */
+  var LS_PRE = 'kt_precheck_v1';
+  var PRE_ITEMS = [
+    '视频已下载到本地、双击能播（不要上课现场搜，断网就开天窗）',
+    'ClassIn 音画自检过；屏幕共享勾了「共享电脑声音」',
+    '助学老师在教室，知道这节课要不要带学生动手',
+    '想好了视频放不出来时的替代说法（口头描述或直接跳过）',
+    '课件双击打开、F11 全屏、教师提示（T 键）已打开'
+  ];
+  function preTime(t) {
+    return new Date(t).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+  function renderPrecheck() {
+    var d = lsGet(LS_PRE, null) || { box: [], at: 0 };
+    $('ktPreList').innerHTML = PRE_ITEMS.map(function (t, i) {
+      return '<label class="kt-chk"><input type="checkbox" data-pre="' + i + '"' +
+        (d.box.indexOf(i) >= 0 ? ' checked' : '') + '><span>' + t + '</span></label>';
+    }).join('');
+    $('ktPreWhen').textContent = d.at ? preTime(d.at) : '还没有做过';
+    Array.prototype.forEach.call($('ktPreList').querySelectorAll('input[data-pre]'), function (inp) {
+      inp.onchange = function () {
+        var cur = lsGet(LS_PRE, null) || { box: [], at: 0 };
+        var i = parseInt(inp.dataset.pre, 10);
+        var p = cur.box.indexOf(i);
+        if (inp.checked && p < 0) { cur.box.push(i); }
+        if (!inp.checked && p >= 0) { cur.box.splice(p, 1); }
+        cur.at = Date.now();
+        lsSet(LS_PRE, cur);
+        $('ktPreWhen').textContent = preTime(cur.at);
+      };
+    });
+  }
+
+  /* ================= 名单面板 ================= */
+  function openRoster() {
+    $('ktRosterText').value = roster().join('\n');
+    var st = stats();
+    $('ktRosterCount').textContent = '当前 ' + st.total + ' 人';
+    layerRoster.classList.add('on');
+    setTimeout(function () { $('ktRosterText').focus(); }, 60);
+  }
+  function saveRosterFromBox() {
+    var arr = ($('ktRosterText').value || '').split(/\r?\n/).map(function (x) { return x.trim(); }).filter(Boolean);
+    saveRoster(arr);
+    $('ktRosterCount').textContent = '已保存：' + arr.length + ' 人';
+    setCur('');
+    if (layerGarden.classList.contains('on')) { renderGarden(); }
+  }
+  /* 页内提示条：替代 alert/confirm/prompt（内嵌浏览器常拦截原生弹窗） */
+  var toastEl = document.createElement('div');
+  toastEl.id = 'ktToast';
+  document.body.appendChild(toastEl);
+  var toastTimer = null;
+  function toast(msg, ms) {
+    if (!toastEl) { return; }
+    toastEl.textContent = msg;
+    toastEl.classList.add('on');
+    if (toastTimer) { clearTimeout(toastTimer); }
+    toastTimer = setTimeout(function () { toastEl.classList.remove('on'); }, ms || 2600);
+  }
+
+  /* ================= 积分 · 班级花园 =================
+     规则：撒花 +1 · 发奖状 +3 · 可手动加减 · 分数自动累计、跨节课保存在本机
+     可视化：一人一株小植物，分数越高长得越高（种子→发芽→小苗→长高→开花→结果）
+  ==================================================== */
+  var LS_SCORE = 'kt_score_v1';   // { 姓名:{p:总分,c:撒花次数,k:奖状次数,t:本节课分,d:日期} }
+  var LS_UNDO = 'kt_undo_v1';     // 最近一次操作，可撤销
+  var LV_TH = [0, 1, 3, 6, 10, 15];
+  var LV_NAME = ['种子', '发芽', '小苗', '长高', '开花', '结果'];
+
+  function dayKey() {
+    var d = new Date();
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  function scores() { var o = lsGet(LS_SCORE, null); return (o && typeof o === 'object' && !Array.isArray(o)) ? o : {}; }
+  function one(name) {
+    var o = scores();
+    var r = o[name];
+    if (!r || typeof r !== 'object') { r = { p: 0, c: 0, k: 0, t: 0, d: dayKey() }; }
+    if (r.d !== dayKey()) { r.t = 0; r.d = dayKey(); }   // 换一天 → 本节课得分归零
+    if (typeof r.p !== 'number') { r.p = 0; }
+    if (typeof r.c !== 'number') { r.c = 0; }
+    if (typeof r.k !== 'number') { r.k = 0; }
+    if (typeof r.t !== 'number') { r.t = 0; }
+    return r;
+  }
+  function put(name, r) { var o = scores(); o[name] = r; lsSet(LS_SCORE, o); }
+  function levelOf(p) {
+    var lv = 0;
+    for (var i = 0; i < LV_TH.length; i++) { if (p >= LV_TH[i]) { lv = i; } }
+    return lv;
+  }
+  function splitNames(s) {
+    return ('' + (s || '')).split(/[、,，;；\/]+|\s+/).map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  /* 加分：names 支持「张三、李四」字符串或数组；delta 可为负 */
+  function addScore(names, delta, type) {
+    var arr = (Array.isArray(names) ? names.slice() : splitNames(names)).filter(Boolean);
+    if (!arr.length || !delta) { return []; }
+    arr.forEach(function (n) {
+      var r = one(n);
+      r.p = Math.max(0, r.p + delta);
+      r.t = Math.max(0, (r.t || 0) + delta);
+      if (delta > 0 && type === 'cert') { r.k++; }
+      else if (delta > 0) { r.c++; }
+      r.d = dayKey();
+      put(n, r);
+    });
+    lsSet(LS_UNDO, { names: arr, delta: delta, type: type || '', ts: Date.now() });
+    if (layerGarden.classList.contains('on')) {
+      renderGarden();
+      arr.forEach(function (n) { bump(n, delta); });
+    }
+    return arr;
+  }
+
+  /* 一株植物的 SVG：等级越高，茎越高、叶越多、开花结果 */
+  function plantSVG(lv) {
+    var stem = [0, 13, 22, 31, 38, 42][lv];
+    var pairs = [0, 1, 2, 3, 3, 4][lv];
+    var green = ['#C9D6BE', '#8FC96A', '#6FB14E', '#5BA33F', '#4E9436', '#3F8530'][lv];
+    var s = '<svg viewBox="0 0 60 70" xmlns="http://www.w3.org/2000/svg">';
+    s += '<ellipse cx="30" cy="61" rx="21" ry="7" fill="#C8A97E"/>';
+    s += '<ellipse cx="30" cy="59" rx="21" ry="5.6" fill="#D9BF97"/>';
+    if (lv === 0) {                                     /* 还是一颗种子：尖头朝上，睡在土里 */
+      s += '<ellipse cx="30" cy="55.6" rx="3.2" ry="4.4" fill="#B08445" transform="rotate(18 30 55.6)"/>';
+      s += '<path d="M30 51.6 q -2.2 3.6 0.4 8" stroke="#8A6A32" stroke-width="1.1" fill="none" stroke-linecap="round"/>';
+    } else {
+      s += '<path d="M30 58 L30 ' + (58 - stem) + '" stroke="' + green + '" stroke-width="3.4" stroke-linecap="round" fill="none"/>';
+      for (var i = 0; i < pairs; i++) {
+        var frac = pairs === 1 ? 0.5 : (0.28 + 0.68 * (i / (pairs - 1)));
+        var y = 58 - stem * frac;
+        var y2 = y - stem * 0.17;
+        var len = 7.5 + lv * 0.7;
+        s += '<ellipse cx="' + (30 - len) + '" cy="' + y.toFixed(1) + '" rx="' + len.toFixed(1) + '" ry="' + (len * 0.5).toFixed(1) +
+          '" fill="' + green + '" transform="rotate(-25 30 ' + y.toFixed(1) + ')"/>';
+        s += '<ellipse cx="' + (30 + len) + '" cy="' + y2.toFixed(1) + '" rx="' + len.toFixed(1) + '" ry="' + (len * 0.5).toFixed(1) +
+          '" fill="' + green + '" transform="rotate(25 30 ' + y2.toFixed(1) + ')"/>';
+      }
+      if (lv >= 4) {                                    /* 开花 */
+        var fy = 58 - stem - 3.6;
+        for (var k = 0; k < 5; k++) {
+          var a = (Math.PI * 2 / 5) * k - Math.PI / 2;
+          s += '<circle cx="' + (30 + Math.cos(a) * 5).toFixed(1) + '" cy="' + (fy + Math.sin(a) * 5).toFixed(1) + '" r="3.5" fill="#F49AC1"/>';
+        }
+        s += '<circle cx="30" cy="' + fy.toFixed(1) + '" r="2.9" fill="#FFD966"/>';
+      }
+      if (lv >= 5) {                                    /* 结果 */
+        s += '<circle cx="22.5" cy="' + (58 - stem * 0.42).toFixed(1) + '" r="3" fill="#E4574C"/>';
+        s += '<circle cx="38" cy="' + (58 - stem * 0.72).toFixed(1) + '" r="2.6" fill="#E4574C"/>';
+      }
+    }
+    s += '</svg>';
+    return s;
+  }
+
+  var gSort = 'seat';    // seat = 按名单顺序；score = 按分数排
+  var gSel = '';         // 当前点开的同学
+  var resetArmed = false; // 清零需要点两次
+
+  function gardenList() {
+    var names = roster().slice();
+    var o = scores();
+    Object.keys(o).forEach(function (n) { if (names.indexOf(n) < 0) { names.push(n); } });
+    if (gSort === 'score') {
+      names.sort(function (a, b) {
+        var d = (o[b] ? o[b].p : 0) - (o[a] ? o[a].p : 0);
+        return d !== 0 ? d : names.indexOf(a) - names.indexOf(b);
+      });
+    }
+    return names;
+  }
+  function renderGarden() {
+    var names = gardenList();
+    var grid = $('ktGGrid');
+    if (!grid) { return; }
+    if (!names.length) {
+      grid.innerHTML = '<div class="kt-g-tip" style="grid-column:1/-1">还没有名单：关掉这里，点工具条「👥 名单」把学生名字粘进去（每行一个），花园就会长出来。</div>';
+      $('ktGStats').textContent = '—';
+      renderDetail();
+      return;
+    }
+    var max = 0, total = 0, today = 0, champs = [];
+    names.forEach(function (n) {
+      var r = one(n);
+      total += r.p; today += (r.t || 0);
+      if (r.p > max) { max = r.p; champs = [n]; }
+      else if (r.p === max && r.p > 0) { champs.push(n); }
+    });
+    $('ktGStats').textContent = '全班 ' + names.length + ' 人 · 累计 ' + total + ' 分 · 本节课 +' + today +
+      (champs.length ? ' · 👑 ' + champs.join('、') + '（' + max + ' 分）' : '');
+    grid.innerHTML = names.map(function (n) {
+      var r = one(n);
+      var lv = levelOf(r.p);
+      var cls = 'kt-plant' + (n === gSel ? ' me' : '') + (max > 0 && r.p === max ? ' top' : '');
+      return '<div class="' + cls + '" data-n="' + esc(n) + '" title="' + esc(n) + '：' + r.p + ' 分（' + LV_NAME[lv] + '）">' +
+        ((max > 0 && r.p === max) ? '<span class="crown">👑</span>' : '') +
+        plantSVG(lv) +
+        '<div class="pn">' + esc(n) + '</div>' +
+        '<div class="pp"><b>' + r.p + '</b> 分 · ' + LV_NAME[lv] +
+        ((r.t > 0) ? ' <span style="color:#F79646">+' + r.t + '</span>' : '') + '</div>' +
+        '<div class="plus"></div>' +
+        '</div>';
+    }).join('');
+    renderDetail();
+    $('ktGLegend').innerHTML = '<span>等级：</span>' + LV_NAME.map(function (nm, i) {
+      return '<i>' + nm + ' ' + LV_TH[i] + '分' + (i === 5 ? ' 起' : '') + '</i>';
+    }).join('');
+  }
+  function renderDetail() {
+    var box = $('ktGDetail');
+    if (!box) { return; }
+    if (!gSel) { box.style.display = 'none'; box.innerHTML = ''; return; }
+    var r = one(gSel);
+    box.style.display = '';
+    box.innerHTML = '<span class="dn">' + esc(gSel) + '</span>' +
+      '<span class="dl">' + r.p + ' 分 · ' + LV_NAME[levelOf(r.p)] + ' · 撒花 ' + (r.c || 0) +
+      ' 次 · 奖状 ' + (r.k || 0) + ' 次 · 本节课 +' + (r.t || 0) + '</span>' +
+      '<span class="db">' +
+      '<button class="kt-gb-green" data-a="1">+1 分</button>' +
+      '<button class="kt-gb-navy" data-a="3">🏆 +3</button>' +
+      '<button class="kt-gb-gray" data-a="-1">−1</button>' +
+      '<button class="kt-gb-orange" data-a="cert">发奖状</button>' +
+      '<button class="kt-gb-gray" data-a="close">收起</button>' +
+      '</span>';
+  }
+  /* 分数变化时让那一格飘一个 +N（在 renderGarden 之后调用） */
+  function bump(name, delta) {
+    if (!layerGarden.classList.contains('on')) { return; }
+    var cells = layerGarden.querySelectorAll('.kt-plant');
+    for (var i = 0; i < cells.length; i++) {
+      if (cells[i].getAttribute('data-n') === name) {
+        var p = cells[i].querySelector('.plus');
+        if (p) {
+          p.textContent = (delta > 0 ? '+' : '') + delta;
+          p.classList.remove('on'); void p.offsetWidth; p.classList.add('on');
+        }
+        return;
+      }
+    }
+  }
+
+  function openGarden() {
+    layerGarden.classList.add('on');
+    renderGarden();
+  }
+  function closeGarden() { layerGarden.classList.remove('on'); }
+
+  function exportCSV() {
+    try {
+      var names = gardenList();
+      var rows = [['姓名', '总分', '等级', '撒花次数', '奖状次数', '本节课得分']];
+      names.forEach(function (n) {
+        var r = one(n);
+        rows.push([n, r.p, LV_NAME[levelOf(r.p)], r.c || 0, r.k || 0, r.t || 0]);
+      });
+      var csv = rows.map(function (r) {
+        return r.map(function (c) { return '"' + ('' + c).replace(/"/g, '""') + '"'; }).join(',');
+      }).join('\r\n');
+      var blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = '班级花园积分_' + dayKey() + '.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 3000);
+      toast('已导出 CSV：' + names.length + ' 人，可用 Excel 打开', 3000);
+    } catch (e) {
+      toast('导出失败：' + e.message, 3600);
+    }
+  }
+  function undoLast() {
+    var u = lsGet(LS_UNDO, null);
+    if (!u || !u.names || !u.names.length) { toast('还没有可撤销的操作。', 2200); return; }
+    var d = -u.delta;
+    u.names.forEach(function (n) {
+      var r = one(n);
+      r.p = Math.max(0, r.p + d);
+      r.t = Math.max(0, (r.t || 0) + d);
+      if (u.delta > 0 && u.type === 'cert' && r.k > 0) { r.k--; }
+      else if (u.delta > 0 && r.c > 0) { r.c--; }
+      r.d = dayKey();
+      put(n, r);
+    });
+    lsSet(LS_UNDO, null);
+    renderGarden();
+    toast('已撤销：' + u.names.join('、') + '　' + (u.delta > 0 ? '−' : '+') + Math.abs(u.delta) + ' 分', 2800);
+  }
+
+  function exportNoName() {
+    try {
+      var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      var out = html.replace(/var DEFAULT_ROSTER\s*=\s*\[[\s\S]*?\];/, 'var DEFAULT_ROSTER = [];');
+      var blob = new Blob([out], { type: 'text/html;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = ((document.title || '课件').replace(/[\\/:*?"<>|]/g, '')) + '_无名单.html';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 3000);
+    } catch (e) {
+      toast('导出失败，可以手动点「清空」后再另存一份。', 3600);
+    }
+  }
+
+  /* ================= 学期总结（一直累计到期末） ================= */
+  function termData() {
+    var names = gardenList();
+    var list = names.map(function (n) {
+      var r = one(n);
+      return { n: n, p: r.p, c: r.c || 0, k: r.k || 0, lv: levelOf(r.p) };
+    });
+    var total = 0;
+    list.forEach(function (x) { total += x.p; });
+    var dist = [0, 0, 0, 0, 0, 0];
+    list.forEach(function (x) { dist[x.lv]++; });
+    var top = list.slice().sort(function (a, b) {
+      return (b.p - a.p) || String(a.n).localeCompare(String(b.n), 'zh');
+    });
+    return {
+      list: list, total: total, dist: dist, top: top,
+      avg: list.length ? Math.round(total / list.length * 10) / 10 : 0
+    };
+  }
+
+  var ctList = [], ctIdx = 0;
+
+  function renderTerm() {
+    var d = termData();
+    $('ktTermSub').textContent = '共 ' + d.list.length + ' 人 · 从第一节课累计到今天';
+    var h = '';
+    h += '<div class="kt-t-kpi">';
+    h += '<div><b>' + d.total + '</b><span>全班总积分</span></div>';
+    h += '<div><b>' + d.avg + '</b><span>人均分</span></div>';
+    h += '<div><b>' + (d.top[0] ? d.top[0].p : 0) + '</b><span>最高分' + (d.top[0] ? '（' + esc(d.top[0].n) + '）' : '') + '</span></div>';
+    h += '<div><b>' + (d.dist[4] + d.dist[5]) + '</b><span>已开花 / 结果</span></div>';
+    h += '</div>';
+
+    h += '<div class="kt-t-sec"><h4>🌱 等级分布</h4><div class="kt-t-dist">';
+    var maxd = 1;
+    d.dist.forEach(function (v) { if (v > maxd) { maxd = v; } });
+    LV_NAME.forEach(function (nm, i) {
+      h += '<div class="kt-t-drow"><span class="nm">' + nm + '</span>' +
+        '<span class="bar"><i style="width:' + Math.round(d.dist[i] / maxd * 100) + '%"></i></span>' +
+        '<span class="ct">' + d.dist[i] + ' 人</span></div>';
+    });
+    h += '</div></div>';
+
+    h += '<div class="kt-t-sec"><h4>🏆 前十名</h4><div class="kt-t-top">';
+    d.top.slice(0, 10).forEach(function (x, i) {
+      h += '<div class="kt-t-trow"><span class="rk">' + (i + 1) + '</span><span class="nm">' + esc(x.n) +
+        '</span><span class="lv">' + LV_NAME[x.lv] + '</span><span class="pt">' + x.p + ' 分</span></div>';
+    });
+    h += '</div></div>';
+
+    var zero = d.list.filter(function (x) { return x.p === 0; });
+    if (zero.length) {
+      h += '<div class="kt-t-sec"><h4>🌰 还是种子的 ' + zero.length + ' 位（下次多给点机会）</h4>' +
+        '<div style="font-size:13px;color:#7A8494;line-height:1.9">' +
+        zero.map(function (x) { return esc(x.n); }).join('、') + '</div></div>';
+    }
+    $('ktTermBody').innerHTML = h;
+
+    ctList = d.top.slice(); ctIdx = 0; renderCt();
+  }
+
+  function openTerm() { layerTerm.classList.add('on'); renderTerm(); }
+  function closeTerm() { layerTerm.classList.remove('on'); }
+
+  /* ---- 学期证书 ---- */
+  function ctWord(x) {
+    if (x.p === 0) { return '下学期，老师等着看你第一次举起的手。'; }
+    if (x.lv === 1) { return '你已经冒出第一片子叶。每一次开口，都被看见了。'; }
+    if (x.lv === 2) { return '你开始往上长了。敢猜、敢问，这就是科学家的样子。'; }
+    if (x.lv === 3) { return '你长得比大多数人都高。你的问题，常常把整堂课带向新的地方。'; }
+    if (x.lv === 4) { return '你开花了。这个学期，你不止自己在长，也在带着别人一起长。'; }
+    return '你结出了果子——一学期的认真，最后都长在了你自己身上。';
+  }
+  function renderCt() {
+    if (!ctList.length) { $('ktCtPaper').innerHTML = '<p style="padding:40px">还没有积分数据。</p>'; $('ktCtIdx').textContent = '—'; return; }
+    var x = ctList[ctIdx];
+    var h = [
+      '<div class="t1">趣 味 科 学 · 学 期 证 书</div>',
+      '<div class="t2">' + esc(x.n) + ' 同学</div>',
+      '<div class="lv">' + LV_NAME[x.lv] + '</div>',
+      '<div class="t3">一学期下来，你一共挣到 <b>' + x.p + '</b> 分</div>',
+      '<div class="nums">',
+      '<div><b>' + x.p + '</b>总积分</div>',
+      '<div><b>' + x.c + '</b>次撒花</div>',
+      '<div><b>' + x.k + '</b>张奖状</div>',
+      '<div><b>' + (ctIdx + 1) + '</b>班级名次</div>',
+      '</div>',
+      '<div class="word">' + ctWord(x) + '</div>',
+      '<div class="sign">' + esc(cfg.course || '趣味科学') + ' · ' + esc(cfg.teacher || '小秋老师') + ' 颁 · ' + today() + '</div>'
+    ].join('');
+    $('ktCtPaper').innerHTML = h;
+    $('ktCtIdx').textContent = (ctIdx + 1) + ' / ' + ctList.length;
+  }
+  function ctGo(d) {
+    if (!ctList.length) { return; }
+    ctIdx = (ctIdx + d + ctList.length) % ctList.length;
+    renderCt();
+  }
+  function openCt() { layerCertTerm.classList.add('on'); renderCt(); }
+  function closeCt() { layerCertTerm.classList.remove('on'); }
+  function printCt() {
+    var pageCss = document.createElement('style');
+    pageCss.id = 'ktPageStyle2';
+    pageCss.appendChild(document.createTextNode('@page{size:A4 landscape;margin:10mm}'));
+    document.head.appendChild(pageCss);
+    document.body.classList.add('kt-printing2');
+    var done = function () {
+      document.body.classList.remove('kt-printing2');
+      if (pageCss.parentNode) { pageCss.parentNode.removeChild(pageCss); }
+      window.removeEventListener('afterprint', done);
+    };
+    window.addEventListener('afterprint', done);
+    setTimeout(done, 60000);
+    try { window.print(); } catch (e) { done(); }
+  }
+
+  /* ================= 备份 / 恢复（一学期的数据不能只赌浏览器） ================= */
+  function backupData() {
+    try {
+      var data = {
+        _t: 'kt-garden-backup', v: 2, date: dayKey(),
+        score: scores(), roster: roster(), undo: lsGet(LS_UNDO, null)
+      };
+      var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = '班级花园备份_' + dayKey() + '.json';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 3000);
+      var n = 0;
+      for (var k in data.score) { if (data.score.hasOwnProperty(k)) { n++; } }
+      toast('💾 已备份 ' + n + ' 位同学的积分——把这个文件收好', 3400);
+    } catch (e) {
+      toast('备份失败：' + e.message, 3600);
+    }
+  }
+  function restoreData() {
+    /* 不用 prompt：ClassIn 内嵌浏览器会禁用。用隐藏 file input。 */
+    var inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = '.json,application/json';
+    inp.style.position = 'fixed'; inp.style.left = '-9999px';
+    document.body.appendChild(inp);
+    inp.addEventListener('change', function () {
+      var f = inp.files && inp.files[0];
+      if (!f) { if (inp.parentNode) { inp.parentNode.removeChild(inp); } return; }
+      var fr = new FileReader();
+      fr.onload = function () {
+        try {
+          var d = JSON.parse(String(fr.result));
+          if (!d || !d.score || typeof d.score !== 'object') { throw new Error('这不是花园备份文件'); }
+          var n = 0;
+          for (var k in d.score) { if (d.score.hasOwnProperty(k)) { n++; } }
+          lsSet(LS_SCORE, d.score);
+          if (d.roster && d.roster.length) { saveRoster(d.roster); }
+          if (layerGarden.classList.contains('on')) { renderGarden(); }
+          toast('📂 已恢复 ' + n + ' 位同学的积分' + (d.date ? '（备份于 ' + d.date + '）' : ''), 3800);
+        } catch (e) {
+          toast('恢复失败：' + e.message, 3600);
+        }
+        if (inp.parentNode) { inp.parentNode.removeChild(inp); }
+      };
+      fr.onerror = function () {
+        toast('读不了这个文件，换一份试试。', 3200);
+        if (inp.parentNode) { inp.parentNode.removeChild(inp); }
+      };
+      fr.readAsText(f, 'utf-8');
+    });
+    inp.click();
+  }
+
+  /* ================= 设置面板 ================= */
+  function openCfg() {
+    $('ktCfgTeacher').value = cfg.teacher || '';
+    $('ktCfgCourse').value = cfg.course || '';
+    $('ktCfgNoRepeat').checked = !!cfg.norepeat;
+    paintWaitCfg();
+    $('ktCfgPos').textContent = cfg.pos === 'bottom' ? '切到页面顶部' : '切到页面底部';
+    layerCfg.classList.add('on');
+  }
+  function paintWaitCfg() {
+    Array.prototype.forEach.call(document.querySelectorAll('#ktCfg [data-wait]'), function (b) {
+      var on = parseInt(b.dataset.wait, 10) === cfg.waitSec;
+      b.style.background = on ? '#DCEFC9' : '';
+      b.style.color = on ? '#3C6B1F' : '';
+    });
+  }
+  function saveCfg() {
+    cfg.teacher = ($('ktCfgTeacher').value || '').trim() || '小秋老师';
+    cfg.course = ($('ktCfgCourse').value || '').trim() || '趣味科学';
+    cfg.norepeat = $('ktCfgNoRepeat').checked;
+    lsSet(LS_CFG, cfg);
+    layerCfg.classList.remove('on');
+  }
+
+  /* ================= 显示 / 隐藏 ================= */
+  function hideBar() {
+    bar.classList.add('mini');
+    $('ktShowBtn').style.display = '';
+  }
+  function showBar() {
+    bar.classList.remove('mini');
+    $('ktShowBtn').style.display = 'none';
+  }
+  /* 新弹层必须同步进这两个数组，否则 Esc 关不掉、方向键也拦不住 */
+  function ktLayers() {
+    return [layerPick, layerCert, layerRoster, layerCfg, layerAsk, layerGarden, layerTerm, layerCertTerm, layerPlan, layerDo];
+  }
+  function anyLayerOpen() {
+    return ktLayers().some(function (l) { return l.classList.contains('on'); });
+  }
+  function closeAll() {
+    ktLayers().forEach(function (l) { l.classList.remove('on'); });
+  }
+
+  /* ================= 事件绑定 ================= */
+  $('ktRoll').onclick = function () { openPick(); setTimeout(roll, 120); };
+  $('ktCheerBtn').onclick = function () {
+    if (current) { cheer(current); } else { openAsk(); }
+  };
+  $('ktCertBtn').onclick = function () { openCert(current, ''); };
+  $('ktTimerBtn').onclick = function () { timerBox.classList.toggle('on'); };
+  $('ktGardenBtn').onclick = openGarden;
+  $('ktRosterBtn').onclick = openRoster;
+  $('ktCfgBtn').onclick = openCfg;
+  $('ktHideBtn').onclick = hideBar;
+  $('ktShowBtn').onclick = showBar;
+
+  $('ktPickGo').onclick = roll;
+  $('ktPickCheer').onclick = function () { cheer(current); };
+  $('ktPickCert').onclick = function () { openCert(current, ''); };
+  $('ktPickClose').onclick = closePick;
+  layerPick.addEventListener('click', function (e) { if (e.target === layerPick) { closePick(); } });
+
+  $('ktCertName').addEventListener('input', renderCert);
+  $('ktCertTitleIn').addEventListener('input', renderCert);
+  ['ktCertName', 'ktCertTitleIn'].forEach(function (id) {
+    $(id).addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); renderCert(); }
+    });
+  });
+  $('ktCertPrint').onclick = printCert;
+  $('ktCertAward').onclick = function () { awardCert(); };
+  $('ktCertClose').onclick = closeCert;
+
+  /* ================= 班级花园事件 ================= */
+  $('ktGClose').onclick = closeGarden;
+  $('ktGSort').onclick = function () {
+    gSort = gSort === 'seat' ? 'score' : 'seat';
+    $('ktGSort').textContent = gSort === 'seat' ? '按分数排' : '按名单排';
+    renderGarden();
+  };
+  $('ktGAll').onclick = function () {
+    var list = roster();
+    if (!list.length) { toast('名单是空的，先去「👥 名单」导入。', 2600); return; }
+    addScore(list, 1, 'all');
+    fettiBurst(90);
+    toast('全班 ' + list.length + ' 人各 +1 分 🌱', 2600);
+  };
+  $('ktGUndo').onclick = undoLast;
+  $('ktGExport').onclick = exportCSV;
+  $('ktGTerm').onclick = openTerm;
+  $('ktGBackup').onclick = backupData;
+  $('ktGRestore').onclick = restoreData;
+  $('ktTermClose').onclick = closeTerm;
+  $('ktTermCsv').onclick = exportCSV;
+  $('ktTermCert').onclick = openCt;
+  $('ktCtPrev').onclick = function () { ctGo(-1); };
+  $('ktCtNext').onclick = function () { ctGo(1); };
+  $('ktCtPrint').onclick = printCt;
+  $('ktCtClose').onclick = closeCt;
+  $('ktGReset').onclick = function () {
+    if (!resetArmed) {
+      resetArmed = true;
+      $('ktGReset').textContent = '再点一次确认清零';
+      toast('确定要把全班积分清零吗？再点一次「全部清零」就清了。', 4000);
+      setTimeout(function () {
+        resetArmed = false;
+        if ($('ktGReset')) { $('ktGReset').textContent = '全部清零'; }
+      }, 5000);
+      return;
+    }
+    resetArmed = false;
+    $('ktGReset').textContent = '全部清零';
+    lsSet(LS_SCORE, {}); lsSet(LS_UNDO, null);
+    renderGarden();
+    toast('全班积分已清零。', 2400);
+  };
+  layerGarden.addEventListener('click', function (e) {
+    if (e.target === layerGarden) { closeGarden(); return; }
+    var cell = e.target.closest ? e.target.closest('.kt-plant') : null;
+    if (cell) {
+      gSel = cell.getAttribute('data-n') || '';
+      renderGarden();
+      return;
+    }
+    var b = e.target.closest ? e.target.closest('.kt-g-detail button') : null;
+    if (b && gSel) {
+      var a = b.getAttribute('data-a');
+      if (a === 'close') { gSel = ''; renderGarden(); }
+      else if (a === 'cert') { openCert(gSel, ''); }
+      else {
+        var d = parseInt(a, 10);
+        addScore([gSel], d, d === 3 ? 'cert' : 'manual');
+        bump(gSel, d);
+        toast((d > 0 ? '+' : '') + d + ' 分 → ' + gSel + ' 现在 ' + one(gSel).p + ' 分', 2000);
+      }
+    }
+  });
+
+  /* 全屏：屏幕共享 / 投屏前用；内嵌浏览器不支持时给页内提示，不报错 */
+  function toggleFs() {
+    var d = document, el = d.documentElement;
+    var fsEl = d.fullscreenElement || d.webkitFullscreenElement || d.msFullscreenElement;
+    try {
+      if (!fsEl) {
+        var r = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+        if (!r) { toast('这个窗口不支持一键全屏，按 F11 试试。', 3200); return; }
+        var p = r.call(el);
+        if (p && p.catch) { p.catch(function () { toast('一键全屏被拦了，按 F11 即可。', 3200); }); }
+      } else {
+        var x = d.exitFullscreen || d.webkitExitFullscreen || d.msExitFullscreen;
+        if (x) { x.call(d); }
+      }
+    } catch (e) {
+      toast('一键全屏不可用，按 F11 即可。', 3200);
+    }
+  }
+  $('ktFsBtn').onclick = toggleFs;
+  layerCert.addEventListener('click', function (e) { if (e.target === layerCert) { closeCert(); } });
+
+  $('ktAskCheer').onclick = function () {
+    var n = ($('ktAskName').value || '').trim();
+    layerAsk.classList.remove('on');
+    cheer(n);
+  };
+  $('ktAskCert').onclick = function () {
+    var n = ($('ktAskName').value || '').trim();
+    layerAsk.classList.remove('on');
+    openCert(n, '');
+  };
+  $('ktAskClose').onclick = function () { layerAsk.classList.remove('on'); };
+  layerAsk.addEventListener('click', function (e) { if (e.target === layerAsk) { layerAsk.classList.remove('on'); } });
+  $('ktAskName').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); $('ktAskCheer').click(); }
+  });
+
+  $('ktRosterSave').onclick = saveRosterFromBox;
+  $('ktRosterReset').onclick = function () {
+    $('ktRosterText').value = DEFAULT_ROSTER.join('\n');
+    $('ktRosterCount').textContent = '已恢复默认名单：' + DEFAULT_ROSTER.length + ' 人';
+  };
+  $('ktRosterClear').onclick = function () {
+    $('ktRosterText').value = '';
+    $('ktRosterCount').textContent = '已清空（可点「恢复默认名单」找回）';
+  };
+  $('ktExportNoName').onclick = exportNoName;
+  $('ktRosterClose').onclick = function () { layerRoster.classList.remove('on'); };
+  layerRoster.addEventListener('click', function (e) { if (e.target === layerRoster) { layerRoster.classList.remove('on'); } });
+
+  $('ktCfgSave').onclick = saveCfg;
+  $('ktPlanBtn').onclick = openPlan;
+  $('ktDoBtn').onclick = openDo;
+  $('ktPlanClose').onclick = function () { layerPlan.classList.remove('on'); };
+  $('ktDoClose').onclick = function () { layerDo.classList.remove('on'); };
+  $('ktPreReset').onclick = function () { lsSet(LS_PRE, { box: [], at: 0 }); renderPrecheck(); };
+  Array.prototype.forEach.call(document.querySelectorAll('#ktCfg [data-wait]'), function (b) {
+    b.onclick = function () {
+      cfg.waitSec = parseInt(b.dataset.wait, 10);
+      lsSet(LS_CFG, cfg);
+      paintWaitCfg();
+    };
+  });
+  $('ktCfgClose').onclick = function () { layerCfg.classList.remove('on'); };
+  $('ktCfgPos').onclick = function () {
+    cfg.pos = cfg.pos === 'bottom' ? 'top' : 'bottom';
+    bar.className = 'pos-' + cfg.pos;
+    $('ktCfgPos').textContent = cfg.pos === 'bottom' ? '切到页面顶部' : '切到页面底部';
+    lsSet(LS_CFG, cfg);
+  };
+  layerCfg.addEventListener('click', function (e) { if (e.target === layerCfg) { layerCfg.classList.remove('on'); } });
+
+  timerBox.querySelectorAll('button[data-min]').forEach(function (b) {
+    b.onclick = function () { timerSet(parseInt(b.dataset.min, 10)); };
+  });
+  $('ktTimerToggle').onclick = timerToggle;
+  $('ktTimerReset').onclick = function () { timerSet(Math.max(1, Math.round(tLeft / 60) || 5)); };
+  $('ktTimerClose').onclick = function () { timerBox.classList.remove('on'); };
+
+  /* 全局快捷键：不与课件既有的 方向键 / 空格 / T 冲突 */
+  document.addEventListener('keydown', function (e) {
+    var t = e.target;
+    var typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+    if (e.key === 'Escape') { closeAll(); return; }
+    if (typing) { return; }
+    var k = (e.key || '').toLowerCase();
+    if (k === 'r') { openPick(); setTimeout(roll, 120); e.preventDefault(); }
+    else if (k === 'f') { if (current) { cheer(current); } else { openAsk(); } e.preventDefault(); }
+    else if (k === 'c') { openCert(current, ''); e.preventDefault(); }
+    else if (k === 'h') { bar.classList.contains('mini') ? showBar() : hideBar(); e.preventDefault(); }
+    else if (k === 'g') { layerGarden.classList.contains('on') ? closeGarden() : openGarden(); e.preventDefault(); }
+    else if (k === 'p') { layerPlan.classList.contains('on') ? closeAll() : openPlan(); e.preventDefault(); }
+    else if (k === 'd') { layerDo.classList.contains('on') ? closeAll() : openDo(); e.preventDefault(); }
+    /* 弹层打开时，方向键不翻页 */
+    if (anyLayerOpen() && (e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === ' ')) { e.preventDefault(); }
+  });
+
+  /* 课件里硬编码了一份"弹层 id 列表"（ktCert/ktPick/...），新加的弹层不在里面，
+     打开时按方向键会翻页。不改课件，用 capture 阶段抢在课件之前拦掉。 */
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' && e.key !== ' ') { return; }
+    if (!anyLayerOpen()) { return; }
+    e.preventDefault();
+    e.stopPropagation();
+  }, true);
+
+  /* 启动 */
+  bindPlan();
+  paintPlanBtn();
+  bar.className = 'pos-' + (cfg.pos || 'bottom');
+  paintTimer();
+  timerSet(5);
+  $('ktCertCourse').textContent = cfg.course;
+  $('ktCertTeacher').textContent = (cfg.teacher || '小秋老师') + ' 颁';
+
+  /* 暴露给课件：页内按钮可直接调用，避免两套重复逻辑 */
+  window.KTools = {
+    cheer: cheer,
+    cert: function (names, title) {
+      openCert(Array.isArray(names) ? names.join('、') : (names || ''), title || '');
+    },
+    pick: function () { openPick(); setTimeout(roll, 120); },
+    setCur: setCur,
+    roster: roster,
+    /* 积分 / 班级花园 */
+    garden: openGarden,
+    add: function (names, delta, type) { return addScore(names, delta, type || 'manual'); },
+    score: function (name) { return one(name); },
+    scores: scores,
+    gardenTop: function (n) {   /* 前 n 名：[{name, p}]，课件里可以直接用 */
+      var o = scores();
+      return Object.keys(o).map(function (k) { return { name: k, p: o[k].p || 0 }; })
+        .sort(function (a, b) { return b.p - a.p; }).slice(0, n || 5);
+    },
+    /* 学期总结 / 数据安全 */
+    term: openTerm,
+    certTerm: openCt,
+    backup: backupData,
+    restore: restoreData,
+    termData: termData,
+    /* 教学模块：等答 / 线上实操 / 时间守卫（追问句提示已按老师要求移除） */
+    wait: startWait,
+    stopWait: stopWait,
+    doCards: openDo,
+    plan: openPlan,
+    planLag: function () { return Math.round(planLag()); },
+    version: '2.3'
+  };
+})();
+
+</script>
+
+<script>
+/* 桥接：把课件自带的撒花/奖状按钮接到课堂工具包，全课只有一套奖励逻辑 */
+(function(){
+  if(!window.KTools) return;
+  var oldCheer = window.cheer;
+  window.cheer = function(name){ try{ return KTools.cheer(name||''); }catch(e){ return oldCheer && oldCheer(name); } };
+  var nameBox = document.getElementById('awardName');
+  var titleBox = document.getElementById('awardTitle');
+  if(typeof window.makeCert === 'function'){
+    window.makeCert = function(){
+      var n = nameBox ? (nameBox.value||'').trim() : '';
+      var t = titleBox ? (titleBox.value||'').trim() : '';
+      if(!n && nameBox){ nameBox.focus(); nameBox.style.borderColor='#F79646'; setTimeout(function(){nameBox.style.borderColor='';},1200); return; }
+      KTools.cert(n, t);
+    };
+  }
+  if(typeof window.closeCert === 'function'){
+    var layer = document.getElementById('certLayer');
+    window.closeCert = function(){ if(layer) layer.classList.remove('on'); };
+  }
+})();
+</script>
+<!-- KTOOLS-END -->
+</body>
+</html>
