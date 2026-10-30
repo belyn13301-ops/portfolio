@@ -204,11 +204,7 @@ const PROJECTS={
   insight:{tag:'研究',title:'校园招募洞察报告',meta:'角色：主笔｜时间：2026暑期｜北辰青年实习产出',
     desc:'面向Z世代大学生群体的系统化洞察，覆盖消费行为、社交习惯、学习方式、职业焦虑四个维度。方法上我没有做问卷和正式访谈——而是把自己放在一线：一边做校园账号、卖校园卡，一边在评论区接触大量学生和家长，再和同在一线的同事交流，把真正碰到的问题和痛点沉淀成用户画像与商业建议。',
     images:[],video:'',
-    result:'完成11页完整洞察报告；建立大学生用户画像；输出可落地的商业建议。方法说明：洞察来自一线实践观察（做账号 + 卖校园卡 + 评论区），非问卷抽样，结论的适用边界我自己会主动说明。'},
-  manual:{tag:'个人',title:'AI时代个人说明书',meta:'角色：作者｜时间：2026暑期｜北辰青年实习产出',
-    desc:'在AI时代重新定义「我是谁」。从能力图谱、工作风格、协作方式到价值观，系统梳理个人定位与优势。它不是简历——简历回答「你做过什么」，说明书回答「怎么和你协作、怎么激发你的优势」。',
-    images:[],video:'',
-    result:'完成8页个人说明书；建立个人能力图谱与协作风格说明；已成为求职面试AI Skill的结构化输入（个人说明书 + 简历 + 岗位JD → 匹配分析）。'}
+    result:'完成11页完整洞察报告；建立大学生用户画像；输出可落地的商业建议。方法说明：洞察来自一线实践观察（做账号 + 卖校园卡 + 评论区），非问卷抽样，结论的适用边界我自己会主动说明。'}
 };
 
 /* 打开项目详情 */
@@ -217,12 +213,10 @@ function openProjectDetail(pid){
   const isHangyan=(pid==='hangyan');
   const isPeiyang=(pid==='peiyang');
   const isInsight=(pid==='insight');
-  const isManual=(pid==='manual');
   document.getElementById('pd-pdf-preview').style.display=isHangyan?'block':'none';
   document.getElementById('pd-pdf-preview-peiyang').style.display=isPeiyang?'block':'none';
   document.getElementById('pd-pdf-preview-insight').style.display=isInsight?'block':'none';
-  document.getElementById('pd-pdf-preview-manual').style.display=isManual?'block':'none';
-  if(isHangyan||isPeiyang||isInsight||isManual){
+  if(isHangyan||isPeiyang||isInsight){
     // hangyan项目只显示PDF预览，隐藏其他内容
     document.getElementById('pd-tag').style.display='none';
     document.getElementById('pd-title').style.display='none';
@@ -273,7 +267,7 @@ function openProjectDetail(pid){
   focusWin(win.dataset.win);
   placeWin(win);                       /* 项目详情是最常点的窗口，也要居中弹出 */
   const titleEl=win.querySelector('.win-title');titleEl.textContent='';
-  const full=isHangyan?'潮流盲盒玩具行研报告.pdf':(isPeiyang?'人才培养方案项目化学习汇报.pdf':(isInsight?'校园招募洞察报告.pdf':(isManual?'AI时代个人说明书.pdf':p.title)));let i=0;
+  const full=isHangyan?'潮流盲盒玩具行研报告.pdf':(isPeiyang?'人才培养方案项目化学习汇报.pdf':(isInsight?'校园招募洞察报告.pdf':p.title));let i=0;
   const iv=setInterval(()=>{titleEl.textContent=full.slice(0,++i);if(i>=full.length)clearInterval(iv);},55);
 }function closeProjectDetail(){
   const win=document.getElementById('win-project-detail');
