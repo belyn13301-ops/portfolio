@@ -6,7 +6,7 @@
  *
  * ID 为空时整个脚本不执行，不会发出任何请求，也不会报错。
  */
-var CLARITY_ID = "";
+var CLARITY_ID = "z5ozz7thtp";
 
 (function (c, l, a, r, i, t, y) {
   if (!i) return;
