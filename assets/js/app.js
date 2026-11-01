@@ -197,10 +197,15 @@ const PROJECTS={
     desc:'这是为喜欢花的小余老师定制的个人网站，从发现需求到设计完成，均为独立进行。做成温馨的花园风格——因为她爱花；页面里还留了护嗓小贴士，讲几节课，嗓子最辛苦。',
     images:[],video:'',
     result:'网站已上线；获得老师认可。',website:'xiaoyulaoshi.html'},
-  zongce:{tag:'工具',title:'综测评算台',meta:'角色：独立设计 & 开发｜时间：2026.09｜对象：班级班委｜形态：单文件网页工具',
-    desc:'班委每学期都要算一次综测加分：几十号人、上百张证书照片，靠 Excel 手工加，错一条就要从头返工，而且没人说得清哪一分是怎么来的。我把它重做成一个单文件网页工具：先把学院加分细则拆成可检索的规则表，证书照片交给 AI 批量识别成结构化 CSV，导入工具后每一条加分都标注依据哪一条规则，存疑的单独列进「待确认」人工复核，最后一次性导出明细、汇总、按人三张表。原则只有一条——AI 只出归类建议，拍板权始终在班委手上。',
-    images:[],video:'',
-    result:'综测评算台已上线公开可用；内置重庆工商大学 2026 版加分规则表；跑通「规则解析 → 证书识别 → 人工复核 → 导出三张表」全流程；把原本无法复核的手工加账，变成每条都有出处、可以公示的账。',website:'https://belyn13301-ops.github.io/zongce/'},
+  zongce:{tag:'工具',title:'综测评算台',meta:'角色：独立设计 &amp; 开发｜时间：2026.09｜对象：班级班委｜形态：单文件网页工具',
+    desc:'班委每学期都要算一次综测加分：几十号人、上百张证书照片，靠 Excel 手工加，错一条就要从头返工，更麻烦的是——算完了没人说得清哪一分是怎么来的，公示时被问一句就答不上。<br><br>我把它重做成一个单文件网页工具，四步走完：<br>① <strong>喂规则</strong>——把学院加分细则逐条录进「规则对照表」，每条配条款编号和匹配关键词，这是全班算分的唯一依据；<br>② <strong>喂证书</strong>——证书照片交给 AI 批量识别成结构化 CSV，导入后工具自动匹配规则、标出重复和存疑项；<br>③ <strong>复核</strong>——匹配不上或拿不准的，单独进「待确认」列表，一条一条由班委拍板；<br>④ <strong>出表</strong>——一键导出明细、汇总、待确认三张表，可以直接拿去公示。<br><br>原则只有一条：AI 只出归类建议，拍板权始终在人手上。',
+    images:[],
+    shots:[
+      {src:'assets/img/zongce-steps.png',cap:'使用说明：四步流程，每一步都写清楚「哪一步由工具做、哪一步必须人来定」'},
+      {src:'assets/img/zongce-rules.png',cap:'规则对照表：加分细则逐条入库，每条带条款编号与匹配关键词——这一页是全班算分的唯一依据'}
+    ],
+    video:'',
+    result:'工具已上线公开可用；内置重庆工商大学 2026 版加分规则表（60+ 条）；跑通「规则解析 → 证书识别 → 人工复核 → 导出三张表」全流程；录入的数据只存在使用者自己的浏览器里，不上传任何服务器；把原本无法复核的手工加账，变成每条都有出处、可以直接公示的账。',website:'https://belyn13301-ops.github.io/zongce/'},
   kepu:{tag:'课件',title:'云课堂创意课件与插件',meta:'角色：课程设计 & 前端实现｜时间：2026 秋 · 六年级趣味科学｜形式：单文件交互网页',
     desc:'给云课堂六年级孩子做的互动课件《生物的启示》。不是把 PPT 搬到网页上，而是按真实课堂节奏重新设计：12 页，含 40 分钟倒计时、教师提示（T 键随时看）、动手环节、过关挑战和收口金句页；下课前还能打开「班级花园」——一个把举手、答题、分享换成花朵与积分的班级积分插件，把课堂氛围和纪律一起解决。整个项目写成单个 HTML 文件，不依赖网络和外部素材，对方学校电脑再旧、网再卡，也能直接打开就讲。',
     images:[],video:'',
@@ -249,6 +254,15 @@ function openProjectDetail(pid){
         div.style.cssText='aspect-ratio:4/3;background:#ddd;border-radius:8px;overflow:hidden;';
         div.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;">`;
         gallery.appendChild(div);
+      });
+    }
+    if(p.shots&&p.shots.length){
+      p.shots.forEach(s=>{
+        const fig=document.createElement('figure');
+        fig.style.cssText='grid-column:1/-1;margin:0 0 16px;';
+        fig.innerHTML='<img src="'+s.src+'" alt="'+((s.cap||'').replace(/"/g,''))+'" style="width:100%;height:auto;display:block;border-radius:10px;border:1px solid rgba(0,0,0,.07);box-shadow:0 6px 20px rgba(0,0,0,.08);">'+
+          (s.cap?'<figcaption style="font-size:12px;line-height:1.7;color:#8a8a8a;margin-top:7px;">'+s.cap+'</figcaption>':'');
+        gallery.appendChild(fig);
       });
     }
     const videoDiv=document.getElementById('pd-video');
