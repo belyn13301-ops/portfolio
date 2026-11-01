@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>简历生成 Skill · 龙秋玲</title>
+<meta name="description" content="student-resume-builder：四步工作流 + 四道闸，一份不注水的简历是怎么被生产出来的。">
+<meta property="og:title" content="简历生成 Skill">
+<meta property="og:description" content="四步工作流，四道闸。别人照着走，也能写出一份不注水的简历。">
+<style>
+:root{
+  --paper:#FAF9F6; --ink:#121212; --ink2:#545454; --ink3:#94918B;
+  --line:#E7E4DE; --acc:#3B5BDB; --acc2:#2A46C4;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei UI","Microsoft YaHei",sans-serif;
+  --mono:"Consolas","SF Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+  background-image:radial-gradient(120% 70% at 50% -10%,#fff 0%,rgba(255,255,255,0) 62%);
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(28px,8vw,72px) clamp(20px,6vw,40px);
+}
+.wrap{width:100%;max-width:560px}
+
+.eyebrow{font-size:12px;letter-spacing:.22em;color:var(--ink3);display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:26px;height:1px;background:#D5D1C8}
+
+h1{font-size:clamp(34px,8vw,52px);font-weight:800;letter-spacing:-.04em;line-height:1.12;margin:20px 0 16px}
+
+.lede{font-size:clamp(15px,3.6vw,17px);color:var(--ink2);line-height:1.85;letter-spacing:.01em}
+.lede b{color:var(--ink);font-weight:700}
+
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 0;align-items:center}
+.steps span{
+  font-size:12.5px;letter-spacing:.06em;color:#2B44B8;background:rgba(59,91,219,.07);
+  border-radius:7px;padding:7px 11px;
+}
+.steps i{font-style:normal;color:#C9C5BD;font-size:12px}
+
+.btn{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;text-decoration:none;
+  margin-top:32px;background:#111;color:#fff;border-radius:14px;padding:20px 24px;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;
+  box-shadow:0 14px 34px rgba(0,0,0,.16);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 20px 44px rgba(0,0,0,.22)}
+.btn:active{transform:translateY(0)}
+.btn .t{font-size:17px;font-weight:700;letter-spacing:.04em}
+.btn .s{font-size:12px;color:#B9B6B0;letter-spacing:.1em;margin-top:4px}
+.btn .arrow{font-size:20px;flex:0 0 auto}
+
+.how{margin-top:28px;padding-top:22px;border-top:1px solid var(--line);
+  font-size:13.5px;color:var(--ink2);line-height:2.0;letter-spacing:.01em}
+.how b{color:var(--ink);font-weight:600}
+.how code{font-family:var(--mono);font-size:12.5px;background:#F1EFEA;border-radius:4px;padding:1px 5px}
+
+footer{margin-top:34px;font-size:12.5px;color:var(--ink3);letter-spacing:.06em;display:flex;flex-wrap:wrap;gap:6px 16px}
+footer a{color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--line)}
+footer a:hover{color:var(--acc2);border-color:var(--acc2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">重庆工商大学 · 第四届简历设计大赛 · 决赛</div>
+
+  <h1>简历生成 Skill</h1>
+
+  <p class="lede">
+    四步工作流，四道闸。<br>
+    <b>别人照着走，也能写出一份不注水的简历。</b>
+  </p>
+
+  <div class="steps">
+    <span>01 岗位拆解</span><i>→</i>
+    <span>02 经历匹配矩阵</span><i>→</i>
+    <span>03 简历定制</span><i>→</i>
+    <span>04 自检交付</span>
+  </div>
+
+  <a class="btn" href="./skill.zip" download>
+    <div>
+      <div class="t">下载 Skill 包</div>
+      <div class="s">ZIP · 34 KB · 含使用说明与自检脚本</div>
+    </div>
+    <div class="arrow">↓</div>
+  </a>
+
+  <div class="how">
+    拿到之后：解压 → 打开 <code>使用说明-学生版.md</code> → 把你的<b>简历</b>和<b>目标岗位 JD</b> 一起丢给 AI，按提示走。<br>
+    全程不需要懂技术，四道闸会自动帮你拦掉编造、概数和时间矛盾。
+  </div>
+
+  <footer>
+    <span>龙秋玲 · AI 产品实习生</span>
+    <a href="mailto:long_qiuling001@163.com">long_qiuling001@163.com</a>
+  </footer>
+
+</div>
+</body>
+</html>
