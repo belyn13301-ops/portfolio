@@ -192,7 +192,7 @@ const PROJECTS={
   navsite:{tag:'网站',title:'CTBU一只喵学习干货导航站',meta:'角色：独立开发者｜状态：已上线｜对象：CTBU新生',
     desc:'面向新生的校园信息导航网站，把分散在各个群和公众号里的信息，按「入学 / 学习 / 生活」重组为能按场景检索的结构，减少新生信息差。从信息梳理到设计开发独立完成。',
     images:[],video:'',
-    result:'网站已上线；作为CTBU一只喵品牌的内容载体之一。',website:'https://belyn13301-ops.github.io/ctbu-guide/'},
+    result:'网站已上线，覆盖 8 类 23 个入口；作为CTBU一只喵品牌的内容载体之一。',website:'https://belyn13301-ops.github.io/ctbu-guide/'},
   teachsite:{tag:'网站',title:'小余老师专属网站',meta:'角色：独立开发者｜状态：已上线｜对象：数学老师',
     desc:'这是为喜欢花的小余老师定制的个人网站，从发现需求到设计完成，均为独立进行。做成温馨的花园风格——因为她爱花；页面里还留了护嗓小贴士，讲几节课，嗓子最辛苦。',
     images:[],video:'',
